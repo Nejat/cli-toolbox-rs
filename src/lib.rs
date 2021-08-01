@@ -7,5 +7,7 @@
 #![allow(clippy::module_name_repetitions)]
 #![allow(clippy::items_after_statements)]
 
+mod debug;
+
 #[cfg(test)]
 mod tests;

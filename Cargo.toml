@@ -2,13 +2,11 @@
 name = "cli-toolbox"
 version = "0.1.0"
 edition = "2018"
-# ----------------------------------------------------------------------------------
-description = "Utility library for working with cli output ergonomically"
-license-file = "../LICENSE.md"
-repository = "https://github.com/Nejat/cli-toolbox"
-keywords = ["debug", "report", "error", "output", "cli"]
-categories = ["command-line-utilities"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+cfg-if = "1.0"
+
+[dev-dependencies]
+gag = "1.0"
