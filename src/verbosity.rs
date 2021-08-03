@@ -55,10 +55,90 @@ impl Verbosity {
     ///
     /// assert_eq!(Verbosity::level(), Verbosity::Verbose);
     /// ```
+    ///
+    /// [`Verbosity`]: crate::verbosity::Verbosity
     #[must_use]
     #[inline]
     pub fn level() -> Self {
         *REPORTING.read()
+    }
+
+    /// Checks if global [`Verbosity`] level is terse
+    ///
+    /// * is not terse if level is quite
+    ///
+    /// ```rust
+    /// # use cli_toolbox::verbosity::Verbosity;
+    /// Verbosity::Quite.set_as_global();
+    ///
+    /// assert_eq!(Verbosity::level(), Verbosity::Quite);
+    /// assert!(!Verbosity::is_terse())
+    /// ```
+    ///
+    /// * is terse if level is terse
+    ///
+    /// ```rust
+    /// # use cli_toolbox::verbosity::Verbosity;
+    /// Verbosity::Terse.set_as_global();
+    ///
+    /// assert_eq!(Verbosity::level(), Verbosity::Terse);
+    /// assert!(Verbosity::is_terse())
+    /// ```
+    ///
+    /// * is terse also if level is verbose
+    ///
+    /// ```rust
+    /// # use cli_toolbox::verbosity::Verbosity;
+    /// Verbosity::Verbose.set_as_global();
+    ///
+    /// assert_eq!(Verbosity::level(), Verbosity::Verbose);
+    /// assert!(Verbosity::is_terse())
+    /// ```
+    ///
+    /// [`Verbosity`]: crate::verbosity::Verbosity
+    #[must_use]
+    #[inline]
+    pub fn is_terse() -> bool {
+        *REPORTING.read() != Verbosity::Quite
+    }
+
+    /// Checks if global [`Verbosity`] level is verbose
+    ///
+    /// * is not verbose if level is quite
+    ///
+    /// ```rust
+    /// # use cli_toolbox::verbosity::Verbosity;
+    /// Verbosity::Quite.set_as_global();
+    ///
+    /// assert_eq!(Verbosity::level(), Verbosity::Quite);
+    /// assert!(!Verbosity::is_verbose())
+    /// ```
+    ///
+    /// * is not verbose if level is terse
+    ///
+    /// ```rust
+    /// # use cli_toolbox::verbosity::Verbosity;
+    /// Verbosity::Terse.set_as_global();
+    ///
+    /// assert_eq!(Verbosity::level(), Verbosity::Terse);
+    /// assert!(!Verbosity::is_verbose())
+    /// ```
+    ///
+    /// * is verbose also if level is verbose
+    ///
+    /// ```rust
+    /// # use cli_toolbox::verbosity::Verbosity;
+    /// Verbosity::Verbose.set_as_global();
+    ///
+    /// assert_eq!(Verbosity::level(), Verbosity::Verbose);
+    /// assert!(Verbosity::is_verbose())
+    /// ```
+    ///
+    /// [`Verbosity`]: crate::verbosity::Verbosity
+    #[must_use]
+    #[inline]
+    pub fn is_verbose() -> bool {
+        *REPORTING.read() == Verbosity::Verbose
     }
 
     /// Sets the instance of a [`Verbosity`] level as the global level
