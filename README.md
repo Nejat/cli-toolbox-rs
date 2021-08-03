@@ -20,7 +20,7 @@ cli-toolbox = "0.1.0"
 ```
 # Roadmap
 * [x] ```debug!``` macro
-* [ ] ```Verbosity``` reporting level functionality
+* [x] ```Verbosity``` reporting level functionality
 * [ ] ```report!``` macro
 
 # Roadmap - ¿ Extra Credit ?
