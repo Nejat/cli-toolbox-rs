@@ -37,7 +37,7 @@ macro_rules! debug {
         if let Ok($ok) = $result { $debug }
     };
     // evaluates block if result is ok, discards ok
-    ($result:expr => _OK $debug:block) => {
+    ($result:expr => OK $debug:block) => {
         #[cfg(debug_assertions)]
         if let Ok(_) = $result { $debug }
     };
@@ -48,7 +48,7 @@ macro_rules! debug {
         if let Err($err) = $result { $debug }
     };
     // evaluates block if result is err, discards err
-    ($result:expr => _ERR $debug:block) => {
+    ($result:expr => ERR $debug:block) => {
         #[cfg(debug_assertions)]
         if let Err(_) = $result { $debug }
     };
@@ -68,7 +68,7 @@ macro_rules! debug {
     // evaluates blocks based on result, discards ok
     (
         $result:expr =>
-            _OK $succeeded:block
+            OK $succeeded:block
             ERR $err:ident $failed:block
     ) => {
         #[cfg(debug_assertions)]
@@ -81,7 +81,7 @@ macro_rules! debug {
     (
         $result:expr =>
             OK $ok:ident $succeeded:block
-            _ERR $failed:block
+            ERR $failed:block
     ) => {
         #[cfg(debug_assertions)]
         match $result {
@@ -92,8 +92,8 @@ macro_rules! debug {
     // evaluates blocks based on result, discards results
     (
         $result:expr =>
-            _OK $succeeded:block
-            _ERR $failed:block
+            OK $succeeded:block
+            ERR $failed:block
     ) => {
         #[cfg(debug_assertions)]
         match $result {

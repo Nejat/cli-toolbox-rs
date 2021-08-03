@@ -35,7 +35,7 @@ fn debug_code_block_if_err_result_discard_err() {
     actual! { actual = "" }
 
     // subject under test
-    debug! { its_broke() => _ERR { actual = "it's broke" } }
+    debug! { its_broke() => ERR { actual = "it's broke" } }
 
     assert_eq!(EXPECTED, actual);
 }
@@ -57,7 +57,7 @@ fn debug_code_block_if_ok_result_discard_ok() {
     actual! { actual = "" }
 
     // subject under test
-    debug! { it_aint_broke() => _OK { actual = "not broke" } }
+    debug! { it_aint_broke() => OK { actual = "not broke" } }
 
     assert_eq!(EXPECTED, actual);
 }
@@ -86,7 +86,7 @@ fn debug_code_blocks_if_err_result_discard_err() {
     debug! {
         is_it_broke(false) =>
             OK value { actual = value }
-            _ERR { actual = -42 }
+            ERR { actual = -42 }
     }
 
     assert_eq!(EXPECTED, actual);
@@ -100,7 +100,7 @@ fn debug_code_blocks_if_err_result_discard_ok() {
     // subject under test - discard ok
     debug! {
         is_it_broke(false) =>
-            _OK { actual = life_universe_everything() }
+            OK { actual = life_universe_everything() }
             ERR err { actual = err }
     }
 
@@ -115,8 +115,8 @@ fn debug_code_blocks_if_err_result_discard_results() {
     // subject under test - discard ok
     debug! {
         is_it_broke(false) =>
-            _OK { actual = life_universe_everything() }
-            _ERR { actual = -42 }
+            OK { actual = life_universe_everything() }
+            ERR { actual = -42 }
     }
 
     assert_eq!(EXPECTED, actual);
@@ -146,7 +146,7 @@ fn debug_code_blocks_if_ok_result_discard_err() {
     debug! {
         is_it_broke(true) =>
             OK value { actual = value }
-            _ERR { actual = -42 }
+            ERR { actual = -42 }
     }
 
     assert_eq!(EXPECTED, actual);
@@ -160,7 +160,7 @@ fn debug_code_blocks_if_ok_result_discard_ok() {
     // subject under test, use err
     debug! {
         is_it_broke(true) =>
-            _OK { actual = life_universe_everything() }
+            OK { actual = life_universe_everything() }
             ERR err { actual = err }
     }
 
@@ -175,8 +175,8 @@ fn debug_code_blocks_if_ok_result_discard_results() {
     // subject under test
     debug! {
         is_it_broke(true) =>
-            _OK { actual = life_universe_everything() }
-            _ERR { actual = -42 }
+            OK { actual = life_universe_everything() }
+            ERR { actual = -42 }
     }
 
     assert_eq!(EXPECTED, actual);
