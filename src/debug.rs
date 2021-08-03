@@ -689,20 +689,12 @@ macro_rules! debug {
     };
     // ===============================================================================
     // private output message
-    (@ $debug:expr) => {
-        println!(concat!("DEBUG: ", $debug));
-    };
+    (@ $debug:expr) => { println!(concat!("DEBUG: ", $debug)); };
     // private output formatted message
-    (@ $debug:expr, $($val:expr),*) => {
-        println!(concat!("DEBUG: ", $debug), $($val),*);
-    };
+    (@ $debug:expr, $($val:expr),*) => { println!(concat!("DEBUG: ", $debug), $($val),*); };
     // ===============================================================================
     // private output error message
-    (@ERR $debug:expr) => {
-        eprintln!(concat!("ERROR: ", $debug));
-    };
+    (@ERR $debug:expr) => { eprintln!(concat!("ERROR: ", $debug)); };
     // private output formatted error message
-    (@ERR $debug:expr, $($val:expr),*) => {
-        eprintln!(concat!("ERROR: ", $debug), $($val),*);
-    };
+    (@ERR $debug:expr, $($val:expr),*) => { eprintln!(concat!("ERROR: ", $debug), $($val),*); };
 }

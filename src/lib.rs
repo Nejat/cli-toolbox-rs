@@ -25,6 +25,7 @@
 //! All other debugging and telemetry output is most likely better served with a logging library.
 
 mod debug;
+mod report;
 pub mod verbosity;
 
 #[cfg(test)]

@@ -167,4 +167,11 @@ impl Verbosity {
             *REPORTING.write() = self;
         }
     }
+
+    /// only for testing
+    #[cfg(test)]
+    #[doc(hidden)]
+    pub fn set_as_global_for_test(self) {
+        *REPORTING.write() = self;
+    }
 }
