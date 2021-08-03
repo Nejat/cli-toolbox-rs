@@ -1,6 +1,5 @@
 use std::io::Read;
 
-use cfg_if::cfg_if;
 use gag::BufferRedirect;
 
 use crate::*;

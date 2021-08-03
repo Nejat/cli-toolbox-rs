@@ -3,7 +3,7 @@
 #[macro_export]
 macro_rules! actual {
     ($var:ident: $typ:ty) => {
-        cfg_if! {
+        cfg_if::cfg_if! {
             if #[cfg(not(debug_assertions))] {
                 let $var: $typ = Default::default();
             } else {
@@ -12,7 +12,7 @@ macro_rules! actual {
         }
     };
     ($var:ident = $exp:expr) => {
-        cfg_if! {
+        cfg_if::cfg_if! {
             if #[cfg(not(debug_assertions))] {
                 let $var = $exp;
             } else {
