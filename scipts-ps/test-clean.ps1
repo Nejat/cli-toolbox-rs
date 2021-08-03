@@ -21,6 +21,7 @@ if (Test-Path -Path $script -PathType Leaf) {
 
 clear
 cargo clean
+Confirm-Success "clean"
 
 cargo test  -- --nocapture --test-threads=1
 Confirm-Success "test"

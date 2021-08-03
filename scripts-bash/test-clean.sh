@@ -23,6 +23,7 @@ function confirm-success() {
 
 clear
 cargo clean
+confirm-success "clean"
 
 cargo test  -- --nocapture --test-threads=1
 confirm-success "test"

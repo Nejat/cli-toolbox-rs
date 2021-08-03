@@ -7,6 +7,8 @@
 #![allow(clippy::module_name_repetitions)]
 #![allow(clippy::items_after_statements)]
 
+#![doc(html_root_url = "https://docs.rs/cli-toolbox/0.1.0")]
+
 //! Utility library for working with ```cli``` output ergonomically.
 //!
 //! This is not a logging alternative, it's intended to produce output for end user consumption.
@@ -21,17 +23,6 @@
 //! used during application development.
 //!
 //! All other debugging and telemetry output is most likely better served with a logging library.
-//!
-//! # Roadmap
-//!
-//! * [x] ```debug!``` macro
-//! * [ ] ```Verbosity``` reporting level functionality
-//! * [ ] ```report!``` macro
-//!
-//! # Roadmap - ¿ Extra Credit ?
-//!
-//! * [ ] handle ```Option<T>``` expressions in addition to ```Result<T,E>```
-//!       conditional expressions
 
 mod debug;
 
