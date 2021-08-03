@@ -8,7 +8,7 @@ include = [ "src/**/*", "Cargo.toml", "LICENSE-MIT", "README.md" ]
 homepage = "https://github.com/Nejat/cli-toolbox-rs"
 repository = "https://github.com/Nejat/cli-toolbox-rs"
 keywords = ["cli", "output", "report", "verbosity", "debug"]
-categories = ["Command-line interface"]
+categories = ["command-line-interface"]
 
 [dependencies]
 cfg-if = "1.0"
