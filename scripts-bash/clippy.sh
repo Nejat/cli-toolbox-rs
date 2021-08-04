@@ -22,8 +22,8 @@ function confirm-success() {
 }
 
 clear
-cargo clippy
+cargo clippy --all-features
 confirm-success "clippy"
 
-cargo clippy --release
+cargo clippy --release --all-features
 confirm-success "clippy release"

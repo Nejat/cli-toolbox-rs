@@ -20,9 +20,9 @@ if (Test-Path -Path $script -PathType Leaf) {
 }
 
 clear
-cargo clippy
+cargo clippy --all-features
 Confirm-Success "clippy"
 
-cargo clippy --release
+cargo clippy --release --all-features
 Confirm-Success "clippy release"
 
