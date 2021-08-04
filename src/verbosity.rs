@@ -1,9 +1,12 @@
 //! Global verbosity level, used for reporting
 
-use std::{
-    fmt::{self, Display, Formatter}, str::FromStr,
-    sync::{Arc, atomic::{AtomicBool, Ordering}},
-};
+use std::fmt;
+use std::fmt::Display;
+use std::fmt::Formatter;
+use std::str::FromStr;
+use std::sync::atomic::AtomicBool;
+use std::sync::atomic::Ordering;
+use std::sync::Arc;
 
 use lazy_static::lazy_static;
 use parking_lot::RwLock;
@@ -37,13 +40,13 @@ impl FromStr for Verbosity {
             "terse" => Ok(Self::Terse),
             "verbose" => Ok(Self::Verbose),
             "quite" => Ok(Self::Quite),
-            _ => Err(format!("{:?} is not a valid verbosity", source))
+            _ => Err(format!("{:?} is not a valid verbosity", source)),
         }
     }
 }
 
 lazy_static! {
-    static ref REPORTING: Arc<RwLock<Verbosity>> = Arc::new(RwLock::new(Verbosity::Terse));
+    static ref REPORTING: Arc<RwLock<Verbosity>> = Arc::new(RwLock::new(Verbosity::Quite));
     static ref REPORTING_SET: AtomicBool = AtomicBool::new(false);
 }
 
@@ -160,9 +163,10 @@ impl Verbosity {
     ///
     /// [`Verbosity`]: crate::verbosity::Verbosity
     pub fn set_as_global(self) {
-        let set = match REPORTING_SET.compare_exchange(false, true, Ordering::SeqCst, Ordering::SeqCst) {
-            Ok(set) | Err(set) => set
-        };
+        let set =
+            match REPORTING_SET.compare_exchange(false, true, Ordering::SeqCst, Ordering::SeqCst) {
+                Ok(set) | Err(set) => set,
+            };
 
         if !set {
             *REPORTING.write() = self;

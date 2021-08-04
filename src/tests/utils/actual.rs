@@ -19,5 +19,5 @@ macro_rules! actual {
                 let mut $var = $exp;
             }
         }
-    }
+    };
 }

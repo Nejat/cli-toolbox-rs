@@ -1,6 +1,6 @@
 [package]
 name = "cli-toolbox"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2018"
 description = "Utility library for working with cli output ergonomically"
 license-file = "LICENSE-MIT"
@@ -19,3 +19,18 @@ parking_lot = "0.11"
 [dev-dependencies]
 gag = "1.0"
 version-sync = "0.9"
+
+[features]
+default = []
+debug = []
+report = []
+
+[[example]]
+name = "cli-debugging"
+path = "examples/cli-debugging.rs"
+required-features = ["debug", "report"]
+
+[[example]]
+name = "cli-reporting"
+path = "examples/cli-reporting.rs"
+required-features = ["debug", "report"]

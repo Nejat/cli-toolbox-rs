@@ -20,8 +20,8 @@ if (Test-Path -Path $script -PathType Leaf) {
 }
 
 clear
-cargo test  -- --nocapture --test-threads=1
+cargo test --all-features -- --nocapture --test-threads=1
 Confirm-Success "test"
 
-cargo test  --release -- --nocapture --test-threads=1
+cargo test --all-features --release -- --nocapture --test-threads=1
 Confirm-Success "test release"

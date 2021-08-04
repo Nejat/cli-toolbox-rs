@@ -3,11 +3,11 @@
 #![deny(clippy::nursery)]
 #![deny(clippy::cargo)]
 #![deny(missing_docs)]
-
+// ==============================================================
 #![allow(clippy::module_name_repetitions)]
 #![allow(clippy::items_after_statements)]
-
-#![doc(html_root_url = "https://docs.rs/cli-toolbox/0.2.0")]
+// ==============================================================
+#![doc(html_root_url = "https://docs.rs/cli-toolbox/0.3.0")]
 
 //! Utility library for working with ```cli``` output ergonomically.
 //!
@@ -24,10 +24,14 @@
 //!
 //! All other debugging and telemetry output is most likely better served with a logging library.
 
+#[cfg(feature = "report")]
 pub use verbosity::Verbosity;
 
+#[cfg(feature = "debug")]
 mod debug;
+#[cfg(feature = "report")]
 mod report;
+#[cfg(feature = "report")]
 mod verbosity;
 
 #[cfg(test)]
