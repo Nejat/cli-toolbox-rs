@@ -3,16 +3,16 @@
 #[macro_export]
 macro_rules! capture {
     ($test:stmt) => {{
-        let mut out = BufferRedirect::stdout().expect("redirected stdout required for test");
-        let mut err = BufferRedirect::stderr().expect("redirected stderr required for test");
+        let mut out = gag::BufferRedirect::stdout().expect("redirected stdout required for test");
+        let mut err = gag::BufferRedirect::stderr().expect("redirected stderr required for test");
 
         $test
 
         let mut stdout = String::new();
         let mut stderr = String::new();
 
-        out.read_to_string(&mut stdout).unwrap();
-        err.read_to_string(&mut stderr).unwrap();
+        std::io::Read::read_to_string(&mut out, &mut stdout).unwrap();
+        std::io::Read::read_to_string(&mut err, &mut stderr).unwrap();
 
         (stdout, stderr)
     }}

@@ -24,8 +24,11 @@
 //!
 //! All other debugging and telemetry output is most likely better served with a logging library.
 
+pub use verbosity::Verbosity;
+
 mod debug;
-pub mod verbosity;
+mod report;
+mod verbosity;
 
 #[cfg(test)]
 mod tests;

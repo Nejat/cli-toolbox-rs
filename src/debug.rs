@@ -2,13 +2,13 @@
 ///
 /// # Features
 ///
-/// * you can output simple or formatted debug information to `stdout` or `stderr`
+/// * you can output basic or formatted debug information to `stdout` or `stderr`
 ///
 /// * you can execute a block of debug code
 ///
 /// * you can operate conditionally based on expressions that evaluate to ```Result<T,E>```
 ///
-///     * conditionally output simple or formatted debug information to `stdout` or `stderr`
+///     * conditionally output basic or formatted debug information to `stdout` or `stderr`
 ///
 ///       ```Ok``` or ```Err``` _result value automatically appended to output_
 ///
@@ -27,7 +27,7 @@
 ///
 /// ### ```stdout```
 ///
-/// * _simple output to_ `stdout`
+/// * _basic output to_ `stdout`
 ///
 /// ```rust
 /// # use cli_toolbox::debug;
@@ -49,7 +49,7 @@
 ///
 /// ### ```stderr```
 ///
-/// * _simple output to_ `stderr`
+/// * _basic output to_ `stderr`
 ///
 /// ```rust
 /// # use cli_toolbox::debug;
@@ -347,7 +347,6 @@
 ///
 /// fn reset_some_arbitrary_state() { /* ... */ }
 /// ```
-///
 #[macro_export]
 macro_rules! debug {
     // ===============================================================================
@@ -689,20 +688,12 @@ macro_rules! debug {
     };
     // ===============================================================================
     // private output message
-    (@ $debug:expr) => {
-        println!(concat!("DEBUG: ", $debug));
-    };
+    (@ $debug:expr) => { println!(concat!("DEBUG: ", $debug)); };
     // private output formatted message
-    (@ $debug:expr, $($val:expr),*) => {
-        println!(concat!("DEBUG: ", $debug), $($val),*);
-    };
+    (@ $debug:expr, $($val:expr),*) => { println!(concat!("DEBUG: ", $debug), $($val),*); };
     // ===============================================================================
     // private output error message
-    (@ERR $debug:expr) => {
-        eprintln!(concat!("ERROR: ", $debug));
-    };
+    (@ERR $debug:expr) => { eprintln!(concat!("ERROR: ", $debug)); };
     // private output formatted error message
-    (@ERR $debug:expr, $($val:expr),*) => {
-        eprintln!(concat!("ERROR: ", $debug), $($val),*);
-    };
+    (@ERR $debug:expr, $($val:expr),*) => { eprintln!(concat!("ERROR: ", $debug), $($val),*); };
 }
