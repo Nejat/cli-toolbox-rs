@@ -15,11 +15,11 @@
 /// * you can format output with application state
 ///
 /// # Terse Examples
-/// 
+///
 /// These examples output only if [`Verbosity`] level is greater than `Quite`.
 ///
 /// * _basic output to_ `stdout`
-/// 
+///
 /// ```rust
 /// # use cli_toolbox::report;
 /// use cli_toolbox::Verbosity; // required by report!
@@ -129,7 +129,7 @@
 macro_rules! report {
     // ===============================================================================
     // report if terse
-    ($msg:expr) => { 
+    ($msg:expr) => {
         if Verbosity::is_terse() { report! { @ $msg } }
     };
     // report formatted if terse
@@ -138,7 +138,7 @@ macro_rules! report {
     };
     // ===============================================================================
     // report if verbose
-    (VERBOSE $msg:expr) => { 
+    (VERBOSE $msg:expr) => {
         if Verbosity::is_verbose() { report! { @ $msg } }
     };
     // report formatted if verbose
@@ -147,7 +147,7 @@ macro_rules! report {
     };
     // ===============================================================================
     // report error if terse
-    (ERR $msg:expr) => { 
+    (ERR $msg:expr) => {
         if Verbosity::is_terse() { report! { @ERR $msg } }
     };
     // report formatted error if terse

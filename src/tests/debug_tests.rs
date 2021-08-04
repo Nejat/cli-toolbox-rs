@@ -191,7 +191,10 @@ fn debug_message_formatted_error_if_err_result() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -208,7 +211,10 @@ fn debug_message_formatted_error_if_err_result_discard_err() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -225,7 +231,10 @@ fn debug_message_formatted_error_if_err_result_discard_ok() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -242,7 +251,10 @@ fn debug_message_formatted_error_if_err_result_discard_results() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -259,7 +271,10 @@ fn debug_message_formatted_error_if_ok_result() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -276,7 +291,10 @@ fn debug_message_formatted_error_if_ok_result_discard_err() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -293,7 +311,10 @@ fn debug_message_formatted_error_if_ok_result_discard_ok() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -310,7 +331,10 @@ fn debug_message_formatted_error_if_ok_result_discard_results() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -327,7 +351,10 @@ fn debug_message_formatted_if_err_result() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -344,7 +371,10 @@ fn debug_message_formatted_if_err_result_discard_err() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -361,7 +391,10 @@ fn debug_message_formatted_if_err_result_discard_ok() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -378,7 +411,10 @@ fn debug_message_formatted_if_err_result_discard_results() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -395,7 +431,10 @@ fn debug_message_formatted_if_ok_result() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -412,7 +451,10 @@ fn debug_message_formatted_if_ok_result_discard_err() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -429,7 +471,10 @@ fn debug_message_formatted_if_ok_result_discard_ok() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -446,7 +491,10 @@ fn debug_message_formatted_if_ok_result_discard_results() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -463,7 +511,10 @@ fn debug_message_formatted_success_if_err_result() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -480,7 +531,10 @@ fn debug_message_formatted_success_if_err_result_discard_err() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -497,7 +551,10 @@ fn debug_message_formatted_success_if_err_result_discard_ok() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -514,7 +571,10 @@ fn debug_message_formatted_success_if_err_result_discard_results() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -531,7 +591,10 @@ fn debug_message_formatted_success_if_ok_result() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -548,7 +611,10 @@ fn debug_message_formatted_success_if_ok_result_discard_err() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -565,7 +631,10 @@ fn debug_message_formatted_success_if_ok_result_discard_ok() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -582,7 +651,10 @@ fn debug_message_formatted_success_if_ok_result_discard_results() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -599,7 +671,10 @@ fn debug_message_if_err_result() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -616,7 +691,10 @@ fn debug_message_if_err_result_discard_err() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -633,7 +711,10 @@ fn debug_message_if_err_result_discard_ok() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -650,7 +731,10 @@ fn debug_message_if_err_result_discard_results() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -667,7 +751,10 @@ fn debug_message_if_ok_result() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -684,7 +771,10 @@ fn debug_message_if_ok_result_discard_err() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -701,7 +791,10 @@ fn debug_message_if_ok_result_discard_ok() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -718,7 +811,10 @@ fn debug_message_if_ok_result_discard_results() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -731,12 +827,18 @@ fn debug_stderr() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
 fn debug_stderr_formatted() {
-    expect! { EXPECTED: &str => "", "ERROR: debug error message only - 42; \"so long and thanks for all the fish!\"\n" }
+    expect! {
+        EXPECTED: &str =>
+            "", "ERROR: debug error message only - 42; \"so long and thanks for all the fish!\"\n"
+    }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -744,14 +846,17 @@ fn debug_stderr_formatted() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
 fn debug_stderr_formatted_if_err_result() {
     expect! {
-        EXPECTED: &str
-            => "", "ERROR: debug error message only - 42; \"so long and thanks for all the fish!\": true\n"
+        EXPECTED: &str =>
+            "", "ERROR: debug error message only - 42; \"so long and thanks for all the fish!\": true\n"
     }
 
     let (actual_out, actual_err) = capture! {
@@ -760,14 +865,17 @@ fn debug_stderr_formatted_if_err_result() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
 fn debug_stderr_formatted_if_err_result_discard_err() {
     expect! {
-        EXPECTED: &str
-            => "", "ERROR: debug error message only - 42; \"so long and thanks for all the fish!\"\n"
+        EXPECTED: &str =>
+            "", "ERROR: debug error message only - 42; \"so long and thanks for all the fish!\"\n"
     }
 
     let (actual_out, actual_err) = capture! {
@@ -776,7 +884,10 @@ fn debug_stderr_formatted_if_err_result_discard_err() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -789,7 +900,10 @@ fn debug_stderr_if_err_result() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -802,7 +916,10 @@ fn debug_stderr_if_err_result_discard_err() {
     };
 
     assert_eq!(EXPECTED, actual_err);
-    assert_eq!(EXPECTED_BLANK, actual_out, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_out,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -815,14 +932,17 @@ fn debug_stdout() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
 fn debug_stdout_formatted() {
     expect! {
-        EXPECTED: &str
-            => "", "DEBUG: debug message only - 42; \"so long and thanks for all the fish!\"\n"
+        EXPECTED: &str =>
+            "", "DEBUG: debug message only - 42; \"so long and thanks for all the fish!\"\n"
     }
 
     let (actual_out, actual_err) = capture! {
@@ -831,14 +951,17 @@ fn debug_stdout_formatted() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
 fn debug_stdout_formatted_if_ok_result() {
     expect! {
-        EXPECTED: &str
-            => "", "DEBUG: debug message only - 42; \"so long and thanks for all the fish!\": 42\n"
+        EXPECTED: &str =>
+            "", "DEBUG: debug message only - 42; \"so long and thanks for all the fish!\": 42\n"
     }
 
     let (actual_out, actual_err) = capture! {
@@ -847,14 +970,17 @@ fn debug_stdout_formatted_if_ok_result() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
 fn debug_stdout_formatted_if_ok_result_discard_ok() {
     expect! {
-        EXPECTED: &str
-            => "", "DEBUG: debug message only - 42; \"so long and thanks for all the fish!\"\n"
+        EXPECTED: &str =>
+            "", "DEBUG: debug message only - 42; \"so long and thanks for all the fish!\"\n"
     }
 
     let (actual_out, actual_err) = capture! {
@@ -863,7 +989,10 @@ fn debug_stdout_formatted_if_ok_result_discard_ok() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -876,7 +1005,10 @@ fn debug_stdout_if_ok_result() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[test]
@@ -889,20 +1021,37 @@ fn debug_stdout_if_ok_result_discard_ok() {
     };
 
     assert_eq!(EXPECTED, actual_out);
-    assert_eq!(EXPECTED_BLANK, actual_err, "alternate io expected to be blank");
+    assert_eq!(
+        EXPECTED_BLANK, actual_err,
+        "alternate io expected to be blank"
+    );
 }
 
 #[cfg(debug_assertions)]
-const fn life_universe_everything() -> i32 { 42 }
+const fn life_universe_everything() -> i32 {
+    42
+}
 
 #[cfg(debug_assertions)]
-fn is_it_broke(you_tell_me: bool) -> Result<i32, i32> { if you_tell_me { Ok(42) } else { Err(-42) } }
+fn is_it_broke(you_tell_me: bool) -> Result<i32, i32> {
+    if you_tell_me {
+        Ok(42)
+    } else {
+        Err(-42)
+    }
+}
 
 #[cfg(debug_assertions)]
-const fn it_aint_broke() -> Result<i32, bool> { Ok(42) }
+const fn it_aint_broke() -> Result<i32, bool> {
+    Ok(42)
+}
 
 #[cfg(debug_assertions)]
-const fn its_broke() -> Result<i32, bool> { Err(true) }
+const fn its_broke() -> Result<i32, bool> {
+    Err(true)
+}
 
 #[cfg(debug_assertions)]
-const fn hh_guide() -> &'static str { "so long and thanks for all the fish!" }
+const fn hh_guide() -> &'static str {
+    "so long and thanks for all the fish!"
+}

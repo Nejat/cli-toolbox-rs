@@ -6,7 +6,6 @@ use cli_toolbox::Verbosity; // this is needed by the report! macro
 const THE_ULTIMATE_ANSWER: u32 = 42;
 
 fn main() {
-
     Verbosity::Terse.set_as_global();
 
     report! { "\nstarting cli-debugging example" }
@@ -43,7 +42,7 @@ fn main() {
 
 #[cfg(debug_assertions)]
 fn check_answer(proposed_answer: u32) -> Result<(), String> {
-    if  proposed_answer == THE_ULTIMATE_ANSWER {
+    if proposed_answer == THE_ULTIMATE_ANSWER {
         Ok(())
     } else {
         Err(String::from("i think not!"))

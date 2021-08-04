@@ -6,10 +6,11 @@ use std::str::FromStr; // this is needed by the report! macro
 
 fn main() {
     let level: Verbosity = env::args()
-        .map(|v| { Verbosity::from_str(&v) })
+        .map(|v| Verbosity::from_str(&v))
         .filter(|v| v.is_ok())
-        .map(|v| { v.unwrap() })
-        .last().unwrap_or(Verbosity::Quite);
+        .map(|v| v.unwrap())
+        .last()
+        .unwrap_or(Verbosity::Quite);
 
     // this will never print
     report! { "setting verbosity to {}", level }

@@ -161,13 +161,13 @@
 /// for a single outcome of a conditional expression.
 ///
 /// You can also use conditional expressions exhaustively to handle both outcomes.
-/// 
+///
 /// All of the features described also apply:
 ///
 /// * result values are appended automatically to end of output
 /// * result values can be suppressed
 /// * output messages can be formatted
-/// 
+///
 /// ```rust
 /// # use cli_toolbox::debug;
 /// debug! {
@@ -177,7 +177,7 @@
 ///         // no additional formatting and appends err value
 ///         ERR "error message when foo is ERR";
 /// }
-/// 
+///
 /// #[cfg(debug_assertions)]
 /// fn foo() -> Result<bool, i32> { Ok(true) }
 /// ```
