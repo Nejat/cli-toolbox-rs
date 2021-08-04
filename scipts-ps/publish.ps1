@@ -54,5 +54,8 @@ Confirm-Success "test release"
 cargo publish --locked --dry-run
 Confirm-Success "publish dry run"
 
-cargo publish --locked
-Confirm-Success "publish"
+if (!$ForReals)
+{
+    cargo publish --locked
+    Confirm-Success "publish"
+}
