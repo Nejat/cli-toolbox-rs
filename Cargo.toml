@@ -27,8 +27,10 @@ report = []
 
 [[example]]
 name = "cli-debugging"
+path = "examples/cli-debugging.rs"
 required-features = ["debug", "report"]
 
 [[example]]
 name = "cli-reporting"
+path = "examples/cli-reporting.rs"
 required-features = ["debug", "report"]
