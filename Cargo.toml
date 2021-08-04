@@ -1,17 +1,20 @@
 [package]
 name = "cli-toolbox"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2018"
 description = "Utility library for working with cli output ergonomically"
 license-file = "LICENSE-MIT"
-include = [ "src/**/*", "Cargo.toml", "LICENSE-MIT", "README.md" ]
+include = ["src/**/*", "Cargo.toml", "LICENSE-MIT", "README.md"]
 homepage = "https://github.com/Nejat/cli-toolbox-rs"
 repository = "https://github.com/Nejat/cli-toolbox-rs"
 keywords = ["cli", "output", "report", "verbosity", "debug"]
 categories = ["command-line-interface"]
+authors = ["Nejat<nejatoz@gmail.com>"]
 
 [dependencies]
 cfg-if = "1.0"
+lazy_static = "1.4"
+parking_lot = "0.11"
 
 [dev-dependencies]
 gag = "1.0"

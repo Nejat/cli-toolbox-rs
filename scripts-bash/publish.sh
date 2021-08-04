@@ -62,5 +62,8 @@ confirm-success "test release"
 cargo publish --locked --dry-run
 confirm-success "publish dry run"
 
-cargo publish --locked
-confirm-success "publish"
+if [[ "${for_reals}" == "true" ]]
+then
+  cargo publish --locked
+  confirm-success "publish"
+fi
