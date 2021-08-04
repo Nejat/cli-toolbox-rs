@@ -1,7 +1,3 @@
-use std::io::Read;
-
-use gag::BufferRedirect;
-
 use crate::*;
 use crate::verbosity::Verbosity;
 
