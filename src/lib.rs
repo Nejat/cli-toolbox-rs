@@ -7,7 +7,7 @@
 #![allow(clippy::module_name_repetitions)]
 #![allow(clippy::items_after_statements)]
 
-#![doc(html_root_url = "https://docs.rs/cli-toolbox/0.1.0")]
+#![doc(html_root_url = "https://docs.rs/cli-toolbox/0.2.0")]
 
 //! Utility library for working with ```cli``` output ergonomically.
 //!
