@@ -43,7 +43,7 @@ impl FromStr for Verbosity {
 }
 
 lazy_static! {
-    static ref REPORTING: Arc<RwLock<Verbosity>> = Arc::new(RwLock::new(Verbosity::Terse));
+    static ref REPORTING: Arc<RwLock<Verbosity>> = Arc::new(RwLock::new(Verbosity::Quite));
     static ref REPORTING_SET: AtomicBool = AtomicBool::new(false);
 }
 
