@@ -39,16 +39,16 @@ if (!$SkipClean)
     Confirm-Success "clean"
 }
 
-cargo clippy
+cargo clippy --all-features
 Confirm-Success "clippy"
 
-cargo clippy --release
+cargo clippy --release --all-features
 Confirm-Success "clippy release"
 
-cargo test  -- --nocapture --test-threads=1
+cargo test --all-features -- --nocapture --test-threads=1
 Confirm-Success "test"
 
-cargo test  --release -- --nocapture --test-threads=1
+cargo test --release --all-features -- --nocapture --test-threads=1
 Confirm-Success "test release"
 
 cargo publish --locked --dry-run

@@ -19,3 +19,16 @@ parking_lot = "0.11"
 [dev-dependencies]
 gag = "1.0"
 version-sync = "0.9"
+
+[features]
+default = []
+debug = []
+report = []
+
+[[example]]
+name = "cli-debugging"
+required-features = ["debug", "report"]
+
+[[example]]
+name = "cli-reporting"
+required-features = ["debug", "report"]

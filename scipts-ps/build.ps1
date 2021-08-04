@@ -23,20 +23,20 @@ clear
 cargo clean
 Confirm-Success "clean"
 
-cargo clippy
+cargo clippy --all-features
 Confirm-Success "clippy"
 
-cargo clippy --release
+cargo clippy --release --all-features
 Confirm-Success "clippy release"
 
-cargo test  -- --nocapture --test-threads=1
+cargo test --all-features -- --nocapture --test-threads=1
 Confirm-Success "test"
 
-cargo test  --release -- --nocapture --test-threads=1
+cargo test --all-features --release -- --nocapture --test-threads=1
 Confirm-Success "test release"
 
 cargo doc --release --no-deps --all-features
 Confirm-Success "docs"
 
-cargo build --release
+cargo build --release --all-features
 Confirm-Success "build"

@@ -24,10 +24,14 @@
 //!
 //! All other debugging and telemetry output is most likely better served with a logging library.
 
+#[cfg(feature = "report")]
 pub use verbosity::Verbosity;
 
+#[cfg(feature = "debug")]
 mod debug;
+#[cfg(feature = "report")]
 mod report;
+#[cfg(feature = "report")]
 mod verbosity;
 
 #[cfg(test)]
