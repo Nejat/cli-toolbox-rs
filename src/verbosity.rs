@@ -67,6 +67,22 @@ impl Verbosity {
         *REPORTING.read()
     }
 
+    /// Checks if global [`Verbosity`] level is `Quite`
+    ///
+    /// ```rust
+    /// # use cli_toolbox::Verbosity;
+    /// Verbosity::Quite.set_as_global();
+    ///
+    /// assert_eq!(Verbosity::level(), Verbosity::Quite);
+    /// ```
+    ///
+    /// [`Verbosity`]: crate::verbosity::Verbosity
+    #[must_use]
+    #[inline]
+    pub fn is_quite() -> bool {
+        *REPORTING.read() == Self::Quite
+    }
+
     /// Checks if global [`Verbosity`] level is `Terse`
     ///
     /// * is not terse if level is 'Quite'
