@@ -35,3 +35,8 @@ required-features = ["debug", "report"]
 name = "cli-reporting"
 path = "examples/cli-reporting.rs"
 required-features = ["debug", "report"]
+
+[[example]]
+name = "cli-release"
+path = "examples/cli-release.rs"
+required-features = ["debug", "report", "release"]

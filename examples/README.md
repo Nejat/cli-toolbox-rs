@@ -27,3 +27,19 @@ and then use the following command to run the example in release build to compar
 ```shell
 cargo run --release --example cli-debugging --features="debug,report"
 ```
+
+## CLI Release 
+
+Run the `release!` macro example to see how release vs debug output behaves.
+
+Use the following command from the project root folder to run the example in debug build
+
+```shell
+cargo run --example cli-release --features="debug,report,release"
+```
+
+and then use the following command to run the example in release build to compare the output of both builds
+
+```shell
+cargo run --release --example cli-release --features="debug,report,release"
+```
