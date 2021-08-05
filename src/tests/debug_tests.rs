@@ -15,7 +15,7 @@ fn debug_code_block() {
 
 #[test]
 fn debug_code_block_if_err_result() {
-    expect! { EXPECTED: &str => "", "it's broke: true" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "it's broke: true" }
     actual! { actual = String::new() }
 
     // subject under test
@@ -26,7 +26,7 @@ fn debug_code_block_if_err_result() {
 
 #[test]
 fn debug_code_block_if_err_result_discard_err() {
-    expect! { EXPECTED: &str => "", "it's broke" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "it's broke" }
     actual! { actual = "" }
 
     // subject under test
@@ -37,7 +37,7 @@ fn debug_code_block_if_err_result_discard_err() {
 
 #[test]
 fn debug_code_block_if_ok_result() {
-    expect! { EXPECTED: &str => "", "not broke: 42" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "not broke: 42" }
     actual! { actual = String::new() }
 
     // subject under test
@@ -48,7 +48,7 @@ fn debug_code_block_if_ok_result() {
 
 #[test]
 fn debug_code_block_if_ok_result_discard_ok() {
-    expect! { EXPECTED: &str => "", "not broke" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "not broke" }
     actual! { actual = "" }
 
     // subject under test
@@ -179,7 +179,7 @@ fn debug_code_blocks_if_ok_result_discard_results() {
 
 #[test]
 fn debug_message_formatted_error_if_err_result() {
-    expect! { EXPECTED: &str => "", "ERROR: debug error message only; -42: -42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "ERROR: debug error message only; -42: -42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -199,7 +199,7 @@ fn debug_message_formatted_error_if_err_result() {
 
 #[test]
 fn debug_message_formatted_error_if_err_result_discard_err() {
-    expect! { EXPECTED: &str => "", "ERROR: debug error message only; -42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "ERROR: debug error message only; -42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -219,7 +219,7 @@ fn debug_message_formatted_error_if_err_result_discard_err() {
 
 #[test]
 fn debug_message_formatted_error_if_err_result_discard_ok() {
-    expect! { EXPECTED: &str => "", "ERROR: debug error message only; -42: -42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "ERROR: debug error message only; -42: -42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -239,7 +239,7 @@ fn debug_message_formatted_error_if_err_result_discard_ok() {
 
 #[test]
 fn debug_message_formatted_error_if_err_result_discard_results() {
-    expect! { EXPECTED: &str => "", "ERROR: debug error message only; -42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "ERROR: debug error message only; -42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -259,7 +259,7 @@ fn debug_message_formatted_error_if_err_result_discard_results() {
 
 #[test]
 fn debug_message_formatted_error_if_ok_result() {
-    expect! { EXPECTED: &str => "", "DEBUG: debug message only: 42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "DEBUG: debug message only: 42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -279,7 +279,7 @@ fn debug_message_formatted_error_if_ok_result() {
 
 #[test]
 fn debug_message_formatted_error_if_ok_result_discard_err() {
-    expect! { EXPECTED: &str => "", "DEBUG: debug message only: 42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "DEBUG: debug message only: 42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -299,7 +299,7 @@ fn debug_message_formatted_error_if_ok_result_discard_err() {
 
 #[test]
 fn debug_message_formatted_error_if_ok_result_discard_ok() {
-    expect! { EXPECTED: &str => "", "DEBUG: debug message only\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "DEBUG: debug message only\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -319,7 +319,7 @@ fn debug_message_formatted_error_if_ok_result_discard_ok() {
 
 #[test]
 fn debug_message_formatted_error_if_ok_result_discard_results() {
-    expect! { EXPECTED: &str => "", "DEBUG: debug message only\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "DEBUG: debug message only\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -339,7 +339,7 @@ fn debug_message_formatted_error_if_ok_result_discard_results() {
 
 #[test]
 fn debug_message_formatted_if_err_result() {
-    expect! { EXPECTED: &str => "", "ERROR: debug error message only; -42: -42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "ERROR: debug error message only; -42: -42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -359,7 +359,7 @@ fn debug_message_formatted_if_err_result() {
 
 #[test]
 fn debug_message_formatted_if_err_result_discard_err() {
-    expect! { EXPECTED: &str => "", "ERROR: debug error message only\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "ERROR: debug error message only\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -379,7 +379,7 @@ fn debug_message_formatted_if_err_result_discard_err() {
 
 #[test]
 fn debug_message_formatted_if_err_result_discard_ok() {
-    expect! { EXPECTED: &str => "", "ERROR: debug error message only: -42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "ERROR: debug error message only: -42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -399,7 +399,7 @@ fn debug_message_formatted_if_err_result_discard_ok() {
 
 #[test]
 fn debug_message_formatted_if_err_result_discard_results() {
-    expect! { EXPECTED: &str => "", "ERROR: debug error message only\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "ERROR: debug error message only\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -419,7 +419,7 @@ fn debug_message_formatted_if_err_result_discard_results() {
 
 #[test]
 fn debug_message_formatted_if_ok_result() {
-    expect! { EXPECTED: &str => "", "DEBUG: debug message only: 42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "DEBUG: debug message only: 42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -439,7 +439,7 @@ fn debug_message_formatted_if_ok_result() {
 
 #[test]
 fn debug_message_formatted_if_ok_result_discard_err() {
-    expect! { EXPECTED: &str => "", "DEBUG: debug message only: 42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "DEBUG: debug message only: 42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -459,7 +459,7 @@ fn debug_message_formatted_if_ok_result_discard_err() {
 
 #[test]
 fn debug_message_formatted_if_ok_result_discard_ok() {
-    expect! { EXPECTED: &str => "", "DEBUG: debug message only\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "DEBUG: debug message only\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -479,7 +479,7 @@ fn debug_message_formatted_if_ok_result_discard_ok() {
 
 #[test]
 fn debug_message_formatted_if_ok_result_discard_results() {
-    expect! { EXPECTED: &str => "", "DEBUG: debug message only\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "DEBUG: debug message only\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -499,7 +499,7 @@ fn debug_message_formatted_if_ok_result_discard_results() {
 
 #[test]
 fn debug_message_formatted_success_if_err_result() {
-    expect! { EXPECTED: &str => "", "ERROR: debug error message only; -42: -42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "ERROR: debug error message only; -42: -42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -519,7 +519,7 @@ fn debug_message_formatted_success_if_err_result() {
 
 #[test]
 fn debug_message_formatted_success_if_err_result_discard_err() {
-    expect! { EXPECTED: &str => "", "ERROR: debug error message only\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "ERROR: debug error message only\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -539,7 +539,7 @@ fn debug_message_formatted_success_if_err_result_discard_err() {
 
 #[test]
 fn debug_message_formatted_success_if_err_result_discard_ok() {
-    expect! { EXPECTED: &str => "", "ERROR: debug error message only: -42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "ERROR: debug error message only: -42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -559,7 +559,7 @@ fn debug_message_formatted_success_if_err_result_discard_ok() {
 
 #[test]
 fn debug_message_formatted_success_if_err_result_discard_results() {
-    expect! { EXPECTED: &str => "", "ERROR: debug error message only\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "ERROR: debug error message only\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -579,7 +579,7 @@ fn debug_message_formatted_success_if_err_result_discard_results() {
 
 #[test]
 fn debug_message_formatted_success_if_ok_result() {
-    expect! { EXPECTED: &str => "", "DEBUG: debug message only; 42: 42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "DEBUG: debug message only; 42: 42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -599,7 +599,7 @@ fn debug_message_formatted_success_if_ok_result() {
 
 #[test]
 fn debug_message_formatted_success_if_ok_result_discard_err() {
-    expect! { EXPECTED: &str => "", "DEBUG: debug message only; 42: 42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "DEBUG: debug message only; 42: 42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -619,7 +619,7 @@ fn debug_message_formatted_success_if_ok_result_discard_err() {
 
 #[test]
 fn debug_message_formatted_success_if_ok_result_discard_ok() {
-    expect! { EXPECTED: &str => "", "DEBUG: debug message only; 42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "DEBUG: debug message only; 42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -639,7 +639,7 @@ fn debug_message_formatted_success_if_ok_result_discard_ok() {
 
 #[test]
 fn debug_message_formatted_success_if_ok_result_discard_results() {
-    expect! { EXPECTED: &str => "", "DEBUG: debug message only; 42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "DEBUG: debug message only; 42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -659,7 +659,7 @@ fn debug_message_formatted_success_if_ok_result_discard_results() {
 
 #[test]
 fn debug_message_if_err_result() {
-    expect! { EXPECTED: &str => "", "ERROR: debug error message only: -42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "ERROR: debug error message only: -42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -679,7 +679,7 @@ fn debug_message_if_err_result() {
 
 #[test]
 fn debug_message_if_err_result_discard_err() {
-    expect! { EXPECTED: &str => "", "ERROR: debug error message only\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "ERROR: debug error message only\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -699,7 +699,7 @@ fn debug_message_if_err_result_discard_err() {
 
 #[test]
 fn debug_message_if_err_result_discard_ok() {
-    expect! { EXPECTED: &str => "", "ERROR: debug error message only: -42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "ERROR: debug error message only: -42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -719,7 +719,7 @@ fn debug_message_if_err_result_discard_ok() {
 
 #[test]
 fn debug_message_if_err_result_discard_results() {
-    expect! { EXPECTED: &str => "", "ERROR: debug error message only\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "ERROR: debug error message only\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -739,7 +739,7 @@ fn debug_message_if_err_result_discard_results() {
 
 #[test]
 fn debug_message_if_ok_result() {
-    expect! { EXPECTED: &str => "", "DEBUG: debug message only: 42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "DEBUG: debug message only: 42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -759,7 +759,7 @@ fn debug_message_if_ok_result() {
 
 #[test]
 fn debug_message_if_ok_result_discard_err() {
-    expect! { EXPECTED: &str => "", "DEBUG: debug message only: 42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "DEBUG: debug message only: 42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -779,7 +779,7 @@ fn debug_message_if_ok_result_discard_err() {
 
 #[test]
 fn debug_message_if_ok_result_discard_ok() {
-    expect! { EXPECTED: &str => "", "DEBUG: debug message only\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "DEBUG: debug message only\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -799,7 +799,7 @@ fn debug_message_if_ok_result_discard_ok() {
 
 #[test]
 fn debug_message_if_ok_result_discard_results() {
-    expect! { EXPECTED: &str => "", "DEBUG: debug message only\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "DEBUG: debug message only\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -819,7 +819,7 @@ fn debug_message_if_ok_result_discard_results() {
 
 #[test]
 fn debug_stderr() {
-    expect! { EXPECTED: &str => "", "ERROR: debug error message only\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "ERROR: debug error message only\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -837,7 +837,8 @@ fn debug_stderr() {
 fn debug_stderr_formatted() {
     expect! {
         EXPECTED: &str =>
-            "", "ERROR: debug error message only - 42; \"so long and thanks for all the fish!\"\n"
+            EXPECTED_BLANK,
+        "ERROR: debug error message only - 42; \"so long and thanks for all the fish!\"\n"
     }
 
     let (actual_out, actual_err) = capture! {
@@ -856,7 +857,8 @@ fn debug_stderr_formatted() {
 fn debug_stderr_formatted_if_err_result() {
     expect! {
         EXPECTED: &str =>
-            "", "ERROR: debug error message only - 42; \"so long and thanks for all the fish!\": true\n"
+            EXPECTED_BLANK,
+            "ERROR: debug error message only - 42; \"so long and thanks for all the fish!\": true\n"
     }
 
     let (actual_out, actual_err) = capture! {
@@ -875,7 +877,8 @@ fn debug_stderr_formatted_if_err_result() {
 fn debug_stderr_formatted_if_err_result_discard_err() {
     expect! {
         EXPECTED: &str =>
-            "", "ERROR: debug error message only - 42; \"so long and thanks for all the fish!\"\n"
+            EXPECTED_BLANK,
+            "ERROR: debug error message only - 42; \"so long and thanks for all the fish!\"\n"
     }
 
     let (actual_out, actual_err) = capture! {
@@ -892,7 +895,7 @@ fn debug_stderr_formatted_if_err_result_discard_err() {
 
 #[test]
 fn debug_stderr_if_err_result() {
-    expect! { EXPECTED: &str => "", "ERROR: debug error message only: true\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "ERROR: debug error message only: true\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -908,7 +911,7 @@ fn debug_stderr_if_err_result() {
 
 #[test]
 fn debug_stderr_if_err_result_discard_err() {
-    expect! { EXPECTED: &str => "", "ERROR: debug error message only\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "ERROR: debug error message only\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -924,7 +927,7 @@ fn debug_stderr_if_err_result_discard_err() {
 
 #[test]
 fn debug_stdout() {
-    expect! { EXPECTED: &str => "", "DEBUG: debug message only\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "DEBUG: debug message only\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -942,7 +945,8 @@ fn debug_stdout() {
 fn debug_stdout_formatted() {
     expect! {
         EXPECTED: &str =>
-            "", "DEBUG: debug message only - 42; \"so long and thanks for all the fish!\"\n"
+            EXPECTED_BLANK,
+            "DEBUG: debug message only - 42; \"so long and thanks for all the fish!\"\n"
     }
 
     let (actual_out, actual_err) = capture! {
@@ -961,7 +965,8 @@ fn debug_stdout_formatted() {
 fn debug_stdout_formatted_if_ok_result() {
     expect! {
         EXPECTED: &str =>
-            "", "DEBUG: debug message only - 42; \"so long and thanks for all the fish!\": 42\n"
+            EXPECTED_BLANK,
+            "DEBUG: debug message only - 42; \"so long and thanks for all the fish!\": 42\n"
     }
 
     let (actual_out, actual_err) = capture! {
@@ -980,7 +985,8 @@ fn debug_stdout_formatted_if_ok_result() {
 fn debug_stdout_formatted_if_ok_result_discard_ok() {
     expect! {
         EXPECTED: &str =>
-            "", "DEBUG: debug message only - 42; \"so long and thanks for all the fish!\"\n"
+            EXPECTED_BLANK,
+            "DEBUG: debug message only - 42; \"so long and thanks for all the fish!\"\n"
     }
 
     let (actual_out, actual_err) = capture! {
@@ -997,7 +1003,7 @@ fn debug_stdout_formatted_if_ok_result_discard_ok() {
 
 #[test]
 fn debug_stdout_if_ok_result() {
-    expect! { EXPECTED: &str => "", "DEBUG: debug message only: 42\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "DEBUG: debug message only: 42\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
@@ -1013,7 +1019,7 @@ fn debug_stdout_if_ok_result() {
 
 #[test]
 fn debug_stdout_if_ok_result_discard_ok() {
-    expect! { EXPECTED: &str => "", "DEBUG: debug message only\n" }
+    expect! { EXPECTED: &str => EXPECTED_BLANK, "DEBUG: debug message only\n" }
 
     let (actual_out, actual_err) = capture! {
         // subject under test
