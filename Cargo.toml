@@ -23,6 +23,7 @@ version-sync = "0.9"
 [features]
 default = []
 debug = []
+release = []
 report = []
 
 [[example]]
