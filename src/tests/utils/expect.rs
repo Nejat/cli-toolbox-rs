@@ -2,7 +2,7 @@
 #[doc(hidden)]
 #[macro_export]
 macro_rules! expect {
-    ($var:ident: $typ:ty => $rls:literal, $dgb:literal) => {
+    ($var:ident: $typ:ty => $rls:expr, $dgb:expr) => {
         cfg_if::cfg_if! {
             if #[cfg(not(debug_assertions))] {
                 const $var: $typ = $rls;

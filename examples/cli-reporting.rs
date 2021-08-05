@@ -2,7 +2,7 @@ use std::env;
 
 use cli_toolbox::report;
 use cli_toolbox::Verbosity;
-use std::str::FromStr; // this is needed by the report! macro
+use std::str::FromStr;
 
 fn main() {
     let level: Verbosity = env::args()

@@ -1,6 +1,6 @@
 use cli_toolbox::debug;
 use cli_toolbox::report;
-use cli_toolbox::Verbosity; // this is needed by the report! macro
+use cli_toolbox::Verbosity;
 
 #[cfg(debug_assertions)]
 const THE_ULTIMATE_ANSWER: u32 = 42;
