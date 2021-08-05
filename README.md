@@ -16,7 +16,7 @@ All other debugging and telemetry output is most likely better served with a log
 
 ```toml
 [dependencies]
-cli-toolbox = "0.3.0"
+cli-toolbox = "0.4.0"
 ```
 # Roadmap
 * [x] ```debug!``` macro
