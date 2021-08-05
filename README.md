@@ -1,3 +1,4 @@
+# cli-toolbox
 Utility library for working with ```cli``` output ergonomically.
 
 This is not a logging alternative, it's intended to produce output for end user consumption.
@@ -19,18 +20,17 @@ All other debugging and telemetry output is most likely better served with a log
 cli-toolbox = "0.4.0"
 ```
 
-# Features
+## Roadmap
+
+* [ ] ...
+
+## Roadmap - ¿ Extra Credit ?
+* [ ] handle ```Option<T>``` expressions in addition to ```Result<T,E>```
+      conditional expressions
+
+## Implemented
 * [x] ```debug!``` macro
 * [x] ```Verbosity``` reporting level functionality
 * [x] ```report!``` macro
 * [x] functionality separated by features
 * [x] ```release!``` macro
-
-# Roadmap
-
-* [ ] ...
-
-# Roadmap - ¿ Extra Credit ?
-* [ ] handle ```Option<T>``` expressions in addition to ```Result<T,E>```
-      conditional expressions
-
