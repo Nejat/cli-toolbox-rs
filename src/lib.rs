@@ -29,6 +29,8 @@ pub use verbosity::Verbosity;
 
 #[cfg(feature = "debug")]
 mod debug;
+#[cfg(feature = "eval")]
+mod eval;
 #[cfg(feature = "release")]
 mod release;
 #[cfg(feature = "report")]
