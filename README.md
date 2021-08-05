@@ -16,13 +16,19 @@ All other debugging and telemetry output is most likely better served with a log
 
 ```toml
 [dependencies]
-cli-toolbox = "0.3.0"
+cli-toolbox = "0.4.0"
 ```
-# Roadmap
+
+# Features
 * [x] ```debug!``` macro
 * [x] ```Verbosity``` reporting level functionality
 * [x] ```report!``` macro
 * [x] functionality separated by features
+* [x] ```release!``` macro
+
+# Roadmap
+
+* [ ] ...
 
 # Roadmap - ¿ Extra Credit ?
 * [ ] handle ```Option<T>``` expressions in addition to ```Result<T,E>```

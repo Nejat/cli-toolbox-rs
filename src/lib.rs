@@ -7,7 +7,7 @@
 #![allow(clippy::module_name_repetitions)]
 #![allow(clippy::items_after_statements)]
 // ==============================================================
-#![doc(html_root_url = "https://docs.rs/cli-toolbox/0.3.0")]
+#![doc(html_root_url = "https://docs.rs/cli-toolbox/0.4.0")]
 
 //! Utility library for working with ```cli``` output ergonomically.
 //!
@@ -29,9 +29,11 @@ pub use verbosity::Verbosity;
 
 #[cfg(feature = "debug")]
 mod debug;
+#[cfg(feature = "release")]
+mod release;
 #[cfg(feature = "report")]
 mod report;
-#[cfg(feature = "report")]
+#[cfg(any(feature = "report", feature = "release"))]
 mod verbosity;
 
 #[cfg(test)]

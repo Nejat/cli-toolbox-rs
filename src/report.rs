@@ -22,8 +22,6 @@
 ///
 /// ```rust
 /// # use cli_toolbox::report;
-/// use cli_toolbox::Verbosity; // required by report!
-///
 /// report! { "some user output" }
 /// ```
 ///
@@ -31,8 +29,6 @@
 ///
 /// ```rust
 /// # use cli_toolbox::report;
-/// use cli_toolbox::Verbosity;
-///
 /// report! { "some formatted user output; {}", 42 }
 /// ```
 ///
@@ -40,8 +36,6 @@
 ///
 /// ```rust
 /// # use cli_toolbox::report;
-/// use cli_toolbox::Verbosity;
-///
 /// report! { ERR "some error message" }
 /// ```
 ///
@@ -49,8 +43,6 @@
 ///
 /// ```rust
 /// # use cli_toolbox::report;
-/// use cli_toolbox::Verbosity;
-///
 /// report! { ERR "some formatted error message; {}", -42 }
 /// ```
 ///
@@ -62,8 +54,6 @@
 ///
 /// ```rust
 /// # use cli_toolbox::report;
-/// use cli_toolbox::Verbosity;
-///
 /// report! { VERBOSE "some detailedd user output" }
 /// ```
 ///
@@ -71,8 +61,6 @@
 ///
 /// ```rust
 /// # use cli_toolbox::report;
-/// use cli_toolbox::Verbosity;
-///
 /// report! { VERBOSE "some formatted more detailed user output; {}", 42 }
 /// ```
 ///
@@ -80,8 +68,6 @@
 ///
 /// ```rust
 /// # use cli_toolbox::report;
-/// use cli_toolbox::Verbosity;
-///
 /// report! { ERRV "some detailedd error message" }
 /// ```
 ///
@@ -89,8 +75,6 @@
 ///
 /// ```rust
 /// # use cli_toolbox::report;
-/// use cli_toolbox::Verbosity;
-///
 /// report! { ERRV "some formatted more detailed error message; {}", -42 }
 /// ```
 ///
@@ -102,8 +86,6 @@
 ///
 /// ```rust
 /// # use cli_toolbox::report;
-/// use cli_toolbox::Verbosity;
-///
 /// // the following will output only one of the two messages, either branch accepts formatting
 /// report! {
 ///     TERSE   "some user output";
@@ -115,8 +97,6 @@
 ///
 /// ```rust
 /// # use cli_toolbox::report;
-/// use cli_toolbox::Verbosity;
-///
 /// // the following will output only one of the two messages, either branch accepts formatting
 /// report! {
 ///     ERR  "some error message";
@@ -130,38 +110,38 @@ macro_rules! report {
     // ===============================================================================
     // report if terse
     ($msg:expr) => {
-        if Verbosity::is_terse() { report! { @ $msg } }
+        if $crate::Verbosity::is_terse() { report! { @ $msg } }
     };
     // report formatted if terse
     ($msg:expr, $($arg:expr),*) => {
-        if Verbosity::is_terse() { report! { @ $msg, $($arg),* } }
+        if $crate::Verbosity::is_terse() { report! { @ $msg, $($arg),* } }
     };
     // ===============================================================================
     // report if verbose
     (VERBOSE $msg:expr) => {
-        if Verbosity::is_verbose() { report! { @ $msg } }
+        if $crate::Verbosity::is_verbose() { report! { @ $msg } }
     };
     // report formatted if verbose
     (VERBOSE $msg:expr, $($arg:expr),* ) => {
-        if Verbosity::is_verbose() { report! { @ $msg, $($arg),* } }
+        if $crate::Verbosity::is_verbose() { report! { @ $msg, $($arg),* } }
     };
     // ===============================================================================
     // report error if terse
     (ERR $msg:expr) => {
-        if Verbosity::is_terse() { report! { @ERR $msg } }
+        if $crate::Verbosity::is_terse() { report! { @ERR $msg } }
     };
     // report formatted error if terse
     (ERR $msg:expr, $($arg:expr),*) => {
-        if Verbosity::is_terse() { report! { @ERR $msg, $($arg),* } }
+        if $crate::Verbosity::is_terse() { report! { @ERR $msg, $($arg),* } }
     };
     // ===============================================================================
     // report error if verbose
     (ERRV $msg:expr) => {
-        if Verbosity::is_verbose() { report! { @ERR $msg } }
+        if $crate::Verbosity::is_verbose() { report! { @ERR $msg } }
     };
     // report formatted error if verbose
     (ERRV $msg:expr, $($arg:expr),*) => {
-        if Verbosity::is_verbose() { report! { @ERR $msg, $($arg),* } }
+        if $crate::Verbosity::is_verbose() { report! { @ERR $msg, $($arg),* } }
     };
     // ===============================================================================
     // report terse or verbose
@@ -169,9 +149,9 @@ macro_rules! report {
         TERSE $terse_msg:expr;
         VERBOSE $verbose_msg:expr;
     ) => {
-        match Verbosity::level() {
-            Verbosity::Terse   => { report! { @ $terse_msg } }
-            Verbosity::Verbose => { report! { @ $verbose_msg } }
+        match $crate::Verbosity::level() {
+            $crate::Verbosity::Terse   => { report! { @ $terse_msg } }
+            $crate::Verbosity::Verbose => { report! { @ $verbose_msg } }
             _ => {}
         }
     };
@@ -180,9 +160,9 @@ macro_rules! report {
         TERSE $terse_msg:expr, $($terse_arg:expr),*;
         VERBOSE $verbose_msg:expr;
     ) => {
-        match Verbosity::level() {
-            Verbosity::Terse   => { report! { @ $terse_msg, $($terse_arg),* } }
-            Verbosity::Verbose => { report! { @ $verbose_msg } }
+        match $crate::Verbosity::level() {
+            $crate::Verbosity::Terse   => { report! { @ $terse_msg, $($terse_arg),* } }
+            $crate::Verbosity::Verbose => { report! { @ $verbose_msg } }
             _ => {}
         }
     };
@@ -191,9 +171,9 @@ macro_rules! report {
         TERSE $terse_msg:expr;
         VERBOSE $verbose_msg:expr, $($verbose_arg:expr),*;
     ) => {
-        match Verbosity::level() {
-            Verbosity::Terse   => { report! { @ $terse_msg } }
-            Verbosity::Verbose => { report! { @ $verbose_msg, $($verbose_arg),* } }
+        match $crate::Verbosity::level() {
+            $crate::Verbosity::Terse   => { report! { @ $terse_msg } }
+            $crate::Verbosity::Verbose => { report! { @ $verbose_msg, $($verbose_arg),* } }
             _ => {}
         }
     };
@@ -202,9 +182,9 @@ macro_rules! report {
         TERSE $terse_msg:expr, $($terse_arg:expr),*;
         VERBOSE $verbose_msg:expr, $($verbose_arg:expr),*;
     ) => {
-        match Verbosity::level() {
-            Verbosity::Terse   => { report! { @ $terse_msg, $($terse_arg),* } }
-            Verbosity::Verbose => { report! { @ $verbose_msg, $($verbose_arg),* } }
+        match $crate::Verbosity::level() {
+            $crate::Verbosity::Terse   => { report! { @ $terse_msg, $($terse_arg),* } }
+            $crate::Verbosity::Verbose => { report! { @ $verbose_msg, $($verbose_arg),* } }
             _ => {}
         }
     };
@@ -214,9 +194,9 @@ macro_rules! report {
         ERR $terse_msg:expr;
         ERRV $verbose_msg:expr;
     ) => {
-        match Verbosity::level() {
-            Verbosity::Terse   => { report! { @ERR $terse_msg } }
-            Verbosity::Verbose => { report! { @ERR $verbose_msg } }
+        match $crate::Verbosity::level() {
+            $crate::Verbosity::Terse   => { report! { @ERR $terse_msg } }
+            $crate::Verbosity::Verbose => { report! { @ERR $verbose_msg } }
             _ => {}
         }
     };
@@ -225,9 +205,9 @@ macro_rules! report {
         ERR $terse_msg:expr, $($terse_arg:expr),*;
         ERRV $verbose_msg:expr;
     ) => {
-        match Verbosity::level() {
-            Verbosity::Terse   => { report! { @ERR $terse_msg, $($terse_arg),* } }
-            Verbosity::Verbose => { report! { @ERR $verbose_msg } }
+        match $crate::Verbosity::level() {
+            $crate::Verbosity::Terse   => { report! { @ERR $terse_msg, $($terse_arg),* } }
+            $crate::Verbosity::Verbose => { report! { @ERR $verbose_msg } }
             _ => {}
         }
     };
@@ -236,9 +216,9 @@ macro_rules! report {
         ERR $terse_msg:expr;
         ERRV $verbose_msg:expr, $($verbose_arg:expr),*;
     ) => {
-        match Verbosity::level() {
-            Verbosity::Terse   => { report! { @ERR $terse_msg } }
-            Verbosity::Verbose => { report! { @ERR $verbose_msg, $($verbose_arg),* } }
+        match $crate::Verbosity::level() {
+            $crate::Verbosity::Terse   => { report! { @ERR $terse_msg } }
+            $crate::Verbosity::Verbose => { report! { @ERR $verbose_msg, $($verbose_arg),* } }
             _ => {}
         }
     };
@@ -247,9 +227,9 @@ macro_rules! report {
         ERR $terse_msg:expr, $($terse_arg:expr),*;
         ERRV $verbose_msg:expr, $($verbose_arg:expr),*;
     ) => {
-        match Verbosity::level() {
-            Verbosity::Terse   => { report! { @ERR $terse_msg, $($terse_arg),* } }
-            Verbosity::Verbose => { report! { @ERR $verbose_msg, $($verbose_arg),* } }
+        match $crate::Verbosity::level() {
+            $crate::Verbosity::Terse   => { report! { @ERR $terse_msg, $($terse_arg),* } }
+            $crate::Verbosity::Verbose => { report! { @ERR $verbose_msg, $($verbose_arg),* } }
             _ => {}
         }
     };
