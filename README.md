@@ -26,8 +26,8 @@ It handles three levels of verbosity that can be set dynamically at runtime:
 * `release!` - conditional code execution according to verbosity level - [`release`]
 
 ## Resources 
-* [Docs](https://docs.rs/cli-toolbox/0.5.0/cli_toolbox/) for more detailed information
-* [Examples](https://github.com/Nejat/cli-toolbox-rs/tree/release/v0.5.0/examples) to see it in action
+* [Docs](https://docs.rs/cli-toolbox/0.5.1/cli_toolbox/) for more detailed information
+* [Examples](https://github.com/Nejat/cli-toolbox-rs/tree/v0.5.1/examples) to see it in action
 
 ## Usage
 
