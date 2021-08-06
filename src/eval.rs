@@ -7,7 +7,7 @@
 ///
 /// * all `Terse` evaluations will also evaluate if the level is set to `Verbose`
 ///
-/// * you can choose unique evaluations for `Terse` or `Verbose` individually
+/// * you can choose unique code evaluations for `Terse` or `Verbose` individually
 ///
 /// # Basic Examples
 ///

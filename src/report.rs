@@ -1,8 +1,8 @@
-/// The `report!` macro provides progress and error reporting.
+/// The `report!` macro provides conditional user output and error reporting according to [`Verbosity`] level.
 ///
 /// # Features
 ///
-/// * you can report user output and error messages in two levels of detail,
+/// * you can report user output and error messages at two levels of detail,
 ///   _i.e._ `Terse` _or_ `Verbose`
 ///
 /// * the user can set the level of reporting they want to endure 🙃,
@@ -10,7 +10,7 @@
 ///
 /// * all `Terse` output will also output if the level is set to `Verbose`
 ///
-/// * you can also choose different output for `Terse` or `Verbose`
+/// * you can also choose unique output for `Terse` or `Verbose`
 ///
 /// * you can format output with application state
 ///

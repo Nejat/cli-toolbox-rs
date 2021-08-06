@@ -1,10 +1,14 @@
-/// The `release!` macro provides release only expression and statement evaluation
+/// The `release!` macro provides release only conditional code evaluation
+/// according to [`Verbosity`] level.
 ///
 /// # Features
 ///
-/// * you can define expressions and statements to evaluate
+/// * you can evaluate code according to level of verbosity,
+///   _i.e._ `Quite`, `Terse` _or_ `Verbose`
 ///
-/// * you can apply [`Verbosity`] filters, _i.e._ <`Quite`|`Terse`|`Verbose`>
+/// * all `Terse` evaluations will also evaluate if the level is set to `Verbose`
+///
+/// * you can choose unique code evaluations for `Terse` or `Verbose` individually
 ///
 /// # Basic Example
 ///
