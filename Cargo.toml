@@ -22,6 +22,7 @@ version-sync = "0.9"
 
 [features]
 default = []
+all = ["debug", "eval", "release", "report"]
 debug = []
 eval = []
 release = []
