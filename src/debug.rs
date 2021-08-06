@@ -1,4 +1,4 @@
-/// The `debug!` macro provides debug only code execution and/or output.
+/// The `debug!` macro provides debug only code evaluation and user output.
 ///
 /// # Features
 ///

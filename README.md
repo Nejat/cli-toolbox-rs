@@ -1,3 +1,4 @@
+# cli-toolbox
 Utility library for working with ```cli``` output ergonomically.
 
 This is not a logging alternative, it's intended to produce output for end user consumption.
@@ -8,29 +9,45 @@ It handles three levels of verbosity that can be set dynamically at runtime:
 * Terse - used to provide minimal user output
 * Verbose - used to provide elaborated and/or additional user output 
 
-Additionally, this library provides conditionally compiled debugging output intended to be used during application development.
+### Output Macros
 
-All other debugging and telemetry output is most likely better served with a logging library.
+* `debug!` - conditionally compiled console debugging output - [`debug`]
+
+* `report!` - conditional console output according to verbosity level - [`debug`|`release`]
+
+\* _debug! is intended to be used during application development_
+
+\* _all other debugging and telemetry output is most likely better served with a logging library_
+
+### Conditional Code
+
+* `eval!` - conditional code execution according to verbosity level - [`debug`|`release`]
+
+* `release!` - conditional code execution according to verbosity level - [`release`]
+
+## Resources 
+* [Docs](https://docs.rs/cli-toolbox/0.5.0/cli_toolbox/) for more detailed information
+* [Examples](https://github.com/Nejat/cli-toolbox-rs/tree/release/v0.5.0/examples) to see it in action
 
 ## Usage
 
+Each macro is gated by a feature.
+
+No feature is mutually exclusive and can be combined as needed.
+
 ```toml
 [dependencies]
-cli-toolbox = "0.4.0"
+cli-toolbox = { version = "0.5", features = ["debug", "eval", "release", "report"] }
 ```
 
-# Features
+## Roadmap
+
+* [ ] ...
+
+## Implemented
 * [x] ```debug!``` macro
 * [x] ```Verbosity``` reporting level functionality
 * [x] ```report!``` macro
 * [x] functionality separated by features
 * [x] ```release!``` macro
-
-# Roadmap
-
-* [ ] ...
-
-# Roadmap - ¿ Extra Credit ?
-* [ ] handle ```Option<T>``` expressions in addition to ```Result<T,E>```
-      conditional expressions
-
+* [x] ```eval!``` macro
