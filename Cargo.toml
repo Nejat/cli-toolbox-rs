@@ -11,6 +11,9 @@ keywords = ["cli", "output", "report", "verbosity", "debug"]
 categories = ["command-line-interface"]
 authors = ["Nejat<nejatoz@gmail.com>"]
 
+[package.metadata.docs.rs]
+features = ["all"]
+
 [dependencies]
 cfg-if = "1.0"
 lazy_static = "1.4"
