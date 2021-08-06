@@ -59,11 +59,11 @@ confirm-success "test"
 cargo test --all-features --release -- --nocapture --test-threads=1
 confirm-success "test release"
 
-cargo publish --locked --dry-run
+cargo publish --locked --all-features --dry-run
 confirm-success "publish dry run"
 
 if [[ "${for_reals}" == "true" ]]
 then
-  cargo publish --locked
+  cargo publish --locked --all-features
   confirm-success "publish"
 fi
