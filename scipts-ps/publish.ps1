@@ -51,11 +51,11 @@ Confirm-Success "test"
 cargo test --release --all-features -- --nocapture --test-threads=1
 Confirm-Success "test release"
 
-cargo publish --locked --dry-run
+cargo publish --locked --all-features --dry-run
 Confirm-Success "publish dry run"
 
 if ($ForReals)
 {
-    cargo publish --locked
+    cargo publish --locked --all-features
     Confirm-Success "publish"
 }
