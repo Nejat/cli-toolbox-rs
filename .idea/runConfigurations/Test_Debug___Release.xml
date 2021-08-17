@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Test Debug &amp; Release" type="CompoundRunConfigurationType">
+    <toRun name="Clean" type="CargoCommandRunConfiguration" />
+    <toRun name="Clippy Release" type="CargoCommandRunConfiguration" />
+    <toRun name="Clippy Debug" type="CargoCommandRunConfiguration" />
+    <method v="2" />
+  </configuration>
+</component>
