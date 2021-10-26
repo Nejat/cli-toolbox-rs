@@ -35,19 +35,19 @@
 //! 
 //! * `release!` - conditional code execution according to verbosity level - \[`release`\]
 
-#[cfg(feature = "report")]
-pub use verbosity::Verbosity;
+// #[cfg(any(feature = "report", feature = "release"))]
+// pub use verbosity::Verbosity;
 
-#[cfg(feature = "debug")]
-mod debug;
-#[cfg(feature = "eval")]
-mod eval;
-#[cfg(feature = "release")]
-mod release;
-#[cfg(feature = "report")]
-mod report;
-#[cfg(any(feature = "report", feature = "release"))]
-mod verbosity;
+// #[cfg(feature = "debug")]
+// mod debug;
+// #[cfg(feature = "eval")]
+// mod eval;
+// #[cfg(feature = "release")]
+// mod release;
+// #[cfg(feature = "report")]
+// mod report;
+// #[cfg(any(feature = "report", feature = "release"))]
+// mod verbosity;
 
 #[cfg(test)]
 mod tests;
