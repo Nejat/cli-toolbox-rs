@@ -26,7 +26,7 @@ syn = { version = "1", features = ["extra-traits"] }
 verbosity = { version = "0.1", optional = true }
 
 [dev-dependencies]
-test-toolbox = { version = "0.1", features = ["all"] }
+test-toolbox = { version = "0.2", features = ["all"] }
 trybuild = { version = "1", features = ["diff"] }
 version-sync = "0.9"
 
