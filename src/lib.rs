@@ -66,11 +66,11 @@ mod tests;
 /// Conditionally prints to `io::stdout` or `io::stderr` when intended verbosity matches
 /// active verbosity,<br/>does not append a new line.
 ///
-#[doc = include_str!("report_macro_doc.md")]
+#[doc = include_str!("docs/report_macro_doc.md")]
 ///
 /// ## Anatomy of the `report!` macro
 ///
-#[doc = include_str!("report_macro_anatomy_doc.md")]
+#[doc = include_str!("docs/report_macro_anatomy_doc.md")]
 #[cfg(feature = "report")]
 #[proc_macro]
 pub fn report(input: TokenStream) -> TokenStream {
@@ -80,11 +80,11 @@ pub fn report(input: TokenStream) -> TokenStream {
 /// Conditionally prints to `io::stdout` or `io::stderr` when intended verbosity matches
 /// active verbosity,<br/>appends a new line.
 ///
-#[doc = include_str!("report_macro_doc.md")]
+#[doc = include_str!("docs/report_macro_doc.md")]
 ///
 /// ## Anatomy of the `reportln!` macro
 ///
-#[doc = include_str!("report_macro_anatomy_doc.md")]
+#[doc = include_str!("docs/report_macro_anatomy_doc.md")]
 #[cfg(feature = "report")]
 #[proc_macro]
 pub fn reportln(input: TokenStream) -> TokenStream {
