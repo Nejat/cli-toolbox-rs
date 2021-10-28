@@ -46,8 +46,6 @@
 // mod release;
 // #[cfg(feature = "report")]
 // mod report;
-// #[cfg(any(feature = "report", feature = "release"))]
-// mod verbosity;
 
 #[cfg(test)]
 mod tests;
