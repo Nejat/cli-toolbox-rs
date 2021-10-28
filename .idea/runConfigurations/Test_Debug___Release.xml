@@ -1,6 +1,5 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Test Debug &amp; Release" type="CompoundRunConfigurationType">
-    <toRun name="Clean" type="CargoCommandRunConfiguration" />
     <toRun name="Test Release" type="CargoCommandRunConfiguration" />
     <toRun name="Test Debug" type="CargoCommandRunConfiguration" />
     <method v="2" />
