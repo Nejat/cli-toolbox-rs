@@ -7,7 +7,7 @@ It handles three levels of verbosity that can be set dynamically at runtime:
 
 * Quite - no output
 * Terse - used to provide minimal user output
-* Verbose - used to provide elaborated and/or additional user output 
+* Verbose - used to provide elaborated and/or additional user output
 
 ### Output Macros
 
@@ -25,7 +25,7 @@ It handles three levels of verbosity that can be set dynamically at runtime:
 
 * `release!` - conditional code execution according to verbosity level - [`release`]
 
-## Resources 
+## Resources
 * [Docs](https://docs.rs/cli-toolbox/0.5.3/cli_toolbox/) for more detailed information
 * [Examples](https://github.com/Nejat/cli-toolbox-rs/tree/v0.5.3/examples) to see it in action
 
@@ -37,17 +37,15 @@ No feature is mutually exclusive and can be combined as needed.
 
 ```toml
 [dependencies]
-cli-toolbox = { version = "0.5", features = ["debug", "eval", "release", "report"] }
+cli-toolbox = { version = "0.5", features = ["report"] }
 ```
 
 ## Roadmap
 
+* [ ] ```debug!``` macro
+* [ ] ```release!``` macro
+* [ ] ```eval!``` macro
 * [ ] ...
 
 ## Implemented
-* [x] ```debug!``` macro
-* [x] ```Verbosity``` reporting level functionality
 * [x] ```report!``` macro
-* [x] functionality separated by features
-* [x] ```release!``` macro
-* [x] ```eval!``` macro

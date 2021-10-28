@@ -63,14 +63,28 @@ mod report;
 #[cfg(test)]
 mod tests;
 
+/// Conditionally prints to `io::stdout` or `io::stderr` when intended verbosity matches
+/// active verbosity,<br/>does not append a new line.
 ///
+#[doc = include_str!("report_macro_doc.md")]
+///
+/// ## Anatomy of the `report!` macro
+///
+#[doc = include_str!("report_macro_anatomy_doc.md")]
 #[cfg(feature = "report")]
 #[proc_macro]
 pub fn report(input: TokenStream) -> TokenStream {
     parse_macro_input!(input as report::ReportMacro).into_token_stream().into()
 }
 
+/// Conditionally prints to `io::stdout` or `io::stderr` when intended verbosity matches
+/// active verbosity,<br/>appends a new line.
 ///
+#[doc = include_str!("report_macro_doc.md")]
+///
+/// ## Anatomy of the `reportln!` macro
+///
+#[doc = include_str!("report_macro_anatomy_doc.md")]
 #[cfg(feature = "report")]
 #[proc_macro]
 pub fn reportln(input: TokenStream) -> TokenStream {
