@@ -18,6 +18,7 @@ features = ["all"]
 proc-macro = true
 
 [dependencies]
+cfg-if = "1"
 lazy_static = "1"
 proc-macro2 = "1"
 quote = "1"
@@ -39,7 +40,7 @@ all = ["debug", "eval", "release", "report"]
 debug = []
 eval = []
 release = []
-report = []
+report = ["verbosity"]
 trace = [] # feature should only be used for tests or examples
 
 #[[example]]
@@ -47,10 +48,10 @@ trace = [] # feature should only be used for tests or examples
 #path = "examples/cli-debugging.rs"
 #required-features = ["debug", "report"]
 
-#[[example]]
-#name = "cli-reporting"
-#path = "examples/cli-reporting.rs"
-#required-features = ["debug", "report"]
+[[example]]
+name = "cli-reporting"
+path = "examples/cli-reporting.rs"
+required-features = ["report", "verbosity"]
 
 #[[example]]
 #name = "cli-release"
