@@ -1,0 +1,47 @@
+error: expected `;`
+ --> tests/report_compile_failed/missing_semicolons_should_fail_compiles.rs:6:9
+  |
+6 |         @verbose "verbose message: {}", 42
+  |         ^
+
+error: expected `;`
+  --> tests/report_compile_failed/missing_semicolons_should_fail_compiles.rs:11:9
+   |
+11 |         @verbose "verbose message: {}", 42
+   |         ^
+
+error: expected `;`
+  --> tests/report_compile_failed/missing_semicolons_should_fail_compiles.rs:16:9
+   |
+16 |         @err-verbose "error verbose message: {}", -42
+   |         ^
+
+error: expected `;`
+  --> tests/report_compile_failed/missing_semicolons_should_fail_compiles.rs:21:9
+   |
+21 |         @err-verbose "error verbose message: {}", -42
+   |         ^
+
+error: expected `;`
+  --> tests/report_compile_failed/missing_semicolons_should_fail_compiles.rs:26:9
+   |
+26 |         @verbose "verbose message: {}", 42
+   |         ^
+
+error: expected `;`
+  --> tests/report_compile_failed/missing_semicolons_should_fail_compiles.rs:31:9
+   |
+31 |         @verbose "verbose message: {}", 42
+   |         ^
+
+error: expected `;`
+  --> tests/report_compile_failed/missing_semicolons_should_fail_compiles.rs:36:9
+   |
+36 |         @err-verbose "error verbose message: {}", -42
+   |         ^
+
+error: expected `;`
+  --> tests/report_compile_failed/missing_semicolons_should_fail_compiles.rs:41:9
+   |
+41 |         @err-verbose "error verbose message: {}", -42
+   |         ^

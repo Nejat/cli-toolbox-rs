@@ -8,38 +8,20 @@ The verbosity level argument is optional and will default to `quite` if omitted.
 
 Use the following command from the project root folder to run the example
 
+* verbose
 ```shell
-cargo run --release --example cli-reporting --features="debug,report" [-- <quite|terse|verbose>]
+cargo run --release --example cli-reporting --features="report" -- verbose
 ```
 
-## CLI Debugging 
-
-Run the `debug!` macro example to see how debugging output behaves.
-
-Use the following command from the project root folder to run the example in debug build
-
+* terse
 ```shell
-cargo run --example cli-debugging --features="debug,report"
+cargo run --release --example cli-reporting --features="report" -- terse
 ```
 
-and then use the following command to run the example in release build to compare the output of both builds
-
+* quite
 ```shell
-cargo run --release --example cli-debugging --features="debug,report"
+cargo run --release --example cli-reporting --features="report"
 ```
-
-## CLI Release 
-
-Run the `release!` macro example to see how release vs debug output behaves.
-
-Use the following command from the project root folder to run the example in debug build
-
 ```shell
-cargo run --example cli-release --features="debug,report,release"
-```
-
-and then use the following command to run the example in release build to compare the output of both builds
-
-```shell
-cargo run --release --example cli-release --features="debug,report,release"
+cargo run --release --example cli-reporting --features="report" -- quite
 ```
