@@ -27,7 +27,7 @@ verbosity = { version = "0.1", optional = true }
 
 [dev-dependencies]
 macrofied-toolbox = { version = "0.2", features = ["result"] }
-test-toolbox = { version = "0.2", features = ["all"] }
+test-toolbox = { version = "0.3", features = ["all"] }
 trybuild = { version = "1", features = ["diff"] }
 version-sync = "0.9"
 

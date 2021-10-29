@@ -18,7 +18,7 @@ impl ToTokens for DebugMacro {
             Self::Expr(expr) =>
                 tokens.extend(quote! {
                     #[cfg(debug_assertions)]
-                    #expr;
+                    { #expr; }
                 })
         }
     }
@@ -29,6 +29,6 @@ fn tokenize_debug_message_macro(tokens: &mut TokenStream, message: &Message) {
 
     tokens.extend(quote! {
         #[cfg(debug_assertions)]
-        #message;
+        { #message; }
     });
 }
