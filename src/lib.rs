@@ -51,6 +51,8 @@ use proc_macro::TokenStream;
 #[cfg(feature = "report")]
 use quote::ToTokens;
 
+#[cfg(feature = "report")]
+mod common;
 // #[cfg(feature = "debug")]
 // mod debug;
 // #[cfg(feature = "eval")]
