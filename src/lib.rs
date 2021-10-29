@@ -38,23 +38,23 @@
 #[cfg(feature = "report")]
 #[macro_use]
 extern crate cfg_if;
-#[cfg(feature = "report")]
+#[cfg(any(feature = "debug", feature = "report"))]
 #[macro_use]
 extern crate quote;
-#[cfg(feature = "report")]
+#[cfg(any(feature = "debug", feature = "report"))]
 #[macro_use]
 extern crate syn;
 
-#[cfg(feature = "report")]
+#[cfg(any(feature = "debug", feature = "report"))]
 use proc_macro::TokenStream;
 
-#[cfg(feature = "report")]
+#[cfg(any(feature = "debug", feature = "report"))]
 use quote::ToTokens;
 
-#[cfg(feature = "report")]
+#[cfg(any(feature = "debug", feature = "report"))]
 mod common;
-// #[cfg(feature = "debug")]
-// mod debug;
+#[cfg(feature = "debug")]
+mod debug;
 // #[cfg(feature = "eval")]
 // mod eval;
 // #[cfg(feature = "release")]
@@ -64,6 +64,20 @@ mod report;
 
 #[cfg(test)]
 mod tests;
+
+///
+#[cfg(feature = "debug")]
+#[proc_macro]
+pub fn debug(input: TokenStream) -> TokenStream {
+    parse_macro_input!(input as debug::DebugMacro).into_token_stream().into()
+}
+
+///
+#[cfg(feature = "debug")]
+#[proc_macro]
+pub fn debugln(input: TokenStream) -> TokenStream {
+    parse_macro_input!(input as debug::DebugLnMacro).into_token_stream().into()
+}
 
 /// Conditionally prints to `io::stdout` or `io::stderr` when intended verbosity matches
 /// active verbosity,<br/>does not append a new line.

@@ -14,6 +14,53 @@ impl Message {
     }
 }
 
+#[cfg(feature = "debug")]
+fn decode_expr_type(expr: &Expr) -> &'static str {
+    match expr {
+        Expr::Array(_) => "array",
+        Expr::Assign(_) => "assign",
+        Expr::AssignOp(_) => "assign-op",
+        Expr::Async(_) => "async",
+        Expr::Await(_) => "await",
+        Expr::Binary(_) => "binary",
+        Expr::Block(_) => "block",
+        Expr::Box(_) => "box",
+        Expr::Break(_) => "break",
+        Expr::Call(_) => "call",
+        Expr::Cast(_) => "cast",
+        Expr::Closure(_) => "closure",
+        Expr::Continue(_) => "continue",
+        Expr::Field(_) => "field",
+        Expr::ForLoop(_) => "for-loop",
+        Expr::Group(_) => "group",
+        Expr::If(_) => "if",
+        Expr::Index(_) => "index",
+        Expr::Let(_) => "let",
+        Expr::Lit(_) => "lit",
+        Expr::Loop(_) => "loop",
+        Expr::Macro(_) => "macro",
+        Expr::Match(_) => "match",
+        Expr::MethodCall(_) => "method call",
+        Expr::Paren(_) => "paren",
+        Expr::Path(_) => "path",
+        Expr::Range(_) => "range",
+        Expr::Reference(_) => "reference",
+        Expr::Repeat(_) => "repeat",
+        Expr::Return(_) => "return",
+        Expr::Struct(_) => "struct",
+        Expr::Try(_) => "try",
+        Expr::TryBlock(_) => "try-block",
+        Expr::Tuple(_) => "tuple",
+        Expr::Type(_) => "type",
+        Expr::Unary(_) => "unary",
+        Expr::Unsafe(_) => "unsafe",
+        Expr::Verbatim(_) => "verbatim",
+        Expr::While(_) => "while",
+        Expr::Yield(_) => "yield",
+        Expr::__TestExhaustive(_) => unimplemented!()
+    }
+}
+
 fn parse_args(input: ParseStream) -> syn::Result<Option<Vec<Expr>>> {
     let mut exprs = Vec::new();
 
@@ -47,6 +94,39 @@ fn parse_args(input: ParseStream) -> syn::Result<Option<Vec<Expr>>> {
     Ok(if exprs.is_empty() { None } else { Some(exprs) })
 }
 
+
+#[cfg(feature = "debug")]
+pub fn parse_expression(input: ParseStream, macro_name: &str) -> syn::Result<Expr> {
+    let expr = <Expr>::parse(input)?;
+
+    match expr {
+        Expr::Block(_) | Expr::TryBlock(_) | Expr::Unsafe(_) => {}
+        Expr::Assign(_) | Expr::AssignOp(_) |
+        Expr::Await(_) | Expr::Binary(_) |
+        Expr::Box(_) | Expr::Break(_) |
+        Expr::Call(_) | Expr::Cast(_) |
+        Expr::Closure(_) | Expr::Continue(_) |
+        Expr::Field(_) | Expr::Group(_) |
+        Expr::If(_) | Expr::Index(_) |
+        Expr::Macro(_) | Expr::Match(_) |
+        Expr::MethodCall(_) | Expr::Path(_) |
+        Expr::Reference(_) | Expr::Repeat(_) |
+        Expr::Return(_) | Expr::Try(_) |
+        Expr::Tuple(_) | Expr::Unary(_) =>
+            parse_optional_semicolon(input)?,
+        _ =>
+            return Err(Error::new(
+                expr.span(),
+                format!(
+                    "{:?} is not a supported {} expression, try placing it into a code block",
+                    decode_expr_type(&expr), macro_name
+                ),
+            ))
+    }
+
+    Ok(expr)
+}
+
 fn parse_format(input: ParseStream) -> syn::Result<Lit> {
     let literal = <Lit>::parse(input)?;
 
@@ -56,4 +136,15 @@ fn parse_format(input: ParseStream) -> syn::Result<Lit> {
     }
 
     Ok(literal)
+}
+
+#[cfg(feature = "debug")]
+fn parse_optional_semicolon(input: ParseStream) -> syn::Result<()> {
+    if let Some(punct) = input.cursor().punct() {
+        if punct.0.as_char() == ';' {
+            <Token![;]>::parse(input)?;
+        }
+    }
+
+    Ok(())
 }

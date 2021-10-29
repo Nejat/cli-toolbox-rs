@@ -8,7 +8,7 @@ use proc_macro2::TokenStream;
 use quote::ToTokens;
 use syn::{Expr, Lit};
 
-mod parse;
+pub mod parse;
 mod tokenize;
 
 pub struct Message {
