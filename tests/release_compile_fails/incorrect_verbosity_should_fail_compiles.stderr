@@ -1,0 +1,17 @@
+error: invalid verbosity designation, use @terse, @verbose or leave blank for default level
+ --> tests/release_compile_fails/incorrect_verbosity_should_fail_compiles.rs:4:16
+  |
+4 |     release! { @err-terse println!("this should fail") }
+  |                ^
+
+error: invalid verbosity designation, use @terse, @verbose or leave blank for default level
+ --> tests/release_compile_fails/incorrect_verbosity_should_fail_compiles.rs:6:16
+  |
+6 |     release! { @err-verbose println!("this should fail") }
+  |                ^
+
+error: invalid verbosity designation, use @terse, @verbose or leave blank for default level
+ --> tests/release_compile_fails/incorrect_verbosity_should_fail_compiles.rs:8:16
+  |
+8 |     release! { @foo println!("this should fail") }
+  |                ^

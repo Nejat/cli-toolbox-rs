@@ -29,7 +29,7 @@
 //!
 //! \* _all other debugging and telemetry output is most likely better served with a logging library_
 //!
-//! ### Conditional Code
+//! ### Conditional Code Evaluation
 //!
 //! * `eval!` - conditional code execution according to verbosity level - \[`debug`|`release`\]
 //!
@@ -38,27 +38,27 @@
 #[cfg(feature = "report")]
 #[macro_use]
 extern crate cfg_if;
-#[cfg(any(feature = "debug", feature = "report"))]
+#[cfg(any(feature = "debug", feature = "eval", feature = "release", feature = "report"))]
 #[macro_use]
 extern crate quote;
-#[cfg(any(feature = "debug", feature = "report"))]
+#[cfg(any(feature = "debug", feature = "eval", feature = "release", feature = "report"))]
 #[macro_use]
 extern crate syn;
 
-#[cfg(any(feature = "debug", feature = "report"))]
+#[cfg(any(feature = "debug", feature = "eval", feature = "release", feature = "report"))]
 use proc_macro::TokenStream;
 
-#[cfg(any(feature = "debug", feature = "report"))]
+#[cfg(any(feature = "debug", feature = "eval", feature = "release", feature = "report"))]
 use quote::ToTokens;
 
-#[cfg(any(feature = "debug", feature = "report"))]
+#[cfg(any(feature = "debug", feature = "eval", feature = "release", feature = "report"))]
 mod common;
 #[cfg(feature = "debug")]
 mod debug;
-// #[cfg(feature = "eval")]
-// mod eval;
-// #[cfg(feature = "release")]
-// mod release;
+#[cfg(feature = "eval")]
+mod eval;
+#[cfg(feature = "release")]
+mod release;
 #[cfg(feature = "report")]
 mod report;
 
@@ -75,18 +75,25 @@ mod tests;
 /// library [`print!`] macro. Otherwise it accepts a valid expression.
 ///
 /// ### Examples
-///
 /// * Printing to `io::stdout`
 ///
-/// ```no_compile
+/// ```no_run
+/// # use::cli_toolbox::debug;
 /// debug! { "DBG: debugging information - {}", 42 }
 /// ```
 ///
-/// * Expression
+/// * Evaluating Expression
 ///
-/// ```no_compile
+/// ```no_run
+/// # use::cli_toolbox::debug;
 /// debug! { validate_some_important_such_and_such(); }
+/// # fn validate_some_important_such_and_such() {}
 /// ```
+///
+/// ## Panics
+///
+/// Just like the [`print!`] macros used to write the output, this also panics if
+/// writing to `io::stdout` fails.
 ///
 /// [`print!`]: <https://doc.rust-lang.org/std/macro.print.html>
 #[cfg(feature = "debug")]
@@ -106,15 +113,112 @@ pub fn debug(input: TokenStream) -> TokenStream {
 ///
 /// Printing a line to `io::stdout`
 ///
-/// ```no_compile
+/// ```no_run
+/// # use::cli_toolbox::debugln;
 /// debugln! { "DBG: debugging information - {}", 42 }
 /// ```
+///
+/// ## Panics
+///
+/// Just like the [`println!`] macros used to write the output, this also panics if
+/// writing to `io::stdout` fails.
 ///
 /// [`println!`]: <https://doc.rust-lang.org/std/macro.println.html>
 #[cfg(feature = "debug")]
 #[proc_macro]
 pub fn debugln(input: TokenStream) -> TokenStream {
     parse_macro_input!(input as debug::DebugLnMacro).into_token_stream().into()
+}
+
+/// Conditionally evaluates expressions when intended verbosity matches active verbosity.
+/// 
+/// The `eval` macro uses the [`Verbosity`] crate to determine when and what to evaluate.
+/// 
+/// _\* See the [`Verbosity`] crate to learn how to set the verbosity level._
+///
+/// ## Anatomy of the `eval!` macro
+///
+/// Input consists of an optional intended verbosity level, defaulting to `terse`
+/// if it is not specifically provided. The remainder of the macro input expects
+/// an expression and then an optional semicolon terminator.
+///
+/// ### Examples
+///
+/// * Evaluates when `default`, which is `terse`
+/// ```no_run
+/// # use::cli_toolbox::eval;
+/// # let bar = 42;
+/// eval! { foo(bar); }
+/// # fn foo(_value: usize) {}
+/// ```
+///
+/// * Evaluates when `terse`
+/// ```no_run
+/// # use::cli_toolbox::eval;
+/// # let bar = 42;
+/// eval! { @terse foo(bar); }
+/// # fn foo(_value: usize) {}
+/// ```
+///
+/// * Evaluates when `verbose`
+/// ```no_run
+/// # use::cli_toolbox::eval;
+/// # let bar = 42;
+/// eval! { @verbose foo(bar); }
+/// # fn foo(_value: usize) {}
+/// ```
+///
+/// [`Verbosity`]: <https://crates.io/crates/verbosity>
+#[cfg(feature = "eval")]
+#[proc_macro]
+pub fn eval(input: TokenStream) -> TokenStream {
+    parse_macro_input!(input as eval::Eval).into_token_stream().into()
+}
+
+/// Conditionally evaluates expressions when intended verbosity matches active verbosity
+/// and only when the code is compiled optimized.
+///
+/// The `release` macro uses the [`Verbosity`] crate to determine when and what to evaluate.
+///
+/// _\* See the [`Verbosity`] crate to learn how to set the verbosity level._
+///
+/// ## Anatomy of the `release!` macro
+///
+/// Input consists of an optional intended verbosity level, defaulting to `terse`
+/// if it is not specifically provided. The remainder of the macro input expects
+/// an expression and then an optional semicolon terminator.
+///
+/// ### Examples
+///
+/// * Evaluates when `default`, which is `terse`
+/// ```no_run
+/// # use::cli_toolbox::release;
+/// # let bar = 42;
+/// release! { foo(bar); }
+/// # fn foo(_value: usize) {}
+/// ```
+///
+/// * Evaluates when `terse`
+/// ```no_run
+/// # use::cli_toolbox::release;
+/// # let bar = 42;
+/// release! { @terse foo(bar); }
+/// # fn foo(_value: usize) {}
+/// ```
+///
+/// * Evaluates when `verbose`
+/// ```no_run
+/// # use::cli_toolbox::release;
+/// # let bar = 42;
+/// release! { @verbose foo(bar); }
+/// # fn foo(_value: usize) {}
+/// ```
+///
+/// [`Verbosity`]: <https://crates.io/crates/verbosity>
+#[cfg(feature = "release")]
+#[proc_macro]
+pub fn release(input: TokenStream) -> TokenStream {
+    parse_macro_input!(input as release::Release).into_token_stream().into()
 }
 
 /// Conditionally prints to `io::stdout` or `io::stderr` when intended verbosity matches

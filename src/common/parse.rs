@@ -1,7 +1,11 @@
 use syn::{Error, Expr, Lit};
 use syn::parse::{Parse, ParseStream};
 use syn::spanned::Spanned;
+#[cfg(any(feature = "eval", feature = "release"))]
+use verbosity::Verbosity;
 
+#[cfg(any(feature = "eval", feature = "release"))]
+use crate::common::kw;
 use crate::common::Message;
 
 impl Message {
@@ -9,7 +13,7 @@ impl Message {
         Ok(Self {
             fmt: parse_format(input)?,
             args: parse_args(input)?,
-            ln_brk
+            ln_brk,
         })
     }
 }
@@ -95,7 +99,7 @@ fn parse_args(input: ParseStream) -> syn::Result<Option<Vec<Expr>>> {
 }
 
 
-#[cfg(feature = "debug")]
+#[cfg(any(feature = "debug", feature = "eval", feature = "release"))]
 pub fn parse_expression(input: ParseStream, macro_name: &str) -> syn::Result<Expr> {
     let expr = <Expr>::parse(input)?;
 
@@ -147,4 +151,42 @@ fn parse_optional_semicolon(input: ParseStream) -> syn::Result<()> {
     }
 
     Ok(())
+}
+
+#[cfg(any(feature = "eval", feature = "release"))]
+pub fn parse_verbosity(input: ParseStream) -> syn::Result<Verbosity> {
+    let verbosity;
+    let span = input.span();
+
+    if input.peek(Token![@]) {
+        if verbosity_keyword_peek2(input) {
+            <Token![@]>::parse(input)?;
+
+            if input.peek(kw::terse) {
+                <kw::terse>::parse(input)?;
+
+                verbosity = Verbosity::Terse;
+            } else {
+                <kw::verbose>::parse(input)?;
+
+                verbosity = Verbosity::Verbose;
+            }
+        } else {
+            return Err(Error::new(
+                span,
+                "invalid verbosity designation, use @terse, @verbose or leave blank for default level",
+            ));
+        }
+    } else {
+        verbosity = Verbosity::Terse;
+    }
+
+    Ok(verbosity)
+}
+
+
+#[cfg(any(feature = "eval", feature = "release"))]
+fn verbosity_keyword_peek2(input: ParseStream) -> bool {
+    input.peek2(kw::terse) ||
+        input.peek2(kw::verbose)
 }

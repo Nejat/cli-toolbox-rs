@@ -9,7 +9,13 @@ use quote::ToTokens;
 use syn::{Expr, Lit};
 
 pub mod parse;
-mod tokenize;
+pub mod tokenize;
+
+pub mod kw {
+    custom_keyword!(err);
+    custom_keyword!(terse);
+    custom_keyword!(verbose);
+}
 
 pub struct Message {
     pub args: Option<Vec<Expr>>,
