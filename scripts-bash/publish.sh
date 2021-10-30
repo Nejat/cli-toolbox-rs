@@ -47,23 +47,53 @@ then
     confirm-success "clean"
 fi
 
-cargo clippy --all-features
-confirm-success "clippy"
+echo -e "${YELLOW}running clippy debug unoptimized"
+cargo clippy --features="debug"
+confirm-success "clippy debug unoptimized"
 
-cargo clippy --release --all-features
-confirm-success "clippy release"
+echo -e "${YELLOW}running clippy debug optimized"
+cargo clippy --release --features="debug"
+confirm-success "clippy debug optimized"
 
-cargo test --all-features -- --nocapture --test-threads=1
+echo -e "${YELLOW}running clippy eval unoptimized"
+cargo clippy --features="eval"
+confirm-success "clippy eval unoptimized"
+
+echo -e "${YELLOW}running clippy eval optimized"
+cargo clippy --release --features="eval"
+confirm-success "clippy eval optimized"
+
+echo -e "${YELLOW}running clippy release unoptimized"
+cargo clippy --features="release"
+confirm-success "clippy release unoptimized"
+
+echo -e "${YELLOW}running clippy release optimized"
+cargo clippy --release --features="release"
+confirm-success "clippy release optimized"
+
+echo -e "${YELLOW}running clippy report unoptimized"
+cargo clippy --features="report"
+confirm-success "clippy report unoptimized"
+
+echo -e "${YELLOW}running clippy report optimized"
+cargo clippy --release --features="report"
+confirm-success "clippy report optimized"
+
+echo -e "${YELLOW}running test all macros unoptimized"
+cargo test --features="all" -- --nocapture --test-threads=1
 confirm-success "test"
 
-cargo test --all-features --release -- --nocapture --test-threads=1
+echo -e "${YELLOW}running test all macros optimized"
+cargo test --features="all" --release -- --nocapture --test-threads=1
 confirm-success "test release"
-
-cargo publish --locked --all-features --dry-run
-confirm-success "publish dry run"
 
 if [[ "${for_reals}" == "true" ]]
 then
+  echo -e "${YELLOW}publish"
   cargo publish --locked --all-features
   confirm-success "publish"
+else
+  echo -e "${YELLOW}publish dry run"
+  cargo publish --locked --all-features --dry-run
+  confirm-success "publish dry run"
 fi

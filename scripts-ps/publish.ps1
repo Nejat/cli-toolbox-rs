@@ -33,29 +33,57 @@ if ($ForReals -and $SkipClean) {
     $SkipClean = $false
 }
 
-if (!$SkipClean)
-{
+if (!$SkipClean) {
     cargo clean
     Confirm-Success "clean"
 }
 
-cargo clippy --all-features
-Confirm-Success "clippy"
+Write-Host "running clippy debug unoptimized" -ForegroundColor Yellow
+cargo clippy --features="debug"
+Confirm-Success "clippy debug unoptimized"
 
-cargo clippy --release --all-features
-Confirm-Success "clippy release"
+Write-Host "running clippy debug optimized" -ForegroundColor Yellow
+cargo clippy --release --features="debug"
+Confirm-Success "clippy debug optimized"
 
-cargo test --all-features -- --nocapture --test-threads=1
+Write-Host "running clippy eval unoptimized" -ForegroundColor Yellow
+cargo clippy --features="eval"
+Confirm-Success "clippy eval unoptimized"
+
+Write-Host "running clippy eval optimized" -ForegroundColor Yellow
+cargo clippy --release --features="eval"
+Confirm-Success "clippy eval optimized"
+
+Write-Host "running clippy release unoptimized" -ForegroundColor Yellow
+cargo clippy --features="release"
+Confirm-Success "clippy release unoptimized"
+
+Write-Host "running clippy release optimized" -ForegroundColor Yellow
+cargo clippy --release --features="release"
+Confirm-Success "clippy release optimized"
+
+Write-Host "running clippy report unoptimized" -ForegroundColor Yellow
+cargo clippy --features="report"
+Confirm-Success "clippy report unoptimized"
+
+Write-Host "running clippy report optimized" -ForegroundColor Yellow
+cargo clippy --release --features="report"
+Confirm-Success "clippy report optimized"
+
+Write-Host "running test all macros unoptimized" -ForegroundColor Yellow
+cargo test --features="all" -- --nocapture --test-threads=1
 Confirm-Success "test"
 
-cargo test --release --all-features -- --nocapture --test-threads=1
+Write-Host "running test all macros optimized" -ForegroundColor Yellow
+cargo test --release --features="all" -- --nocapture --test-threads=1
 Confirm-Success "test release"
 
-cargo publish --locked --all-features --dry-run
-Confirm-Success "publish dry run"
-
-if ($ForReals)
-{
+if ($ForReals) {
+    Write-Host "publish" -ForegroundColor Yellow
     cargo publish --locked --all-features
     Confirm-Success "publish"
+} else {
+    Write-Host "publish dry run" -ForegroundColor Yellow
+    cargo publish --locked --all-features --dry-run
+    Confirm-Success "publish dry run"
 }
