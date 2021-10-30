@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Test Debug" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
-    <option name="command" value="test --features=&quot;debug,eval,release,report&quot; -- --nocapture --test-threads=1" />
+    <option name="command" value="test --features=&quot;all&quot; -- --nocapture --test-threads=1" />
     <option name="workingDirectory" value="file://$PROJECT_DIR$" />
     <option name="channel" value="DEFAULT" />
     <option name="requiredFeatures" value="true" />
