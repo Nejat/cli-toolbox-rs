@@ -1,3 +1,5 @@
+#![allow(unused_mut)] // for demonstration purposes
+
 use verbosity::Verbosity;
 
 use cli_toolbox::{debug, debugln, release, reportln};

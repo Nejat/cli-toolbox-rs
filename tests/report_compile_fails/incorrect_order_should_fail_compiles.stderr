@@ -1,47 +1,47 @@
 error: define terse reporting before verbose reporting
- --> tests/report_compile_failed/incorrect_order_should_fail_compiles.rs:6:9
+ --> tests/report_compile_fails/incorrect_order_should_fail_compiles.rs:6:9
   |
 6 |         @terse "terse message: {}", 42
   |         ^
 
 error: define terse reporting before verbose reporting
-  --> tests/report_compile_failed/incorrect_order_should_fail_compiles.rs:11:9
+  --> tests/report_compile_fails/incorrect_order_should_fail_compiles.rs:11:9
    |
 11 |         @err-terse "error terse message: {}", -42
    |         ^
 
 error: define terse reporting before verbose reporting
-  --> tests/report_compile_failed/incorrect_order_should_fail_compiles.rs:16:9
+  --> tests/report_compile_fails/incorrect_order_should_fail_compiles.rs:16:9
    |
 16 |         @terse "terse message: {}", 42
    |         ^
 
 error: define terse reporting before verbose reporting
-  --> tests/report_compile_failed/incorrect_order_should_fail_compiles.rs:21:9
+  --> tests/report_compile_fails/incorrect_order_should_fail_compiles.rs:21:9
    |
 21 |         @err-terse "error terse message: {}", -42
    |         ^
 
 error: define terse reporting before verbose reporting
-  --> tests/report_compile_failed/incorrect_order_should_fail_compiles.rs:26:9
+  --> tests/report_compile_fails/incorrect_order_should_fail_compiles.rs:26:9
    |
 26 |         @terse "terse message: {}", 42
    |         ^
 
 error: define terse reporting before verbose reporting
-  --> tests/report_compile_failed/incorrect_order_should_fail_compiles.rs:31:9
+  --> tests/report_compile_fails/incorrect_order_should_fail_compiles.rs:31:9
    |
 31 |         @err-terse "error terse message: {}", -42
    |         ^
 
 error: define terse reporting before verbose reporting
-  --> tests/report_compile_failed/incorrect_order_should_fail_compiles.rs:36:9
+  --> tests/report_compile_fails/incorrect_order_should_fail_compiles.rs:36:9
    |
 36 |         @terse "terse message: {}", 42
    |         ^
 
 error: define terse reporting before verbose reporting
-  --> tests/report_compile_failed/incorrect_order_should_fail_compiles.rs:41:9
+  --> tests/report_compile_fails/incorrect_order_should_fail_compiles.rs:41:9
    |
 41 |         @err-terse "error terse message: {}", -42
    |         ^

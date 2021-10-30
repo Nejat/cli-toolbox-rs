@@ -74,8 +74,7 @@ mod tests;
 /// In order to print to `io:stdout`, `debug!` accepts the same input as the `std`
 /// library [`print!`] macro. Otherwise it accepts a valid expression.
 ///
-/// ### Examples
-///
+/// ### Examples///
 /// * Printing to `io::stdout`
 ///
 /// ```no_compile
