@@ -65,14 +65,52 @@ mod report;
 #[cfg(test)]
 mod tests;
 
+/// Conditionally prints to `io::stdout` or evaluates an expression when the code
+/// is compiled unoptimized with debug assertions, otherwise does not include
+/// the message or expression. _for a message a new line is not appended_
 ///
+/// ## Anatomy of the `debug!` macro
+///
+/// In order to print to `io:stdout`, `debug!` accepts the same input as the `std`
+/// library [`print!`] macro. Otherwise it accepts a valid expression.
+///
+/// ### Examples
+///
+/// * Printing to `io::stdout`
+///
+/// ```no_compile
+/// debug! { "DBG: debugging information - {}", 42 }
+/// ```
+///
+/// * Expression
+///
+/// ```no_compile
+/// debug! { validate_some_important_such_and_such(); }
+/// ```
+///
+/// [`print!`]: <https://doc.rust-lang.org/std/macro.print.html>
 #[cfg(feature = "debug")]
 #[proc_macro]
 pub fn debug(input: TokenStream) -> TokenStream {
     parse_macro_input!(input as debug::DebugMacro).into_token_stream().into()
 }
 
+/// Conditionally prints to `io::stdout` when the code is compiled unoptimized
+/// with debug assertions, otherwise does not include the message. _a new line is appended_
 ///
+/// ## Anatomy of the `debugln!` macro
+///
+/// `debug!` accepts the same input as the `std` library [`println!`] macro.
+///
+/// ### Example
+///
+/// Printing a line to `io::stdout`
+///
+/// ```no_compile
+/// debugln! { "DBG: debugging information - {}", 42 }
+/// ```
+///
+/// [`println!`]: <https://doc.rust-lang.org/std/macro.println.html>
 #[cfg(feature = "debug")]
 #[proc_macro]
 pub fn debugln(input: TokenStream) -> TokenStream {
