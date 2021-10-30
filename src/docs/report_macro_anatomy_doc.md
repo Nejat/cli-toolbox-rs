@@ -8,19 +8,23 @@ _\* all of the examples below also apply to the `report!` macro variant_
 ### Examples
 
 * reports to `io::stdout` if `Verbosity` level is `terse` or `verbose` 
-```no_compile
+```no_run
+# use cli_toolbox::reportln;
 reportln! { @terse "some {} message to report", "important" }
 ```
 * reports to `io::stdout` if `Verbosity` level is `verbose`
-```no_compile
+```no_run
+# use cli_toolbox::reportln;
 reportln! { @verbose "some {} message to report", "important" }
 ``` 
 * reports to `io::stderr` if `Verbosity` level is `terse` or `verbose`
-```no_compile
+```no_run
+# use cli_toolbox::reportln;
 reportln! { @err-terse "some {} message to report", "important" }
 ```
 * reports to `io::stderr` if `Verbosity` level is `verbose`
-```no_compile
+```no_run
+# use cli_toolbox::reportln;
 reportln! { @err-verbose "some {} message to report", "important" }
 ``` 
 
@@ -34,7 +38,8 @@ First the `terse` message, followed by a required semicolon separator and then b
 ### Examples
 * reports to `io::stdout` based on `Verbosity` level
 
-```no_compile
+```no_run
+# use cli_toolbox::reportln;
 reportln! {
     @terse "some basic message";
     @verbose "more verbose message"
@@ -43,7 +48,8 @@ reportln! {
 
 * reports to `io::stderr` based on `Verbosity` level
 
-```no_compile
+```no_run
+# use cli_toolbox::reportln;
 reportln! {
     @err-terse "some basic message";
     @err-verbose "more verbose message"
@@ -52,14 +58,16 @@ reportln! {
 
 * reports to `io::stdout` or `io::stderr` based on `Verbosity` level
 
-```no_compile
+```no_run
+# use cli_toolbox::reportln;
 reportln! {
     @terse "some basic message";
     @err-verbose "more verbose message"
 }
 ```
 
-```no_compile
+```no_run
+# use cli_toolbox::reportln;
 reportln! {
     @err-terse "some basic message";
     @verbose "more verbose message"
@@ -71,8 +79,8 @@ specifically `terse`, otherwise the second message is output if the level is `ve
 
 ## Panics
 
-Just like the [`println!`] macros used, by this macro, to write the output, this also panics if writing 
-to `io::stdout` or `io::stderr` fails.
+Just like the [`println!`] macros used to write the output, this also panics if writing to `io::stdout` 
+or `io::stderr` fails.
 
-[`Verboisty`]: <https://crates.io/crates/verbosity>
+[`Verbosity`]: <https://crates.io/crates/verbosity>
 [`println!`]: <https://doc.rust-lang.org/std/macro.println.html>

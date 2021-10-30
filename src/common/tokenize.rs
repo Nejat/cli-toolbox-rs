@@ -1,6 +1,8 @@
 use proc_macro2::TokenStream;
 use quote::ToTokens;
+#[cfg(any(feature = "eval", feature = "release"))]
 use syn::Expr;
+#[cfg(any(feature = "eval", feature = "release"))]
 use verbosity::Verbosity;
 
 use crate::common::Message;
@@ -13,11 +15,12 @@ impl ToTokens for Message {
     }
 }
 
+#[cfg(any(feature = "eval", feature = "release"))]
 pub fn tokenize_verbosity_checked_expr(verbosity: Verbosity, expr: &Expr) -> TokenStream {
     let verbosity_check = if verbosity == Verbosity::Terse {
-        quote! { Verbosity::is_terse() }
+        quote! { verbosity::Verbosity::is_terse() }
     } else {
-        quote! { Verbosity::is_verbose() }
+        quote! { verbosity::Verbosity::is_verbose() }
     };
 
     quote! { if #verbosity_check { #expr; } }

@@ -1,9 +1,19 @@
+use std::env;
+use std::str::FromStr;
+
 use verbosity::Verbosity;
 
 use cli_toolbox::{debugln, eval, reportln};
 
 fn main() {
-    Verbosity::Terse.set_as_global();
+    let level = Verbosity::from_str(&env::args().last().unwrap_or_else(String::new))
+        .unwrap_or(Verbosity::Quite);
+
+    // this will never print
+    reportln! { "setting verbosity to {}", level }
+
+    // this can only be set once, level is quite until it's set
+    level.set_as_global();
 
     reportln! { "example: starting" }
 

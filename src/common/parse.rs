@@ -1,8 +1,10 @@
 use syn::{Error, Expr, Lit};
 use syn::parse::{Parse, ParseStream};
 use syn::spanned::Spanned;
+#[cfg(any(feature = "eval", feature = "release"))]
 use verbosity::Verbosity;
 
+#[cfg(any(feature = "eval", feature = "release"))]
 use crate::common::kw;
 use crate::common::Message;
 
