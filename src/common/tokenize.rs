@@ -1,12 +1,15 @@
 use proc_macro2::TokenStream;
+#[cfg(any(feature = "debug", feature = "report"))]
 use quote::ToTokens;
 #[cfg(any(feature = "eval", feature = "release"))]
 use syn::Expr;
 #[cfg(any(feature = "eval", feature = "release"))]
 use verbosity::Verbosity;
 
+#[cfg(any(feature = "debug", feature = "report"))]
 use crate::common::Message;
 
+#[cfg(any(feature = "debug", feature = "report"))]
 impl ToTokens for Message {
     fn to_tokens(&self, tokens: &mut TokenStream) {
         let report = self.build_message(false);

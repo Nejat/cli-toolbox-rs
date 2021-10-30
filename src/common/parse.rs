@@ -1,4 +1,6 @@
-use syn::{Error, Expr, Lit};
+use syn::{Error, Expr};
+#[cfg(any(feature = "debug", feature = "report"))]
+use syn::Lit;
 use syn::parse::{Parse, ParseStream};
 use syn::spanned::Spanned;
 #[cfg(any(feature = "eval", feature = "release"))]
@@ -6,8 +8,10 @@ use verbosity::Verbosity;
 
 #[cfg(any(feature = "eval", feature = "release"))]
 use crate::common::kw;
+#[cfg(any(feature = "debug", feature = "report"))]
 use crate::common::Message;
 
+#[cfg(any(feature = "debug", feature = "report"))]
 impl Message {
     pub fn parse(input: ParseStream, ln_brk: bool) -> syn::Result<Self> {
         Ok(Self {
@@ -18,7 +22,7 @@ impl Message {
     }
 }
 
-#[cfg(feature = "debug")]
+#[cfg(any(feature = "debug", feature = "eval", feature = "release"))]
 fn decode_expr_type(expr: &Expr) -> &'static str {
     match expr {
         Expr::Array(_) => "array",
@@ -65,6 +69,7 @@ fn decode_expr_type(expr: &Expr) -> &'static str {
     }
 }
 
+#[cfg(any(feature = "debug", feature = "report"))]
 fn parse_args(input: ParseStream) -> syn::Result<Option<Vec<Expr>>> {
     let mut exprs = Vec::new();
 
@@ -131,6 +136,7 @@ pub fn parse_expression(input: ParseStream, macro_name: &str) -> syn::Result<Exp
     Ok(expr)
 }
 
+#[cfg(any(feature = "debug", feature = "report"))]
 fn parse_format(input: ParseStream) -> syn::Result<Lit> {
     let literal = <Lit>::parse(input)?;
 
@@ -142,7 +148,7 @@ fn parse_format(input: ParseStream) -> syn::Result<Lit> {
     Ok(literal)
 }
 
-#[cfg(feature = "debug")]
+#[cfg(any(feature = "debug", feature = "eval", feature = "release"))]
 fn parse_optional_semicolon(input: ParseStream) -> syn::Result<()> {
     if let Some(punct) = input.cursor().punct() {
         if punct.0.as_char() == ';' {

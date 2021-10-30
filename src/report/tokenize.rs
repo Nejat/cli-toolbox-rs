@@ -18,7 +18,6 @@ impl ToTokens for ReportLnMacro {
 impl ToTokens for ReportMessage {
     fn to_tokens(&self, tokens: &mut TokenStream) {
         let report = self.message.build_message(self.std_err);
-        // todo: this is incorrect, see eval or release macros for correct output
         let is_verbosity = Ident::new(&format!("is_{}", self.verbosity), Span::call_site());
 
         tokens.extend(quote! { if verbosity::Verbosity::#is_verbosity() { #report; } });

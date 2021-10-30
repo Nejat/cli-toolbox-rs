@@ -3,26 +3,34 @@ use std::fmt::{Display, Formatter};
 #[cfg(all(debug_assertions, feature = "trace"))]
 use std::string::ToString;
 
+#[cfg(any(feature = "debug", feature = "report"))]
 use proc_macro2::TokenStream;
 #[cfg(all(debug_assertions, feature = "trace"))]
 use quote::ToTokens;
+#[cfg(any(feature = "debug", feature = "report"))]
 use syn::{Expr, Lit};
 
 pub mod parse;
 pub mod tokenize;
 
+#[cfg(any(feature = "debug", feature = "eval", feature = "release", feature = "report"))]
 pub mod kw {
+    #[cfg(any(feature = "debug", feature = "report"))]
     custom_keyword!(err);
+    #[cfg(any(feature = "debug", feature = "eval", feature = "release", feature = "report"))]
     custom_keyword!(terse);
+    #[cfg(any(feature = "debug", feature = "eval", feature = "release", feature = "report"))]
     custom_keyword!(verbose);
 }
 
+#[cfg(any(feature = "debug", feature = "report"))]
 pub struct Message {
     pub args: Option<Vec<Expr>>,
     pub fmt: Lit,
     pub ln_brk: bool,
 }
 
+#[cfg(any(feature = "debug", feature = "report"))]
 impl Message {
     pub(crate) fn build_message(&self, std_err: bool) -> TokenStream {
         let report = if std_err {
@@ -43,8 +51,7 @@ impl Message {
     }
 }
 
-
-#[cfg(all(debug_assertions, feature = "trace"))]
+#[cfg(all(debug_assertions, any(feature = "debug", feature = "report"), feature = "trace"))]
 impl Display for Message {
     fn fmt(&self, fmt: &mut Formatter<'_>) -> std::fmt::Result {
         let args = if let Some(args) = &self.args {
