@@ -1,9 +1,8 @@
-use syn::{Error, Expr, Lit};
+use syn::Error;
 use syn::parse::{Parse, ParseStream};
-use syn::spanned::Spanned;
 use verbosity::Verbosity;
 
-use crate::report::{Message, QUITE_ERR, ReportLnMacro, ReportMacro};
+use crate::report::{Message, QUITE_ERR, ReportLnMacro, ReportMacro, ReportMessage};
 
 mod kw {
     custom_keyword!(err);
@@ -11,62 +10,105 @@ mod kw {
     custom_keyword!(verbose);
 }
 
-impl Parse for Message {
+impl Parse for ReportLnMacro {
     fn parse(input: ParseStream) -> syn::Result<Self> {
-        let (std_err, verbosity) = parse_verbosity(input)?;
+        cfg_if! {
+            if #[cfg(all(debug_assertions, feature = "trace"))] {
+                let result = parse_report_macro(input, true, |terse, verbose| Self { terse, verbose });
 
-        Ok(Self {
-            std_err,
-            verbosity,
-            ln_brk: true,
-            fmt: parse_format(input)?,
-            args: parse_args(input)?,
-        })
-    }
-}
+                if let Ok(result) = &result {
+                    println!("PARSED: {}", result);
+                }
 
-fn parse_args(input: ParseStream) -> syn::Result<Option<Vec<Expr>>> {
-    let mut exprs = Vec::new();
-
-    while input.peek(Token![,]) {
-        <Token![,]>::parse(input)?;
-
-        let expr = <Expr>::parse(input)?;
-
-        match expr {
-            Expr::Array(_) | Expr::Await(_) |
-            Expr::Binary(_) | Expr::Block(_) |
-            Expr::Box(_) | Expr::Call(_) |
-            Expr::Cast(_) | Expr::Field(_) |
-            Expr::If(_) | Expr::Index(_) |
-            Expr::Lit(_) | Expr::Macro(_) |
-            Expr::Match(_) | Expr::MethodCall(_) |
-            Expr::Path(_) | Expr::Reference(_) |
-            Expr::Try(_) | Expr::TryBlock(_) |
-            Expr::Tuple(_) | Expr::Unary(_) |
-            Expr::Unsafe(_) => {}
-            _ => return Err(Error::new(expr.span(), "unsupported arg expression"))
+                result
+            } else {
+                parse_report_macro(input, true, |terse, verbose| Self { terse, verbose })
+            }
         }
-
-        exprs.push(expr);
     }
-
-    if input.peek(Token![;]) || input.peek(Token![@]) {
-        <Token![;]>::parse(input)?;
-    }
-
-    Ok(if exprs.is_empty() { None } else { Some(exprs) })
 }
 
-fn parse_format(input: ParseStream) -> syn::Result<Lit> {
-    let literal = <Lit>::parse(input)?;
+impl Parse for ReportMacro {
+    fn parse(input: ParseStream) -> syn::Result<Self> {
+        cfg_if! {
+            if #[cfg(all(debug_assertions, feature = "trace"))] {
+                let result = parse_report_macro(input, false, |terse, verbose| Self { terse, verbose });
 
-    match literal {
-        Lit::Str(_) | Lit::ByteStr(_) => {}
-        _ => return Err(Error::new(literal.span(), "expecting a string literal"))
+                if let Ok(result) = &result {
+                    println!("PARSED: {}", result);
+                }
+
+                result
+            } else {
+                parse_report_macro(input, false, |terse, verbose| Self { terse, verbose })
+            }
+        }
     }
+}
 
-    Ok(literal)
+#[allow(clippy::shadow_unrelated)] // intention of code is clear
+fn parse_report_macro<T>(
+    input: ParseStream, ln_brk: bool, builder: impl Fn(Option<ReportMessage>, Option<ReportMessage>) -> T,
+) -> syn::Result<T> {
+    let (std_err, verbosity) = parse_verbosity(input)?;
+    let message = ReportMessage {
+        message: Message::parse(input, ln_brk)?,
+        std_err,
+        verbosity,
+    };
+    let error_span = input.span();
+
+    match verbosity {
+        Verbosity::Quite =>
+            unreachable!(QUITE_ERR),
+        Verbosity::Terse => {
+            // check if a second message is provided
+            // a second message requires an intended verbosity level
+            let (std_err, verbosity) =
+                if let Ok(parsed_values) = parse_verbosity(input) {
+                    parsed_values
+                } else {
+                    return Ok(builder(Some(message), None));
+                };
+
+            match verbosity {
+                Verbosity::Quite =>
+                    unreachable!(QUITE_ERR),
+                Verbosity::Terse =>
+                    Err(Error::new(error_span, "do not duplicate verbosity")),
+                Verbosity::Verbose => {
+                    // only accept a second message that is intended for verbose output
+                    let verbose = ReportMessage {
+                        message: Message::parse(input, ln_brk)?,
+                        std_err,
+                        verbosity,
+                    };
+
+                    Ok(builder(Some(message), Some(verbose)))
+                }
+            }
+        }
+        Verbosity::Verbose =>
+            if input.is_empty() {
+                Ok(builder(None, Some(message)))
+            } else {
+                let error_span = input.span();
+
+                match parse_verbosity(input) {
+                    Ok((_, verbosity)) => {
+                        match verbosity {
+                            Verbosity::Quite =>
+                                unreachable!(QUITE_ERR),
+                            Verbosity::Terse =>
+                                Err(Error::new(error_span, "define terse reporting before verbose reporting")),
+                            Verbosity::Verbose =>
+                                Err(Error::new(error_span, "do not duplicate verbosity"))
+                        }
+                    }
+                    Err(err) => Err(err)
+                }
+            }
+    }
 }
 
 fn parse_verbosity(input: ParseStream) -> syn::Result<(bool, Verbosity)> {
@@ -111,92 +153,4 @@ fn verbosity_keyword_peek2(input: ParseStream) -> bool {
     input.peek2(kw::err) ||
         input.peek2(kw::terse) ||
         input.peek2(kw::verbose)
-}
-
-impl Parse for ReportMacro {
-    fn parse(input: ParseStream) -> syn::Result<Self> {
-        cfg_if! {
-            if #[cfg(all(debug_assertions, feature = "trace"))] {
-                let result = parse_report_macro(input, false, |terse, verbose| Self { terse, verbose });
-
-                if let Ok(result) = &result {
-                    println!("PARSED: {}", result);
-                }
-
-                result
-            } else {
-                parse_report_macro(input, false, |terse, verbose| Self { terse, verbose })
-            }
-        }
-    }
-}
-
-impl Parse for ReportLnMacro {
-    fn parse(input: ParseStream) -> syn::Result<Self> {
-        cfg_if! {
-            if #[cfg(all(debug_assertions, feature = "trace"))] {
-                let result = parse_report_macro(input, true, |terse, verbose| Self { terse, verbose });
-
-                if let Ok(result) = &result {
-                    println!("PARSED: {}", result);
-                }
-
-                result
-            } else {
-                parse_report_macro(input, true, |terse, verbose| Self { terse, verbose })
-            }
-        }
-    }
-}
-
-fn parse_report_macro<T>(
-    input: ParseStream, ln_brk: bool, builder: impl Fn(Option<Message>, Option<Message>) -> T,
-) -> syn::Result<T> {
-    let mut message = Message::parse(input)?;
-    let error_span = input.span();
-
-    message.ln_brk = ln_brk;
-
-    match &message.verbosity {
-        Verbosity::Quite =>
-            unreachable!(QUITE_ERR),
-        Verbosity::Terse => {
-            if let Ok(mut verbose) = Message::parse(input) {
-                verbose.ln_brk = ln_brk;
-
-                match &verbose.verbosity {
-                    Verbosity::Quite =>
-                        unreachable!(QUITE_ERR),
-                    Verbosity::Terse =>
-                        Err(Error::new(error_span, "do not duplicate verbosity")),
-                    Verbosity::Verbose =>
-                        Ok(builder(Some(message), Some(verbose)))
-                }
-            } else {
-                Ok(builder(Some(message), None))
-            }
-        }
-        Verbosity::Verbose =>
-            if input.is_empty() {
-                Ok(builder(None, Some(message)))
-            } else {
-                let error_span = input.span();
-
-                match parse_verbosity(input) {
-                    Ok((_, verbosity)) => {
-                        match verbosity {
-                            Verbosity::Quite =>
-                                unreachable!(QUITE_ERR),
-                            Verbosity::Terse =>
-                                Err(Error::new(error_span, "define terse reporting before verbose reporting")),
-                            Verbosity::Verbose =>
-                                Err(Error::new(error_span, "do not duplicate verbosity"))
-                        }
-                    }
-                    Err(err) => {
-                        Err(Error::new(error_span, format!("expected verbose message: {:?}", err)))
-                    }
-                }
-            }
-    }
 }

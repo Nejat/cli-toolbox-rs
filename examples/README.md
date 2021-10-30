@@ -6,22 +6,38 @@ Run the `report!` macro example to see the output behavior of the different leve
 
 The verbosity level argument is optional and will default to `quite` if omitted.
 
-Use the following command from the project root folder to run the example
+Use the following commands from the project root folder to run the examples
 
-* verbose
+* __verbose__
 ```shell
 cargo run --release --example cli-reporting --features="report" -- verbose
 ```
 
-* terse
+* __terse__
 ```shell
 cargo run --release --example cli-reporting --features="report" -- terse
 ```
 
-* quite
+* __quite__
 ```shell
 cargo run --release --example cli-reporting --features="report"
 ```
 ```shell
 cargo run --release --example cli-reporting --features="report" -- quite
+```
+
+## CLI Debugging
+
+Run the `debug!` macro example to see the output behavior of the different build optimizations
+
+Use the following commands from the project root folder to run the examples
+
+* __unoptimized__
+```shell
+cargo run --example cli-debugging --features="debug,report,verbosity"
+```
+
+* __optimized__
+```shell
+cargo run --release --example cli-debugging --features="debug,report,verbosity"
 ```
