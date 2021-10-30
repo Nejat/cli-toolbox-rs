@@ -1,7 +1,7 @@
 [package]
 name = "cli-toolbox"
 version = "0.5.3"
-edition = "2018"
+edition = "2021"
 description = "Utility library for working with cli output ergonomically"
 license = "MIT"
 include = ["src/**/*", "Cargo.toml", "LICENSE-MIT", "README.md"]
