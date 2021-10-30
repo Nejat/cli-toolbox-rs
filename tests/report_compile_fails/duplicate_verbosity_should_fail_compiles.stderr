@@ -1,0 +1,71 @@
+error: do not duplicate verbosity
+ --> tests/report_compile_fails/duplicate_verbosity_should_fail_compiles.rs:6:9
+  |
+6 |         @terse "terse message: {}", 42
+  |         ^
+
+error: do not duplicate verbosity
+  --> tests/report_compile_fails/duplicate_verbosity_should_fail_compiles.rs:11:9
+   |
+11 |         @verbose "verbose message: {}", 42
+   |         ^
+
+error: do not duplicate verbosity
+  --> tests/report_compile_fails/duplicate_verbosity_should_fail_compiles.rs:16:9
+   |
+16 |         @err-terse "error terse message: {}", -42
+   |         ^
+
+error: do not duplicate verbosity
+  --> tests/report_compile_fails/duplicate_verbosity_should_fail_compiles.rs:21:9
+   |
+21 |         @terse "error terse message: {}", 42
+   |         ^
+
+error: do not duplicate verbosity
+  --> tests/report_compile_fails/duplicate_verbosity_should_fail_compiles.rs:26:9
+   |
+26 |         @err-terse "error terse message: {}", -42
+   |         ^
+
+error: do not duplicate verbosity
+  --> tests/report_compile_fails/duplicate_verbosity_should_fail_compiles.rs:31:9
+   |
+31 |         @err-verbose "error verbose message: {}", -42
+   |         ^
+
+error: do not duplicate verbosity
+  --> tests/report_compile_fails/duplicate_verbosity_should_fail_compiles.rs:36:9
+   |
+36 |         @verbose "error verbose message: {}", 42
+   |         ^
+
+error: do not duplicate verbosity
+  --> tests/report_compile_fails/duplicate_verbosity_should_fail_compiles.rs:41:9
+   |
+41 |         @err-verbose "error verbose message: {}", -42
+   |         ^
+
+error: do not duplicate verbosity
+  --> tests/report_compile_fails/duplicate_verbosity_should_fail_compiles.rs:46:9
+   |
+46 |         @terse "terse message: {}", 42
+   |         ^
+
+error: do not duplicate verbosity
+  --> tests/report_compile_fails/duplicate_verbosity_should_fail_compiles.rs:51:9
+   |
+51 |         @verbose "verbose message: {}", 42
+   |         ^
+
+error: do not duplicate verbosity
+  --> tests/report_compile_fails/duplicate_verbosity_should_fail_compiles.rs:56:9
+   |
+56 |         @err-terse "error terse message: {}", -42
+   |         ^
+
+error: do not duplicate verbosity
+  --> tests/report_compile_fails/duplicate_verbosity_should_fail_compiles.rs:61:9
+   |
+61 |         @err-verbose "error verbose message: {}", -42
+   |         ^

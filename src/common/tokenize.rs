@@ -1,0 +1,30 @@
+use proc_macro2::TokenStream;
+#[cfg(any(feature = "debug", feature = "report"))]
+use quote::ToTokens;
+#[cfg(any(feature = "eval", feature = "release"))]
+use syn::Expr;
+#[cfg(any(feature = "eval", feature = "release"))]
+use verbosity::Verbosity;
+
+#[cfg(any(feature = "debug", feature = "report"))]
+use crate::common::Message;
+
+#[cfg(any(feature = "debug", feature = "report"))]
+impl ToTokens for Message {
+    fn to_tokens(&self, tokens: &mut TokenStream) {
+        let report = self.build_message(false);
+
+        tokens.extend(report);
+    }
+}
+
+#[cfg(any(feature = "eval", feature = "release"))]
+pub fn tokenize_verbosity_checked_expr(verbosity: Verbosity, expr: &Expr) -> TokenStream {
+    let verbosity_check = if verbosity == Verbosity::Terse {
+        quote! { verbosity::Verbosity::is_terse() }
+    } else {
+        quote! { verbosity::Verbosity::is_verbose() }
+    };
+
+    quote! { if #verbosity_check { #expr; } }
+}

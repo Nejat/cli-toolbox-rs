@@ -1,0 +1,17 @@
+error: invalid verbosity designation, use @terse, @verbose or leave blank for default level
+ --> tests/eval_compile_fails/incorrect_verbosity_should_fail_compiles.rs:4:13
+  |
+4 |     eval! { @err-terse println!("this should fail") }
+  |             ^
+
+error: invalid verbosity designation, use @terse, @verbose or leave blank for default level
+ --> tests/eval_compile_fails/incorrect_verbosity_should_fail_compiles.rs:6:13
+  |
+6 |     eval! { @err-verbose println!("this should fail") }
+  |             ^
+
+error: invalid verbosity designation, use @terse, @verbose or leave blank for default level
+ --> tests/eval_compile_fails/incorrect_verbosity_should_fail_compiles.rs:8:13
+  |
+8 |     eval! { @foo println!("this should fail") }
+  |             ^

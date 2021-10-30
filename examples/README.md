@@ -6,40 +6,112 @@ Run the `report!` macro example to see the output behavior of the different leve
 
 The verbosity level argument is optional and will default to `quite` if omitted.
 
-Use the following command from the project root folder to run the example
+Use the following commands from the project root folder to run the examples
 
+* __verbose__
 ```shell
-cargo run --release --example cli-reporting --features="debug,report" [-- <quite|terse|verbose>]
+cargo run --release --example cli-reporting --features="report,verbosity" -- verbose
 ```
 
-## CLI Debugging 
-
-Run the `debug!` macro example to see how debugging output behaves.
-
-Use the following command from the project root folder to run the example in debug build
-
+* __terse__
 ```shell
-cargo run --example cli-debugging --features="debug,report"
+cargo run --release --example cli-reporting --features="report,verbosity" -- terse
 ```
 
-and then use the following command to run the example in release build to compare the output of both builds
-
+* __quite__
 ```shell
-cargo run --release --example cli-debugging --features="debug,report"
+cargo run --release --example cli-reporting --features="report,verbosity"
+```
+```shell
+cargo run --release --example cli-reporting --features="report,verbosity" -- quite
 ```
 
-## CLI Release 
+## CLI Debugging
 
-Run the `release!` macro example to see how release vs debug output behaves.
+Run the `debug!` macro example to see the output behavior of the different build optimizations
 
-Use the following command from the project root folder to run the example in debug build
+Use the following commands from the project root folder to run the examples
 
+* __unoptimized__
 ```shell
-cargo run --example cli-release --features="debug,report,release"
+cargo run --example cli-debugging --features="debug,report,verbosity"
 ```
 
-and then use the following command to run the example in release build to compare the output of both builds
-
+* __optimized__
 ```shell
-cargo run --release --example cli-release --features="debug,report,release"
+cargo run --release --example cli-debugging --features="debug,report,verbosity"
+```
+
+## CLI Eval
+
+Run the `eval!` macro example to see the behavior of the different levels of verbosity.
+
+The verbosity level argument is optional and will default to `quite` if omitted.
+
+Use the following commands from the project root folder to run the examples
+
+* __verbose__
+```shell
+cargo run --release --example cli-eval --features="debug,eval,report,verbosity" -- verbose
+```
+
+* __terse__
+```shell
+cargo run --release --example cli-eval --features="debug,eval,report,verbosity" -- terse
+```
+
+* __quite__
+```shell
+cargo run --release --example cli-eval --features="debug,eval,report,verbosity"
+```
+```shell
+cargo run --release --example cli-eval --features="debug,eval,report,verbosity" -- quite
+```
+
+## CLI Release
+
+Run the `release!` macro example to see the behavior of the different levels of verbosity.
+
+The verbosity level argument is optional and will default to `quite` if omitted.
+
+Use the following commands from the project root folder to run the examples
+
+### Optimized
+
+* __verbose__
+```shell
+cargo run --release --example cli-eval --features="debug,eval,report,verbosity" -- verbose
+```
+
+* __terse__
+```shell
+cargo run --release --example cli-eval --features="debug,eval,report,verbosity" -- terse
+```
+
+* __quite__
+```shell
+cargo run --release --example cli-eval --features="debug,eval,report,verbosity"
+```
+```shell
+cargo run --release --example cli-eval --features="debug,eval,report,verbosity" -- quite
+```
+
+### Unoptimized
+
+* __verbose__
+```shell
+cargo run --example cli-eval --features="debug,eval,report,verbosity" -- verbose
+```
+
+* __terse__
+```shell
+cargo run --example cli-eval --features="debug,eval,report,verbosity" -- terse
+```
+
+* __quite__
+```shell
+cargo run --example cli-eval --features="debug,eval,report,verbosity"
+```
+```shell
+cargo run --example cli-eval --features="debug,eval,report,verbosity" -- quite
 ```

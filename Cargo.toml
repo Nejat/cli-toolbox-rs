@@ -1,7 +1,7 @@
 [package]
 name = "cli-toolbox"
-version = "0.5.3"
-edition = "2018"
+version = "0.6.0"
+edition = "2021"
 description = "Utility library for working with cli output ergonomically"
 license = "MIT"
 include = ["src/**/*", "Cargo.toml", "LICENSE-MIT", "README.md"]
@@ -14,22 +14,35 @@ authors = ["Nejat<nejatoz@gmail.com>"]
 [package.metadata.docs.rs]
 features = ["all"]
 
+[lib]
+proc-macro = true
+
 [dependencies]
-cfg-if = "1.0"
-lazy_static = "1.4"
-parking_lot = "0.11"
+cfg-if = "1"
+lazy_static = "1"
+proc-macro2 = "1"
+quote = "1"
+syn = { version = "1", features = ["extra-traits"] }
+verbosity = { version = "0.1", optional = true }
 
 [dev-dependencies]
-gag = "1.0"
+macrofied-toolbox = { version = "0.2", features = ["result"] }
+test-toolbox = { version = "0.3", features = ["all"] }
+trybuild = { version = "1", features = ["diff"] }
 version-sync = "0.9"
+
+[[test]]
+name = "macro-tests"
+path = "tests/tests.rs"
 
 [features]
 default = []
 all = ["debug", "eval", "release", "report"]
 debug = []
-eval = []
-release = []
-report = []
+eval = ["verbosity"]
+release = ["verbosity"]
+report = ["verbosity"]
+trace = [] # feature should only be used for tests or examples
 
 [[example]]
 name = "cli-debugging"
@@ -39,9 +52,14 @@ required-features = ["debug", "report"]
 [[example]]
 name = "cli-reporting"
 path = "examples/cli-reporting.rs"
-required-features = ["debug", "report"]
+required-features = ["report"]
+
+[[example]]
+name = "cli-eval"
+path = "examples/cli-eval.rs"
+required-features = ["debug", "eval", "report"]
 
 [[example]]
 name = "cli-release"
 path = "examples/cli-release.rs"
-required-features = ["debug", "report", "release"]
+required-features = ["debug", "release", "report"]
