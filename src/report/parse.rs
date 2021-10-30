@@ -2,13 +2,8 @@ use syn::Error;
 use syn::parse::{Parse, ParseStream};
 use verbosity::Verbosity;
 
+use crate::common::kw;
 use crate::report::{Message, QUITE_ERR, ReportLnMacro, ReportMacro, ReportMessage};
-
-mod kw {
-    custom_keyword!(err);
-    custom_keyword!(terse);
-    custom_keyword!(verbose);
-}
 
 impl Parse for ReportLnMacro {
     fn parse(input: ParseStream) -> syn::Result<Self> {
