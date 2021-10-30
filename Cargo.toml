@@ -39,8 +39,8 @@ path = "tests/tests.rs"
 default = []
 all = ["debug", "eval", "release", "report"]
 debug = []
-eval = []
-release = []
+eval = ["verbosity"]
+release = ["verbosity"]
 report = ["verbosity"]
 trace = [] # feature should only be used for tests or examples
 
@@ -54,7 +54,12 @@ name = "cli-reporting"
 path = "examples/cli-reporting.rs"
 required-features = ["report", "verbosity"]
 
-#[[example]]
-#name = "cli-release"
-#path = "examples/cli-release.rs"
-#required-features = ["debug", "report", "release"]
+[[example]]
+name = "cli-eval"
+path = "examples/cli-eval.rs"
+required-features = ["debug", "eval", "report", "verbosity"]
+
+[[example]]
+name = "cli-release"
+path = "examples/cli-release.rs"
+required-features = ["debug", "release", "report", "verbosity"]

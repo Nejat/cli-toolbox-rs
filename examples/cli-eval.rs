@@ -1,6 +1,6 @@
 use verbosity::Verbosity;
 
-use cli_toolbox::{debug, debugln, release, reportln};
+use cli_toolbox::{debugln, eval, reportln};
 
 fn main() {
     Verbosity::Terse.set_as_global();
@@ -11,12 +11,10 @@ fn main() {
 
     let mut value = 0;
 
-    release! { value = 42 }
+    eval! { @terse value = 42 }
 
     // this will not evaluate based on the verbosity set for this example
-    release! { @verbose value = 41 }
-
-    debug! { assert_eq!(0, value); }
+    eval! { @verbose value = 0 }
 
     reportln! { "example: result = {}", value }
 

@@ -38,27 +38,27 @@
 #[cfg(feature = "report")]
 #[macro_use]
 extern crate cfg_if;
-#[cfg(any(feature = "debug", feature = "report"))]
+#[cfg(any(feature = "debug", feature = "eval", feature = "release", feature = "report"))]
 #[macro_use]
 extern crate quote;
-#[cfg(any(feature = "debug", feature = "report"))]
+#[cfg(any(feature = "debug", feature = "eval", feature = "release", feature = "report"))]
 #[macro_use]
 extern crate syn;
 
-#[cfg(any(feature = "debug", feature = "report"))]
+#[cfg(any(feature = "debug", feature = "eval", feature = "release", feature = "report"))]
 use proc_macro::TokenStream;
 
-#[cfg(any(feature = "debug", feature = "report"))]
+#[cfg(any(feature = "debug", feature = "eval", feature = "release", feature = "report"))]
 use quote::ToTokens;
 
-#[cfg(any(feature = "debug", feature = "report"))]
+#[cfg(any(feature = "debug", feature = "eval", feature = "release", feature = "report"))]
 mod common;
 #[cfg(feature = "debug")]
 mod debug;
-// #[cfg(feature = "eval")]
-// mod eval;
-// #[cfg(feature = "release")]
-// mod release;
+#[cfg(feature = "eval")]
+mod eval;
+#[cfg(feature = "release")]
+mod release;
 #[cfg(feature = "report")]
 mod report;
 
@@ -115,6 +115,20 @@ pub fn debug(input: TokenStream) -> TokenStream {
 #[proc_macro]
 pub fn debugln(input: TokenStream) -> TokenStream {
     parse_macro_input!(input as debug::DebugLnMacro).into_token_stream().into()
+}
+
+///
+#[cfg(feature = "eval")]
+#[proc_macro]
+pub fn eval(input: TokenStream) -> TokenStream {
+    parse_macro_input!(input as eval::Eval).into_token_stream().into()
+}
+
+///
+#[cfg(feature = "release")]
+#[proc_macro]
+pub fn release(input: TokenStream) -> TokenStream {
+    parse_macro_input!(input as release::Release).into_token_stream().into()
 }
 
 /// Conditionally prints to `io::stdout` or `io::stderr` when intended verbosity matches

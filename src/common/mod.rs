@@ -9,7 +9,7 @@ use quote::ToTokens;
 use syn::{Expr, Lit};
 
 pub mod parse;
-mod tokenize;
+pub mod tokenize;
 
 pub mod kw {
     custom_keyword!(err);
