@@ -26,8 +26,8 @@ It handles three levels of verbosity that can be set dynamically at runtime:
 * `release!` - conditional code execution according to verbosity level - [`release`]
 
 ## Resources
-* [Docs](https://docs.rs/cli-toolbox/0.6.0/cli_toolbox/) for more detailed information
-* [Examples](https://github.com/Nejat/cli-toolbox-rs/tree/v0.6.0/examples) to see it in action
+* [Docs](https://docs.rs/cli-toolbox/0.6.1/cli_toolbox/) for more detailed information
+* [Examples](https://github.com/Nejat/cli-toolbox-rs/tree/v0.6.1/examples) to see it in action
 
 ## Usage
 
@@ -35,17 +35,43 @@ Each macro is gated by a feature.
 
 No feature is mutually exclusive and can be combined as needed.
 
+* `debug!` macro
+
+```toml
+[dependencies]
+cli-toolbox = { version = "0.6", features = ["debug"] }
+```
+
+* `eval!` macro
+
+```toml
+[dependencies]
+cli-toolbox = { version = "0.6", features = ["eval"] }
+verbosity = "0.1"
+```
+
+* `release!` macro
+
+```toml
+[dependencies]
+cli-toolbox = { version = "0.6", features = ["release"] }
+verbosity = "0.1"
+```
+
+* `report!` macro
+
 ```toml
 [dependencies]
 cli-toolbox = { version = "0.6", features = ["report"] }
+verbosity = "0.1"
 ```
 
 ## Roadmap
 
-* [ ] ```debug!``` macro
-* [ ] ```release!``` macro
-* [ ] ```eval!``` macro
 * [ ] ...
 
 ## Implemented
+* [x] ```debug!``` macro
+* [x] ```eval!``` macro
+* [x] ```release!``` macro
 * [x] ```report!``` macro
