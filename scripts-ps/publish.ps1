@@ -72,11 +72,11 @@ Confirm-Success "clippy report optimized"
 
 Write-Host "running test all macros unoptimized" -ForegroundColor Yellow
 cargo test --features="all" -- --nocapture --test-threads=1
-Confirm-Success "test"
+Confirm-Success "test all macros unoptimized"
 
 Write-Host "running test all macros optimized" -ForegroundColor Yellow
 cargo test --release --features="all" -- --nocapture --test-threads=1
-Confirm-Success "test release"
+Confirm-Success "test all macros optimized"
 
 if ($ForReals) {
     Write-Host "publish" -ForegroundColor Yellow
