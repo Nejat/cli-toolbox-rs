@@ -22,11 +22,14 @@ function confirm-success() {
 }
 
 clear
+echo -e "${YELLOW}running clean"
 cargo clean
 confirm-success "clean"
 
-cargo test --all-features -- --nocapture --test-threads=1
-confirm-success "test"
+echo -e "${YELLOW}running test all macros unoptimized"
+cargo test --features="all" -- --nocapture --test-threads=1
+confirm-success "test all macros unoptimized"
 
-cargo test --all-features --release -- --nocapture --test-threads=1
-confirm-success "test release"
+echo -e "${YELLOW}running test all macros optimized"
+cargo test --features="all" --release -- --nocapture --test-threads=1
+confirm-success "test all macros optimized"
