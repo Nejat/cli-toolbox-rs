@@ -2,7 +2,7 @@ use syn::parse::{Parse, ParseStream};
 
 use crate::common::Message;
 use crate::common::parse::parse_expression;
-use crate::debug::{DebugLnMacro, DebugMacro};
+use crate::debug_macro::{DebugLnMacro, DebugMacro};
 
 impl Parse for DebugLnMacro {
     fn parse(input: ParseStream) -> syn::Result<Self> {

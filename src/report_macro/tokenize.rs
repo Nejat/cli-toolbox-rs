@@ -1,17 +1,17 @@
 use proc_macro2::{Ident, Span, TokenStream};
 use quote::ToTokens;
 
-use crate::report::{ReportLnMacro, ReportMacro, ReportMessage};
+use crate::report_macro::{ReportLnMacro, ReportMacro, ReportMessage};
 
 impl ToTokens for ReportMacro {
     fn to_tokens(&self, tokens: &mut TokenStream) {
-        tokenize_report_macro(tokens, &self.terse, &self.verbose);
+        tokens.extend(tokenize_report_macro(&self.terse, &self.verbose));
     }
 }
 
 impl ToTokens for ReportLnMacro {
     fn to_tokens(&self, tokens: &mut TokenStream) {
-        tokenize_report_macro(tokens, &self.terse, &self.verbose);
+        tokens.extend(tokenize_report_macro(&self.terse, &self.verbose));
     }
 }
 
@@ -25,29 +25,30 @@ impl ToTokens for ReportMessage {
 }
 
 fn tokenize_report_macro(
-    tokens: &mut TokenStream, terse: &Option<ReportMessage>, verbose: &Option<ReportMessage>,
-) {
-    match (terse, verbose) {
+    terse: &Option<ReportMessage>, verbose: &Option<ReportMessage>,
+) -> TokenStream {
+    let result = match (terse, verbose) {
         (Some(terse), None) =>
-            terse.to_tokens(tokens),
+            quote! { #terse },
         (None, Some(verbose)) =>
-            verbose.to_tokens(tokens),
+            quote! { #verbose },
         (Some(terse), Some(verbose)) => {
             let terse = terse.message.build_message(terse.std_err);
             let verbose = verbose.message.build_message(verbose.std_err);
-            tokens.extend(
-                quote! {
-                    match verbosity::Verbosity::level() {
-                        verbosity::Verbosity::Terse => #terse,
-                        verbosity::Verbosity::Verbose => #verbose,
-                        verbosity::Verbosity::Quite => {}
-                    }
+
+            quote! {
+                match verbosity::Verbosity::level() {
+                    verbosity::Verbosity::Terse => #terse,
+                    verbosity::Verbosity::Verbose => #verbose,
+                    verbosity::Verbosity::Quite => {}
                 }
-            );
+            }
         }
-        (None, None) => {}
-    }
+        (None, None) => TokenStream::new()
+    };
 
     #[cfg(all(debug_assertions, feature = "trace"))]
-    println!("EXPANSION: {}", tokens);
+    println!("EXPANSION: {}", result);
+
+    result
 }

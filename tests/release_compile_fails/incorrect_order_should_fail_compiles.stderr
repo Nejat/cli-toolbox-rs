@@ -1,0 +1,5 @@
+error: define terse before verbose
+ --> tests/release_compile_fails/incorrect_order_should_fail_compiles.rs:6:9
+  |
+6 |         @terse println!("terse message: {}", 42)
+  |         ^

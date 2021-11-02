@@ -2,8 +2,8 @@ use syn::Error;
 use syn::parse::{Parse, ParseStream};
 use verbosity::Verbosity;
 
-use crate::common::kw;
-use crate::report::{Message, QUITE_ERR, ReportLnMacro, ReportMacro, ReportMessage};
+use crate::common::{DUPE_VERBOSITY_ERR, kw, QUITE_ERR, VERBOSITY_ORDER_ERR};
+use crate::report_macro::{Message, ReportLnMacro, ReportMacro, ReportMessage};
 
 impl Parse for ReportLnMacro {
     fn parse(input: ParseStream) -> syn::Result<Self> {
@@ -70,7 +70,7 @@ fn parse_report_macro<T>(
                 Verbosity::Quite =>
                     unreachable!(QUITE_ERR),
                 Verbosity::Terse =>
-                    Err(Error::new(error_span, "do not duplicate verbosity")),
+                    Err(Error::new(error_span, DUPE_VERBOSITY_ERR)),
                 Verbosity::Verbose => {
                     // only accept a second message that is intended for verbose output
                     let verbose = ReportMessage {
@@ -95,9 +95,9 @@ fn parse_report_macro<T>(
                             Verbosity::Quite =>
                                 unreachable!(QUITE_ERR),
                             Verbosity::Terse =>
-                                Err(Error::new(error_span, "define terse reporting before verbose reporting")),
+                                Err(Error::new(error_span, VERBOSITY_ORDER_ERR)),
                             Verbosity::Verbose =>
-                                Err(Error::new(error_span, "do not duplicate verbosity"))
+                                Err(Error::new(error_span, DUPE_VERBOSITY_ERR))
                         }
                     }
                     Err(err) => Err(err)

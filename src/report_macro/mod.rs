@@ -10,8 +10,6 @@ use crate::common::Message;
 mod parse;
 mod tokenize;
 
-const QUITE_ERR: &str = "quite should not be able to be specified";
-
 struct ReportMessage {
     message: Message,
     std_err: bool,
