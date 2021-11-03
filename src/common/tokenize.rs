@@ -19,7 +19,30 @@ impl ToTokens for Message {
 }
 
 #[cfg(any(feature = "eval", feature = "release"))]
-pub fn tokenize_verbosity_checked_expr(verbosity: Verbosity, expr: &Expr) -> TokenStream {
+pub fn tokenize_expression(terse: &Option<Expr>, verbose: &Option<Expr>) -> TokenStream {
+    match (terse, verbose) {
+        (Some(terse), None) =>
+            tokenize_verbosity_expression(Verbosity::Terse, terse),
+        (None, Some(verbose)) =>
+            tokenize_verbosity_expression(Verbosity::Verbose, verbose),
+        (Some(terse), Some(verbose)) => {
+            let terse = tokenize_verbosity_expression(Verbosity::Terse, terse);
+            let verbose = tokenize_verbosity_expression(Verbosity::Verbose, verbose);
+
+            quote! {
+                match verbosity::Verbosity::level() {
+                    verbosity::Verbosity::Terse => #terse,
+                    verbosity::Verbosity::Verbose => #verbose,
+                    verbosity::Verbosity::Quite => {}
+                }
+            }
+        }
+        (None, None) => TokenStream::new()
+    }
+}
+
+#[cfg(any(feature = "eval", feature = "release"))]
+pub fn tokenize_verbosity_expression(verbosity: Verbosity, expr: &Expr) -> TokenStream {
     let verbosity_check = if verbosity == Verbosity::Terse {
         quote! { verbosity::Verbosity::is_terse() }
     } else {
@@ -28,3 +51,4 @@ pub fn tokenize_verbosity_checked_expr(verbosity: Verbosity, expr: &Expr) -> Tok
 
     quote! { if #verbosity_check { #expr; } }
 }
+

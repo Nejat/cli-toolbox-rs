@@ -1,0 +1,11 @@
+error: do not duplicate verbosity
+ --> tests/release_compile_fails/duplicate_verbosity_should_fail_compiles.rs:6:9
+  |
+6 |         @terse println!("terse message: {}", 42)
+  |         ^
+
+error: do not duplicate verbosity
+  --> tests/release_compile_fails/duplicate_verbosity_should_fail_compiles.rs:11:9
+   |
+11 |         @verbose println!("verbose message: {}", 42)
+   |         ^

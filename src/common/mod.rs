@@ -23,6 +23,15 @@ pub mod kw {
     custom_keyword!(verbose);
 }
 
+#[cfg(any(feature = "eval", feature = "release", feature = "report"))]
+pub const QUITE_ERR: &str = "quite should not be able to be specified";
+
+#[cfg(any(feature = "eval", feature = "release", feature = "report"))]
+pub const DUPE_VERBOSITY_ERR: &str = "do not duplicate verbosity";
+
+#[cfg(any(feature = "eval", feature = "release", feature = "report"))]
+pub const VERBOSITY_ORDER_ERR: &str = "define terse before verbose";
+
 #[cfg(any(feature = "debug", feature = "report"))]
 pub struct Message {
     pub args: Option<Vec<Expr>>,

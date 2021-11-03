@@ -6,6 +6,8 @@ use syn::spanned::Spanned;
 #[cfg(any(feature = "eval", feature = "release"))]
 use verbosity::Verbosity;
 
+#[cfg(any(feature = "eval", feature = "release", feature = "report"))]
+use crate::common::{DUPE_VERBOSITY_ERR, QUITE_ERR, VERBOSITY_ORDER_ERR};
 #[cfg(any(feature = "eval", feature = "release"))]
 use crate::common::kw;
 #[cfg(any(feature = "debug", feature = "report"))]
@@ -103,6 +105,61 @@ fn parse_args(input: ParseStream) -> syn::Result<Option<Vec<Expr>>> {
     Ok(if exprs.is_empty() { None } else { Some(exprs) })
 }
 
+#[cfg(any(feature = "eval", feature = "release"))]
+#[allow(clippy::shadow_unrelated)] // intention of code is clear
+pub fn parse_expr_eval<T>(
+    input: ParseStream, macro_name: &str, builder: impl Fn(Option<Expr>, Option<Expr>) -> T,
+) -> syn::Result<T> {
+    let verbosity = parse_verbosity(input, false)?;
+    let expr = parse_expression(input, macro_name)?;
+    let error_span = input.span();
+
+    match verbosity {
+        Some(Verbosity::Quite) =>
+            unreachable!(QUITE_ERR),
+        Some(Verbosity::Terse) | None => {
+            let verbose = if let Ok(Some(verbose)) = parse_verbosity(input, true) {
+                verbose
+            } else {
+                return Ok(builder(Some(expr), None));
+            };
+
+            match verbose {
+                Verbosity::Quite =>
+                    unreachable!(QUITE_ERR),
+                Verbosity::Terse =>
+                    Err(Error::new(error_span, DUPE_VERBOSITY_ERR)),
+                Verbosity::Verbose =>
+                // only accept a second expression that is intended for verbose output
+                    Ok(builder(Some(expr), Some(parse_expression(input, macro_name)?)))
+            }
+        }
+        Some(Verbosity::Verbose) => {
+            if input.is_empty() {
+                Ok(builder(None, Some(expr)))
+            } else {
+                let error_span = input.span();
+
+                match parse_verbosity(input, true) {
+                    Ok(verbosity) => {
+                        match verbosity {
+                            Some(Verbosity::Quite) =>
+                                unreachable!(QUITE_ERR),
+                            Some(Verbosity::Terse) =>
+                                Err(Error::new(error_span, VERBOSITY_ORDER_ERR)),
+                            Some(Verbosity::Verbose) =>
+                                Err(Error::new(error_span, DUPE_VERBOSITY_ERR)),
+                            None =>
+                                Err(Error::new(error_span, "unexpected token"))
+                        }
+                    }
+                    Err(err) => Err(err)
+                }
+            }
+        }
+    }
+}
+
 
 #[cfg(any(feature = "debug", feature = "eval", feature = "release"))]
 pub fn parse_expression(input: ParseStream, macro_name: &str) -> syn::Result<Expr> {
@@ -160,9 +217,11 @@ fn parse_optional_semicolon(input: ParseStream) -> syn::Result<()> {
 }
 
 #[cfg(any(feature = "eval", feature = "release"))]
-pub fn parse_verbosity(input: ParseStream) -> syn::Result<Verbosity> {
+pub fn parse_verbosity(input: ParseStream, chk_semicolon: bool) -> syn::Result<Option<Verbosity>> {
     let verbosity;
     let span = input.span();
+
+    if chk_semicolon { parse_optional_semicolon(input)?; }
 
     if input.peek(Token![@]) {
         if verbosity_keyword_peek2(input) {
@@ -171,11 +230,11 @@ pub fn parse_verbosity(input: ParseStream) -> syn::Result<Verbosity> {
             if input.peek(kw::terse) {
                 <kw::terse>::parse(input)?;
 
-                verbosity = Verbosity::Terse;
+                verbosity = Some(Verbosity::Terse);
             } else {
                 <kw::verbose>::parse(input)?;
 
-                verbosity = Verbosity::Verbose;
+                verbosity = Some(Verbosity::Verbose);
             }
         } else {
             return Err(Error::new(
@@ -184,7 +243,7 @@ pub fn parse_verbosity(input: ParseStream) -> syn::Result<Verbosity> {
             ));
         }
     } else {
-        verbosity = Verbosity::Terse;
+        verbosity = None;
     }
 
     Ok(verbosity)

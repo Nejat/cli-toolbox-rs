@@ -7,7 +7,7 @@ const EXPECTED_BLANK_STD_ERR: &str = "";
 const EXPECTED_BLANK_STD_OUT: &str = "";
 
 #[test]
-fn when_verbose_verbosity_should_report_err_terse() {
+fn when_verbose_verbosity_should_evaluate_err_terse() {
     Verbosity::Verbose.set_as_global();
 
     assert_eq!(Verbosity::Verbose, Verbosity::level());
@@ -32,7 +32,7 @@ fn when_verbose_verbosity_should_report_err_terse() {
 }
 
 #[test]
-fn when_verbose_verbosity_should_report_err_verbose_not_err_terse() {
+fn when_verbose_verbosity_should_evaluate_err_verbose_not_err_terse() {
     Verbosity::Verbose.set_as_global();
 
     assert_eq!(Verbosity::Verbose, Verbosity::level());
@@ -63,7 +63,7 @@ fn when_verbose_verbosity_should_report_err_verbose_not_err_terse() {
 }
 
 #[test]
-fn when_verbose_verbosity_should_report_verbose_not_err_terse() {
+fn when_verbose_verbosity_should_evaluate_verbose_not_err_terse() {
     Verbosity::Verbose.set_as_global();
 
     assert_eq!(Verbosity::Verbose, Verbosity::level());
@@ -94,7 +94,7 @@ fn when_verbose_verbosity_should_report_verbose_not_err_terse() {
 }
 
 #[test]
-fn when_verbose_verbosity_should_report_err_verbose() {
+fn when_verbose_verbosity_should_evaluate_err_verbose() {
     Verbosity::Verbose.set_as_global();
 
     assert_eq!(Verbosity::Verbose, Verbosity::level());
@@ -119,7 +119,7 @@ fn when_verbose_verbosity_should_report_err_verbose() {
 }
 
 #[test]
-fn when_verbose_verbosity_should_report_terse() {
+fn when_verbose_verbosity_should_evaluate_terse() {
     Verbosity::Verbose.set_as_global();
 
     assert_eq!(Verbosity::Verbose, Verbosity::level());
@@ -144,7 +144,7 @@ fn when_verbose_verbosity_should_report_terse() {
 }
 
 #[test]
-fn when_verbose_verbosity_should_report_err_verbose_not_terse() {
+fn when_verbose_verbosity_should_evaluate_err_verbose_not_terse() {
     Verbosity::Verbose.set_as_global();
 
     assert_eq!(Verbosity::Verbose, Verbosity::level());
@@ -175,7 +175,7 @@ fn when_verbose_verbosity_should_report_err_verbose_not_terse() {
 }
 
 #[test]
-fn when_verbose_verbosity_should_report_verbose_not_terse() {
+fn when_verbose_verbosity_should_evaluate_verbose_not_terse() {
     Verbosity::Verbose.set_as_global();
 
     assert_eq!(Verbosity::Verbose, Verbosity::level());
@@ -206,7 +206,7 @@ fn when_verbose_verbosity_should_report_verbose_not_terse() {
 }
 
 #[test]
-fn when_verbose_verbosity_should_report_verbose() {
+fn when_verbose_verbosity_should_evaluate_verbose() {
     Verbosity::Verbose.set_as_global();
 
     assert_eq!(Verbosity::Verbose, Verbosity::level());

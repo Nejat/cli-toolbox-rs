@@ -54,13 +54,13 @@ use quote::ToTokens;
 #[cfg(any(feature = "debug", feature = "eval", feature = "release", feature = "report"))]
 mod common;
 #[cfg(feature = "debug")]
-mod debug;
+mod debug_macro;
 #[cfg(feature = "eval")]
-mod eval;
+mod eval_macro;
 #[cfg(feature = "release")]
-mod release;
+mod release_macro;
 #[cfg(feature = "report")]
-mod report;
+mod report_macro;
 
 #[cfg(test)]
 mod tests;
@@ -99,7 +99,7 @@ mod tests;
 #[cfg(feature = "debug")]
 #[proc_macro]
 pub fn debug(input: TokenStream) -> TokenStream {
-    parse_macro_input!(input as debug::DebugMacro).into_token_stream().into()
+    parse_macro_input!(input as debug_macro::DebugMacro).into_token_stream().into()
 }
 
 /// Conditionally prints to `io::stdout` when the code is compiled unoptimized
@@ -127,7 +127,7 @@ pub fn debug(input: TokenStream) -> TokenStream {
 #[cfg(feature = "debug")]
 #[proc_macro]
 pub fn debugln(input: TokenStream) -> TokenStream {
-    parse_macro_input!(input as debug::DebugLnMacro).into_token_stream().into()
+    parse_macro_input!(input as debug_macro::DebugLnMacro).into_token_stream().into()
 }
 
 /// Conditionally evaluates expressions when intended verbosity matches active verbosity.
@@ -172,7 +172,7 @@ pub fn debugln(input: TokenStream) -> TokenStream {
 #[cfg(feature = "eval")]
 #[proc_macro]
 pub fn eval(input: TokenStream) -> TokenStream {
-    parse_macro_input!(input as eval::Eval).into_token_stream().into()
+    parse_macro_input!(input as eval_macro::Eval).into_token_stream().into()
 }
 
 /// Conditionally evaluates expressions when intended verbosity matches active verbosity
@@ -218,7 +218,7 @@ pub fn eval(input: TokenStream) -> TokenStream {
 #[cfg(feature = "release")]
 #[proc_macro]
 pub fn release(input: TokenStream) -> TokenStream {
-    parse_macro_input!(input as release::Release).into_token_stream().into()
+    parse_macro_input!(input as release_macro::Release).into_token_stream().into()
 }
 
 /// Conditionally prints to `io::stdout` or `io::stderr` when intended verbosity matches
@@ -232,7 +232,7 @@ pub fn release(input: TokenStream) -> TokenStream {
 #[cfg(feature = "report")]
 #[proc_macro]
 pub fn report(input: TokenStream) -> TokenStream {
-    parse_macro_input!(input as report::ReportMacro).into_token_stream().into()
+    parse_macro_input!(input as report_macro::ReportMacro).into_token_stream().into()
 }
 
 /// Conditionally prints to `io::stdout` or `io::stderr` when intended verbosity matches
@@ -246,5 +246,5 @@ pub fn report(input: TokenStream) -> TokenStream {
 #[cfg(feature = "report")]
 #[proc_macro]
 pub fn reportln(input: TokenStream) -> TokenStream {
-    parse_macro_input!(input as report::ReportLnMacro).into_token_stream().into()
+    parse_macro_input!(input as report_macro::ReportLnMacro).into_token_stream().into()
 }
