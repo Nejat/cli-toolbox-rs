@@ -35,9 +35,6 @@
 //!
 //! * `release!` - conditional code execution according to verbosity level - \[`release`\]
 
-#[cfg(feature = "report")]
-#[macro_use]
-extern crate cfg_if;
 #[cfg(any(feature = "debug", feature = "eval", feature = "release", feature = "report"))]
 #[macro_use]
 extern crate quote;
