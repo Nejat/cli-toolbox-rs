@@ -2,7 +2,7 @@ use proc_macro2::TokenStream;
 use quote::ToTokens;
 
 use crate::common::tokenize::tokenize_expression;
-use crate::common::trace_expansion;
+use crate::common::tracing::trace_expansion;
 use crate::eval_macro::Eval;
 
 impl ToTokens for Eval {

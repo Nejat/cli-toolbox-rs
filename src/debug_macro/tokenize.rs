@@ -1,7 +1,8 @@
 use proc_macro2::TokenStream;
 use quote::ToTokens;
 
-use crate::common::{Message, trace_expansion};
+use crate::common::Message;
+use crate::common::tracing::trace_expansion;
 use crate::debug_macro::{DebugLnMacro, DebugMacro};
 
 impl ToTokens for DebugLnMacro {

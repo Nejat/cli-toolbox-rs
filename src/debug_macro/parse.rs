@@ -1,12 +1,13 @@
 use syn::parse::{Parse, ParseStream};
 
-use crate::common::{Message, trace_parsed};
+use crate::common::Message;
 use crate::common::parse::parse_expression;
+use crate::common::tracing::{trace_parsed, trace_source};
 use crate::debug_macro::{DebugLnMacro, DebugMacro};
 
 impl Parse for DebugLnMacro {
     fn parse(input: ParseStream) -> syn::Result<Self> {
-        return trace_parsed(parse(input));
+        return trace_parsed(parse(trace_source(input)));
 
         #[inline]
         fn parse(input: ParseStream) -> syn::Result<DebugLnMacro> {
@@ -17,7 +18,7 @@ impl Parse for DebugLnMacro {
 
 impl Parse for DebugMacro {
     fn parse(input: ParseStream) -> syn::Result<Self> {
-        return trace_parsed(parse(input));
+        return trace_parsed(parse(trace_source(input)));
 
         #[inline]
         fn parse(input: ParseStream) -> syn::Result<DebugMacro> {

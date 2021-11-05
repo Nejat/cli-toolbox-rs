@@ -1,7 +1,7 @@
 use proc_macro2::{Ident, Span, TokenStream};
 use quote::ToTokens;
 
-use crate::common::trace_expansion;
+use crate::common::tracing::trace_expansion;
 use crate::report_macro::{ReportLnMacro, ReportMacro, ReportMessage};
 
 impl ToTokens for ReportMacro {
