@@ -14,7 +14,7 @@ mod tokenize;
 
 pub enum DebugMacro {
     Message(Message),
-    Expr(Box<Expr>),
+    Expr(Expr),
 }
 
 #[cfg(all(debug_assertions, feature = "trace"))]

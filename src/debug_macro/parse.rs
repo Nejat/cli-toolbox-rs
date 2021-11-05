@@ -25,8 +25,9 @@ impl Parse for DebugMacro {
             Ok(if let Ok(message) = Message::parse(input, false) {
                 DebugMacro::Message(message)
             } else {
-                DebugMacro::Expr(Box::new(parse_expression(input, "debug")?))
+                DebugMacro::Expr(parse_expression(input, "debug")?)
             })
         }
     }
 }
+

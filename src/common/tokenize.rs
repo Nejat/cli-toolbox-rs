@@ -12,9 +12,7 @@ use crate::common::Message;
 #[cfg(any(feature = "debug", feature = "report"))]
 impl ToTokens for Message {
     fn to_tokens(&self, tokens: &mut TokenStream) {
-        let report = self.build_message(false);
-
-        tokens.extend(report);
+        tokens.extend(self.build_message(false));
     }
 }
 
