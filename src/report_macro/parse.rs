@@ -9,7 +9,7 @@ use crate::report_macro::{Message, ReportLnMacro, ReportMacro, ReportMessage};
 impl Parse for ReportLnMacro {
     fn parse(input: ParseStream) -> syn::Result<Self> {
         trace_parsed(parse_report_macro(
-            trace_source(input), true, |terse, verbose| Self { terse, verbose }
+            trace_source(input), true, |terse, verbose| Self { terse, verbose },
         ))
     }
 }
@@ -17,7 +17,7 @@ impl Parse for ReportLnMacro {
 impl Parse for ReportMacro {
     fn parse(input: ParseStream) -> syn::Result<Self> {
         trace_parsed(parse_report_macro(
-            trace_source(input), false, |terse, verbose| Self { terse, verbose }
+            trace_source(input), false, |terse, verbose| Self { terse, verbose },
         ))
     }
 }

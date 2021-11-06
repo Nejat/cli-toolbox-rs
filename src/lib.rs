@@ -128,9 +128,9 @@ pub fn debugln(input: TokenStream) -> TokenStream {
 }
 
 /// Conditionally evaluates expressions when intended verbosity matches active verbosity.
-/// 
+///
 /// The `eval` macro uses the [`Verbosity`] crate to determine when and what to evaluate.
-/// 
+///
 /// _\* See the [`Verbosity`] crate to learn how to set the verbosity level._
 ///
 /// ## Anatomy of the `eval!` macro

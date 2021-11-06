@@ -58,12 +58,14 @@ fn when_message_with_cast_arg_should_output() {
 #[test]
 fn when_message_with_field_arg_should_output() {
     #[cfg(debug_assertions)]
-    struct Foo { bar: usize }
+    struct Foo {
+        bar: usize,
+    }
 
     expect! { expected_stdout = "", "DBG: debugging output: 42" }
 
     #[cfg(debug_assertions)]
-    let sut = Foo { bar: 42 };
+        let sut = Foo { bar: 42 };
 
     let (actual_stdout, actual_stderr) = capture! {
         debug! { "DBG: debugging output: {}", sut.bar }
@@ -90,7 +92,7 @@ fn when_message_with_index_arg_should_output() {
     expect! { expected_stdout = "", "DBG: debugging output: 42" }
 
     #[cfg(debug_assertions)]
-    let sut = [42; 3];
+        let sut = [42; 3];
 
     let (actual_stdout, actual_stderr) = capture! {
         debug! { "DBG: debugging output: {}", sut[1] }
@@ -129,7 +131,7 @@ fn when_message_with_match_arg_should_output() {
     expect! { expected_stdout = "", "DBG: debugging output: 42" }
 
     #[cfg(debug_assertions)]
-    let sut = 42;
+        let sut = 42;
 
     let (actual_stdout, actual_stderr) = capture! {
         debug! { "DBG: debugging output: {}", match sut { 42 => sut, _ => unreachable!() } }
@@ -142,7 +144,9 @@ fn when_message_with_match_arg_should_output() {
 #[test]
 fn when_message_with_method_to_call_arg_should_output() {
     #[cfg(debug_assertions)]
-    struct Foo { bar: usize }
+    struct Foo {
+        bar: usize,
+    }
 
     #[cfg(debug_assertions)]
     impl Foo {
@@ -152,7 +156,7 @@ fn when_message_with_method_to_call_arg_should_output() {
     expect! { expected_stdout = "", "DBG: debugging output: 42" }
 
     #[cfg(debug_assertions)]
-    let sut = Foo { bar: 42 };
+        let sut = Foo { bar: 42 };
 
     let (actual_stdout, actual_stderr) = capture! {
         debug! { "DBG: debugging output: {}", sut.method_to_call() }
@@ -177,8 +181,10 @@ fn when_message_with_paren_arg_should_output() {
 #[test]
 fn when_message_with_path_arg_should_output() {
     #[cfg(debug_assertions)]
-    mod foo { pub mod bar { pub const VALUE: usize = 42; }}
-    
+    mod foo {
+        pub mod bar { pub const VALUE: usize = 42; }
+    }
+
     expect! { expected_stdout = "", "DBG: debugging output: 42" }
 
     let (actual_stdout, actual_stderr) = capture! {
@@ -206,7 +212,7 @@ fn when_message_with_reference_arg_should_output() {
     expect! { expected_stdout = "", "DBG: debugging output: 42" }
 
     #[cfg(debug_assertions)]
-    let sut = 42;
+        let sut = 42;
 
     let (actual_stdout, actual_stderr) = capture! {
         debug! { "DBG: debugging output: {}", &sut }
@@ -237,7 +243,6 @@ fn when_message_with_try_arg_should_output() {
     assert_eq!(expected_stdout, actual_stdout);
 
     fn inner() -> Result<String, ()> {
-
         let (actual_stdout, actual_stderr) = capture! {
             debug! { "DBG: debugging output: {:?}", method_to_try()? }
         };

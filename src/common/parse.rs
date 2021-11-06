@@ -161,7 +161,7 @@ pub fn parse_expression(input: ParseStream, macro_name: &str) -> syn::Result<Exp
 
 #[cfg(any(feature = "debug", feature = "eval", feature = "release", feature = "report"))]
 pub fn parse_optional_semicolon(input: ParseStream, required: bool) -> syn::Result<()> {
-    if input.peek(Token![;]) || (required && input.peek(Token![@]))  {
+    if input.peek(Token![;]) || (required && input.peek(Token![@])) {
         <Token![;]>::parse(input)?;
     }
 
