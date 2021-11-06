@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Traced  - Clippy Debug &amp; Rlease" type="CompoundRunConfigurationType">
+    <toRun name="Traced - Clippy Debug" type="CargoCommandRunConfiguration" />
+    <toRun name="Traced - Clippy Release" type="CargoCommandRunConfiguration" />
+    <method v="2" />
+  </configuration>
+</component>

@@ -94,7 +94,7 @@ fn when_terse_verbosity_should_report_err_terse_not_verbose() {
 }
 
 #[test]
-fn when_terse_verbosity_should_suppress_err_verbose_reporting() {
+fn when_terse_verbosity_should_suppress_err_verbose() {
     Verbosity::Terse.set_as_global();
 
     assert_eq!(Verbosity::Terse, Verbosity::level());
@@ -202,7 +202,7 @@ fn when_terse_verbosity_should_report_terse_not_verbose() {
 }
 
 #[test]
-fn when_terse_verbosity_should_suppress_verbose_reporting() {
+fn when_terse_verbosity_should_suppress_verbose() {
     Verbosity::Terse.set_as_global();
 
     assert_eq!(Verbosity::Terse, Verbosity::level());

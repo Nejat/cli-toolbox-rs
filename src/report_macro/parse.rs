@@ -2,42 +2,23 @@ use syn::Error;
 use syn::parse::{Parse, ParseStream};
 use verbosity::Verbosity;
 
-use crate::common::kw;
-use crate::report::{Message, QUITE_ERR, ReportLnMacro, ReportMacro, ReportMessage};
+use crate::common::{DUPE_VERBOSITY_ERR, kw, QUITE_ERR, VERBOSITY_ORDER_ERR};
+use crate::common::tracing::{trace_parsed, trace_source};
+use crate::report_macro::{Message, ReportLnMacro, ReportMacro, ReportMessage};
 
 impl Parse for ReportLnMacro {
     fn parse(input: ParseStream) -> syn::Result<Self> {
-        cfg_if! {
-            if #[cfg(all(debug_assertions, feature = "trace"))] {
-                let result = parse_report_macro(input, true, |terse, verbose| Self { terse, verbose });
-
-                if let Ok(result) = &result {
-                    println!("PARSED: {}", result);
-                }
-
-                result
-            } else {
-                parse_report_macro(input, true, |terse, verbose| Self { terse, verbose })
-            }
-        }
+        trace_parsed(parse_report_macro(
+            trace_source(input), true, |terse, verbose| Self { terse, verbose }
+        ))
     }
 }
 
 impl Parse for ReportMacro {
     fn parse(input: ParseStream) -> syn::Result<Self> {
-        cfg_if! {
-            if #[cfg(all(debug_assertions, feature = "trace"))] {
-                let result = parse_report_macro(input, false, |terse, verbose| Self { terse, verbose });
-
-                if let Ok(result) = &result {
-                    println!("PARSED: {}", result);
-                }
-
-                result
-            } else {
-                parse_report_macro(input, false, |terse, verbose| Self { terse, verbose })
-            }
-        }
+        trace_parsed(parse_report_macro(
+            trace_source(input), false, |terse, verbose| Self { terse, verbose }
+        ))
     }
 }
 
@@ -70,7 +51,7 @@ fn parse_report_macro<T>(
                 Verbosity::Quite =>
                     unreachable!(QUITE_ERR),
                 Verbosity::Terse =>
-                    Err(Error::new(error_span, "do not duplicate verbosity")),
+                    Err(Error::new(error_span, DUPE_VERBOSITY_ERR)),
                 Verbosity::Verbose => {
                     // only accept a second message that is intended for verbose output
                     let verbose = ReportMessage {
@@ -95,9 +76,9 @@ fn parse_report_macro<T>(
                             Verbosity::Quite =>
                                 unreachable!(QUITE_ERR),
                             Verbosity::Terse =>
-                                Err(Error::new(error_span, "define terse reporting before verbose reporting")),
+                                Err(Error::new(error_span, VERBOSITY_ORDER_ERR)),
                             Verbosity::Verbose =>
-                                Err(Error::new(error_span, "do not duplicate verbosity"))
+                                Err(Error::new(error_span, DUPE_VERBOSITY_ERR))
                         }
                     }
                     Err(err) => Err(err)

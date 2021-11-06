@@ -12,6 +12,7 @@ use syn::{Expr, Lit};
 
 pub mod parse;
 pub mod tokenize;
+pub mod tracing;
 
 #[cfg(any(feature = "debug", feature = "eval", feature = "release", feature = "report"))]
 pub mod kw {
@@ -22,6 +23,15 @@ pub mod kw {
     #[cfg(any(feature = "debug", feature = "eval", feature = "release", feature = "report"))]
     custom_keyword!(verbose);
 }
+
+#[cfg(any(feature = "eval", feature = "release", feature = "report"))]
+pub const QUITE_ERR: &str = "quite should not be able to be specified";
+
+#[cfg(any(feature = "eval", feature = "release", feature = "report"))]
+pub const DUPE_VERBOSITY_ERR: &str = "do not duplicate verbosity";
+
+#[cfg(any(feature = "eval", feature = "release", feature = "report"))]
+pub const VERBOSITY_ORDER_ERR: &str = "define terse before verbose";
 
 #[cfg(any(feature = "debug", feature = "report"))]
 pub struct Message {
@@ -64,11 +74,8 @@ impl Display for Message {
         };
 
         write!(
-            fmt,
-            "{{ args: {}, fmt: {}, ln_brk: {} }}",
-            args,
-            self.fmt.to_token_stream(),
-            self.ln_brk
+            fmt, "{{ args: {}, fmt: {}, ln_brk: {} }}",
+            args, self.fmt.to_token_stream(), self.ln_brk
         )
     }
 }

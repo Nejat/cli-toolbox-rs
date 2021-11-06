@@ -7,7 +7,7 @@ const EXPECTED_BLANK_STD_ERR: &str = "";
 const EXPECTED_BLANK_STD_OUT: &str = "";
 
 #[test]
-fn when_quite_verbosity_should_suppress_err_terse_reporting() {
+fn when_quite_verbosity_should_suppress_err_terse() {
     Verbosity::Quite.set_as_global();
 
     assert_eq!(Verbosity::Quite, Verbosity::level());
@@ -28,7 +28,7 @@ fn when_quite_verbosity_should_suppress_err_terse_reporting() {
 }
 
 #[test]
-fn when_quite_verbosity_should_suppress_err_terse_err_verbose_reporting() {
+fn when_quite_verbosity_should_suppress_err_terse_err_verbose() {
     Verbosity::Quite.set_as_global();
 
     assert_eq!(Verbosity::Quite, Verbosity::level());
@@ -55,7 +55,7 @@ fn when_quite_verbosity_should_suppress_err_terse_err_verbose_reporting() {
 }
 
 #[test]
-fn when_quite_verbosity_should_suppress_err_terse_verbose_reporting() {
+fn when_quite_verbosity_should_suppress_err_terse_verbose() {
     Verbosity::Quite.set_as_global();
 
     assert_eq!(Verbosity::Quite, Verbosity::level());
@@ -82,7 +82,7 @@ fn when_quite_verbosity_should_suppress_err_terse_verbose_reporting() {
 }
 
 #[test]
-fn when_quite_verbosity_should_suppress_err_verbose_reporting() {
+fn when_quite_verbosity_should_suppress_err_verbose() {
     Verbosity::Quite.set_as_global();
 
     assert_eq!(Verbosity::Quite, Verbosity::level());
@@ -103,7 +103,7 @@ fn when_quite_verbosity_should_suppress_err_verbose_reporting() {
 }
 
 #[test]
-fn when_quite_verbosity_should_suppress_terse_reporting() {
+fn when_quite_verbosity_should_suppress_terse() {
     Verbosity::Quite.set_as_global();
 
     assert_eq!(Verbosity::Quite, Verbosity::level());
@@ -124,7 +124,7 @@ fn when_quite_verbosity_should_suppress_terse_reporting() {
 }
 
 #[test]
-fn when_quite_verbosity_should_suppress_terse_err_verbose_reporting() {
+fn when_quite_verbosity_should_suppress_terse_err_verbose() {
     Verbosity::Quite.set_as_global();
 
     assert_eq!(Verbosity::Quite, Verbosity::level());
@@ -151,7 +151,7 @@ fn when_quite_verbosity_should_suppress_terse_err_verbose_reporting() {
 }
 
 #[test]
-fn when_quite_verbosity_should_suppress_terse_verbose_reporting() {
+fn when_quite_verbosity_should_suppress_terse_verbose() {
     Verbosity::Quite.set_as_global();
 
     assert_eq!(Verbosity::Quite, Verbosity::level());
@@ -178,7 +178,7 @@ fn when_quite_verbosity_should_suppress_terse_verbose_reporting() {
 }
 
 #[test]
-fn when_quite_verbosity_should_suppress_verbose_reporting() {
+fn when_quite_verbosity_should_suppress_verbose() {
     Verbosity::Quite.set_as_global();
 
     assert_eq!(Verbosity::Quite, Verbosity::level());
