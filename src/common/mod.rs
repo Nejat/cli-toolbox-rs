@@ -12,6 +12,7 @@ use syn::{Expr, Lit};
 
 pub mod parse;
 pub mod tokenize;
+pub mod tracing;
 
 #[cfg(any(feature = "debug", feature = "eval", feature = "release", feature = "report"))]
 pub mod kw {
@@ -73,11 +74,8 @@ impl Display for Message {
         };
 
         write!(
-            fmt,
-            "{{ args: {}, fmt: {}, ln_brk: {} }}",
-            args,
-            self.fmt.to_token_stream(),
-            self.ln_brk
+            fmt, "{{ args: {}, fmt: {}, ln_brk: {} }}",
+            args, self.fmt.to_token_stream(), self.ln_brk
         )
     }
 }

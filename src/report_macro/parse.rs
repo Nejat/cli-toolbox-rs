@@ -3,41 +3,22 @@ use syn::parse::{Parse, ParseStream};
 use verbosity::Verbosity;
 
 use crate::common::{DUPE_VERBOSITY_ERR, kw, QUITE_ERR, VERBOSITY_ORDER_ERR};
+use crate::common::tracing::{trace_parsed, trace_source};
 use crate::report_macro::{Message, ReportLnMacro, ReportMacro, ReportMessage};
 
 impl Parse for ReportLnMacro {
     fn parse(input: ParseStream) -> syn::Result<Self> {
-        cfg_if! {
-            if #[cfg(all(debug_assertions, feature = "trace"))] {
-                let result = parse_report_macro(input, true, |terse, verbose| Self { terse, verbose });
-
-                if let Ok(result) = &result {
-                    println!("PARSED: {}", result);
-                }
-
-                result
-            } else {
-                parse_report_macro(input, true, |terse, verbose| Self { terse, verbose })
-            }
-        }
+        trace_parsed(parse_report_macro(
+            trace_source(input), true, |terse, verbose| Self { terse, verbose }
+        ))
     }
 }
 
 impl Parse for ReportMacro {
     fn parse(input: ParseStream) -> syn::Result<Self> {
-        cfg_if! {
-            if #[cfg(all(debug_assertions, feature = "trace"))] {
-                let result = parse_report_macro(input, false, |terse, verbose| Self { terse, verbose });
-
-                if let Ok(result) = &result {
-                    println!("PARSED: {}", result);
-                }
-
-                result
-            } else {
-                parse_report_macro(input, false, |terse, verbose| Self { terse, verbose })
-            }
-        }
+        trace_parsed(parse_report_macro(
+            trace_source(input), false, |terse, verbose| Self { terse, verbose }
+        ))
     }
 }
 

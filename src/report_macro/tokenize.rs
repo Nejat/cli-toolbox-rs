@@ -1,17 +1,18 @@
 use proc_macro2::{Ident, Span, TokenStream};
 use quote::ToTokens;
 
+use crate::common::tracing::trace_expansion;
 use crate::report_macro::{ReportLnMacro, ReportMacro, ReportMessage};
 
 impl ToTokens for ReportMacro {
     fn to_tokens(&self, tokens: &mut TokenStream) {
-        tokens.extend(tokenize_report_macro(&self.terse, &self.verbose));
+        tokens.extend(trace_expansion(tokenize_report_macro(&self.terse, &self.verbose)));
     }
 }
 
 impl ToTokens for ReportLnMacro {
     fn to_tokens(&self, tokens: &mut TokenStream) {
-        tokens.extend(tokenize_report_macro(&self.terse, &self.verbose));
+        tokens.extend(trace_expansion(tokenize_report_macro(&self.terse, &self.verbose)));
     }
 }
 
@@ -27,7 +28,7 @@ impl ToTokens for ReportMessage {
 fn tokenize_report_macro(
     terse: &Option<ReportMessage>, verbose: &Option<ReportMessage>,
 ) -> TokenStream {
-    let result = match (terse, verbose) {
+    match (terse, verbose) {
         (Some(terse), None) =>
             quote! { #terse },
         (None, Some(verbose)) =>
@@ -45,10 +46,5 @@ fn tokenize_report_macro(
             }
         }
         (None, None) => TokenStream::new()
-    };
-
-    #[cfg(all(debug_assertions, feature = "trace"))]
-    println!("EXPANSION: {}", result);
-
-    result
+    }
 }
