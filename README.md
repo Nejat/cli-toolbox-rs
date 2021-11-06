@@ -26,8 +26,8 @@ It handles three levels of verbosity that can be set dynamically at runtime:
 * `release!` - conditional code execution according to verbosity level - [`release`]
 
 ## Resources
-* [Docs](https://docs.rs/cli-toolbox/0.7.0/cli_toolbox/) for more detailed information
-* [Examples](https://github.com/Nejat/cli-toolbox-rs/tree/v0.7.0/examples) to see it in action
+* [Docs](https://docs.rs/cli-toolbox/0.8.0/cli_toolbox/) for more detailed information
+* [Examples](https://github.com/Nejat/cli-toolbox-rs/tree/v0.8.0/examples) to see it in action
 
 ## Usage
 
@@ -39,14 +39,14 @@ No feature is mutually exclusive and can be combined as needed.
 
 ```toml
 [dependencies]
-cli-toolbox = { version = "0.7", features = ["debug"] }
+cli-toolbox = { version = "0.8", features = ["debug"] }
 ```
 
 * `eval!` macro
 
 ```toml
 [dependencies]
-cli-toolbox = { version = "0.7", features = ["eval"] }
+cli-toolbox = { version = "0.8", features = ["eval"] }
 verbosity = "0.1"
 ```
 
@@ -54,7 +54,7 @@ verbosity = "0.1"
 
 ```toml
 [dependencies]
-cli-toolbox = { version = "0.7", features = ["release"] }
+cli-toolbox = { version = "0.8", features = ["release"] }
 verbosity = "0.1"
 ```
 
@@ -62,7 +62,7 @@ verbosity = "0.1"
 
 ```toml
 [dependencies]
-cli-toolbox = { version = "0.7", features = ["report"] }
+cli-toolbox = { version = "0.8", features = ["report"] }
 verbosity = "0.1"
 ```
 
