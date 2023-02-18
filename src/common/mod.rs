@@ -1,7 +1,5 @@
 #[cfg(all(debug_assertions, feature = "trace"))]
 use std::fmt::{Display, Formatter};
-#[cfg(all(debug_assertions, feature = "trace"))]
-use std::string::ToString;
 
 #[cfg(any(feature = "debug", feature = "report"))]
 use proc_macro2::TokenStream;
@@ -9,6 +7,9 @@ use proc_macro2::TokenStream;
 use quote::ToTokens;
 #[cfg(any(feature = "debug", feature = "report"))]
 use syn::{Expr, Lit};
+
+#[cfg(all(debug_assertions, feature = "trace"))]
+use crate::displays;
 
 pub mod parse;
 pub mod tokenize;
@@ -64,18 +65,11 @@ impl Message {
 #[cfg(all(debug_assertions, any(feature = "debug", feature = "report"), feature = "trace"))]
 impl Display for Message {
     fn fmt(&self, fmt: &mut Formatter<'_>) -> std::fmt::Result {
-        let args = if let Some(args) = &self.args {
-            format!(
-                "{:?}",
-                args.iter().map(|v| format!("{}", v.to_token_stream())).collect::<Vec<String>>()
-            )
-        } else {
-            "None".to_string()
-        };
+        let args = displays(&self.args);
 
         write!(
-            fmt, "{{ args: {}, fmt: {}, ln_brk: {} }}",
-            args, self.fmt.to_token_stream(), self.ln_brk
+            fmt, "{{ args: {args}, fmt: {}, ln_brk: {} }}",
+            self.fmt.to_token_stream(), self.ln_brk
         )
     }
 }

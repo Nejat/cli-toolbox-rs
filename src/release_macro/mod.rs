@@ -1,11 +1,10 @@
 #[cfg(all(debug_assertions, feature = "trace"))]
 use std::fmt::{Display, Formatter};
-#[cfg(all(debug_assertions, feature = "trace"))]
-use std::string::ToString;
+
+use syn::Expr;
 
 #[cfg(all(debug_assertions, feature = "trace"))]
-use quote::ToTokens;
-use syn::Expr;
+use crate::display;
 
 mod parse;
 mod tokenize;
@@ -21,8 +20,7 @@ impl Display for Release {
     fn fmt(&self, fmt: &mut Formatter<'_>) -> std::fmt::Result {
         write!(
             fmt, "release! {{\n  terse: {}\n  verbose: {}\n}}",
-            self.terse.as_ref().map_or_else(|| "None".to_string(), |e| (*e).to_token_stream().to_string()),
-            self.verbose.as_ref().map_or_else(|| "None".to_string(), |e| (*e).to_token_stream().to_string()),
+            display(&self.terse), display(&self.verbose),
         )
     }
 }

@@ -245,3 +245,19 @@ pub fn report(input: TokenStream) -> TokenStream {
 pub fn reportln(input: TokenStream) -> TokenStream {
     parse_macro_input!(input as report_macro::ReportLnMacro).into_token_stream().into()
 }
+
+#[cfg(all(debug_assertions, feature = "trace"))]
+fn display<D: ToTokens>(value: &Option<D>) -> String {
+    value.as_ref().map_or_else(|| String::from("None"), |val| format!("{}", val.to_token_stream()))
+}
+
+#[cfg(all(debug_assertions, feature = "trace"))]
+fn displays<D: ToTokens>(value: &Option<Vec<D>>) -> String {
+    value.as_ref().map_or_else(
+        || String::from("None"),
+        |vals| format!(
+            "{:?}",
+            vals.iter().map(|v| format!("{}", v.to_token_stream())).collect::<Vec<String>>()
+        ),
+    )
+}

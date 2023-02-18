@@ -67,7 +67,7 @@ pub fn decode_expr_type(expr: &Expr) -> &'static str {
         Expr::Verbatim(_) => "verbatim",
         Expr::While(_) => "while",
         Expr::Yield(_) => "yield",
-        Expr::__TestExhaustive(_) => unimplemented!()
+        _ => unimplemented!("{expr:?} is not supported")
     }
 }
 
@@ -82,7 +82,7 @@ pub fn parse_expr_eval<T>(
 
     match verbosity {
         Some(Verbosity::Quite) =>
-            unreachable!(QUITE_ERR),
+            unreachable!("{}", QUITE_ERR),
         Some(Verbosity::Terse) | None => {
             let verbose = if let Ok(Some(verbose)) = parse_verbosity(input, true) {
                 verbose
@@ -92,7 +92,7 @@ pub fn parse_expr_eval<T>(
 
             match verbose {
                 Verbosity::Quite =>
-                    unreachable!(QUITE_ERR),
+                    unreachable!("{}", QUITE_ERR),
                 Verbosity::Terse =>
                     Err(Error::new(error_span, DUPE_VERBOSITY_ERR)),
                 Verbosity::Verbose =>
@@ -110,7 +110,7 @@ pub fn parse_expr_eval<T>(
                     Ok(verbosity) => {
                         match verbosity {
                             Some(Verbosity::Quite) =>
-                                unreachable!(QUITE_ERR),
+                                unreachable!("{}", QUITE_ERR),
                             Some(Verbosity::Terse) =>
                                 Err(Error::new(error_span, VERBOSITY_ORDER_ERR)),
                             Some(Verbosity::Verbose) =>
@@ -150,8 +150,8 @@ pub fn parse_expression(input: ParseStream, macro_name: &str) -> syn::Result<Exp
             return Err(Error::new(
                 expr.span(),
                 format!(
-                    "{:?} is not a supported {} expression, try placing it into a code block",
-                    decode_expr_type(&expr), macro_name
+                    "{:?} is not a supported {macro_name} expression, try placing it into a code block",
+                    decode_expr_type(&expr)
                 ),
             ))
     }

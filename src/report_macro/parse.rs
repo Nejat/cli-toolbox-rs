@@ -36,7 +36,7 @@ fn parse_report_macro<T>(
 
     match verbosity {
         Verbosity::Quite =>
-            unreachable!(QUITE_ERR),
+            unreachable!("{}", QUITE_ERR),
         Verbosity::Terse => {
             // check if a second message is provided
             // a second message requires an intended verbosity level
@@ -49,7 +49,7 @@ fn parse_report_macro<T>(
 
             match verbosity {
                 Verbosity::Quite =>
-                    unreachable!(QUITE_ERR),
+                    unreachable!("{}", QUITE_ERR),
                 Verbosity::Terse =>
                     Err(Error::new(error_span, DUPE_VERBOSITY_ERR)),
                 Verbosity::Verbose => {
@@ -74,7 +74,7 @@ fn parse_report_macro<T>(
                     Ok((_, verbosity)) => {
                         match verbosity {
                             Verbosity::Quite =>
-                                unreachable!(QUITE_ERR),
+                                unreachable!("{}", QUITE_ERR),
                             Verbosity::Terse =>
                                 Err(Error::new(error_span, VERBOSITY_ORDER_ERR)),
                             Verbosity::Verbose =>
