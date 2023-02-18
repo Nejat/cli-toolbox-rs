@@ -9,7 +9,7 @@ use crate::report_macro::{Message, ReportLnMacro, ReportMacro, ReportMessage};
 impl Parse for ReportLnMacro {
     fn parse(input: ParseStream) -> syn::Result<Self> {
         trace_parsed(parse_report_macro(
-            trace_source(input), true, |terse, verbose| Self { terse, verbose }
+            trace_source(input), true, |terse, verbose| Self { terse, verbose },
         ))
     }
 }
@@ -17,7 +17,7 @@ impl Parse for ReportLnMacro {
 impl Parse for ReportMacro {
     fn parse(input: ParseStream) -> syn::Result<Self> {
         trace_parsed(parse_report_macro(
-            trace_source(input), false, |terse, verbose| Self { terse, verbose }
+            trace_source(input), false, |terse, verbose| Self { terse, verbose },
         ))
     }
 }
@@ -36,7 +36,7 @@ fn parse_report_macro<T>(
 
     match verbosity {
         Verbosity::Quite =>
-            unreachable!(QUITE_ERR),
+            unreachable!("{}", QUITE_ERR),
         Verbosity::Terse => {
             // check if a second message is provided
             // a second message requires an intended verbosity level
@@ -49,7 +49,7 @@ fn parse_report_macro<T>(
 
             match verbosity {
                 Verbosity::Quite =>
-                    unreachable!(QUITE_ERR),
+                    unreachable!("{}", QUITE_ERR),
                 Verbosity::Terse =>
                     Err(Error::new(error_span, DUPE_VERBOSITY_ERR)),
                 Verbosity::Verbose => {
@@ -74,7 +74,7 @@ fn parse_report_macro<T>(
                     Ok((_, verbosity)) => {
                         match verbosity {
                             Verbosity::Quite =>
-                                unreachable!(QUITE_ERR),
+                                unreachable!("{}", QUITE_ERR),
                             Verbosity::Terse =>
                                 Err(Error::new(error_span, VERBOSITY_ORDER_ERR)),
                             Verbosity::Verbose =>

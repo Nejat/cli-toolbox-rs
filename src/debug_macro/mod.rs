@@ -21,7 +21,7 @@ pub enum DebugMacro {
 impl Display for DebugMacro {
     fn fmt(&self, fmt: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::Message(msg) => write!(fmt, "debug! {{\n  message: {}\n}}", msg),
+            Self::Message(msg) => write!(fmt, "debug! {{\n  message: {msg}\n}}"),
             Self::Expr(expr) => write!(fmt, "debug! {{\n  expr: {}\n}}", expr.to_token_stream())
         }
     }

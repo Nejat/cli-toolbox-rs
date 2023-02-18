@@ -7,7 +7,7 @@
 #![allow(clippy::module_name_repetitions)]
 #![allow(clippy::items_after_statements)]
 // ==============================================================
-#![doc(html_root_url = "https://docs.rs/cli-toolbox/0.8.0")]
+#![doc(html_root_url = "https://docs.rs/cli-toolbox/0.8.1")]
 
 //! Utility library for working with ```cli``` output ergonomically.
 //!
@@ -128,9 +128,9 @@ pub fn debugln(input: TokenStream) -> TokenStream {
 }
 
 /// Conditionally evaluates expressions when intended verbosity matches active verbosity.
-/// 
+///
 /// The `eval` macro uses the [`Verbosity`] crate to determine when and what to evaluate.
-/// 
+///
 /// _\* See the [`Verbosity`] crate to learn how to set the verbosity level._
 ///
 /// ## Anatomy of the `eval!` macro
@@ -244,4 +244,20 @@ pub fn report(input: TokenStream) -> TokenStream {
 #[proc_macro]
 pub fn reportln(input: TokenStream) -> TokenStream {
     parse_macro_input!(input as report_macro::ReportLnMacro).into_token_stream().into()
+}
+
+#[cfg(all(debug_assertions, feature = "trace"))]
+fn display<D: ToTokens>(value: &Option<D>) -> String {
+    value.as_ref().map_or_else(|| String::from("None"), |val| format!("{}", val.to_token_stream()))
+}
+
+#[cfg(all(debug_assertions, feature = "trace"))]
+fn displays<D: ToTokens>(value: &Option<Vec<D>>) -> String {
+    value.as_ref().map_or_else(
+        || String::from("None"),
+        |vals| format!(
+            "{:?}",
+            vals.iter().map(|v| format!("{}", v.to_token_stream())).collect::<Vec<String>>()
+        ),
+    )
 }

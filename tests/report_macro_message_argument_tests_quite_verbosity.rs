@@ -8,7 +8,7 @@ const EXPECTED_BLANK_STD_ERR: &str = "";
 #[test]
 fn when_message_with_array_arg_should_output() {
     Verbosity::Quite.set_as_global();
-    
+
     let expected_stdout = "";
 
     let (actual_stdout, actual_stderr) = capture! {
@@ -67,7 +67,9 @@ fn when_message_with_cast_arg_should_output() {
 fn when_message_with_field_arg_should_output() {
     Verbosity::Quite.set_as_global();
 
-    struct Foo { bar: usize }
+    struct Foo {
+        bar: usize,
+    }
 
     let expected_stdout = "";
     let sut = Foo { bar: 42 };
@@ -156,7 +158,9 @@ fn when_message_with_match_arg_should_output() {
 fn when_message_with_method_to_call_arg_should_output() {
     Verbosity::Quite.set_as_global();
 
-    struct Foo { bar: usize }
+    struct Foo {
+        bar: usize,
+    }
 
     impl Foo {
         fn method_to_call(&self) -> usize { self.bar }
@@ -191,8 +195,8 @@ fn when_message_with_paren_arg_should_output() {
 fn when_message_with_path_arg_should_output() {
     Verbosity::Quite.set_as_global();
 
-    mod foo { pub mod bar { pub const VALUE: usize = 42; }}
-    
+    mod foo { pub mod bar { pub const VALUE: usize = 42; } }
+
     let expected_stdout = "";
 
     let (actual_stdout, actual_stderr) = capture! {
